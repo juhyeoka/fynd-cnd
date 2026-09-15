@@ -8,7 +8,7 @@
   "name": "fynd-cnd",
   "notifyOnFail": "default",
   "ownerId": "tea-d6ik7at6ubrc73caqv40",
-  "repo": "https://github.com/juhyeoka/yeongjin-market",
+  "repo": "https://github.com/juhyeoka/fynd-cnd",
   "rootDir": "",
   "serviceDetails": {
     "buildCommand": "echo \"No build required\"",

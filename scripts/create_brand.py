@@ -217,7 +217,7 @@ def build_detail_html(brand: dict, base_url: str) -> str:
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>{name} {product} | FYND × 영진관광</title>
   <meta name="description" content="{headline}">
-  <meta name="keywords" content="{name}, {product}, {region}, 영진마켓, FYND, 지역 브랜드">
+  <meta name="keywords" content="{name}, {product}, {region}, FYND, 충남 지역 브랜드">
   <meta name="robots" content="{robots_value}">
   <meta name="theme-color" content="#ffffff">
   <link rel="canonical" href="{page_url}">
@@ -441,7 +441,7 @@ def create_brand(base_url: str) -> dict:
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="영진마켓 입점 브랜드 데이터와 상세 페이지를 관리합니다."
+        description="FYND-CND 입점 브랜드 데이터와 상세 페이지를 관리합니다."
     )
     parser.add_argument(
         "--base-url",

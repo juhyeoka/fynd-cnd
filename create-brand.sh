@@ -7,7 +7,7 @@ cd "$(dirname "$0")"
 DEFAULT_RENDER_URL="https://fynd-cnd.onrender.com"
 
 echo ""
-read -r -p "현재 영진마켓 주소 [$DEFAULT_RENDER_URL]: " SITE_URL
+read -r -p "현재 FYND-CND 서비스 주소 [$DEFAULT_RENDER_URL]: " SITE_URL
 
 if [ -z "$SITE_URL" ]; then
   SITE_URL="$DEFAULT_RENDER_URL"

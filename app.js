@@ -22,7 +22,7 @@ const mapRegionPanel = document.querySelector("#mapRegionPanel");
 const mapLoading = document.querySelector("#mapLoading");
 const brandTicker = document.querySelector("#brandTicker");
 
-const RECENT_BRAND_KEY = "yeongjin-market-recent-brand";
+const RECENT_BRAND_KEY = "fynd-cnd-recent-brand";
 const BRAND_ROTATION_INTERVAL = 10000;
 const BRAND_CARD_LAYOUTS = [
   "tall",
