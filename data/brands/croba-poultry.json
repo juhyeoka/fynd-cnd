@@ -1,0 +1,31 @@
+{
+  "slug": "croba-poultry",
+  "name": "크로바양계",
+  "category": "축산",
+  "categoryKey": "livestock",
+  "product": "무항생제 유정란",
+  "region": "충남 홍성",
+  "address": "충남 홍성군 홍성읍 월산로43번길 48-23",
+  "headline": "홍성에서 키운 닭의 알을 식탁 가까이",
+  "description": "크로바양계는 홍성에서 무항생제 유정란을 생산합니다. 생란과 초란은 물론 간편하게 먹는 구운 계란까지 여러 방식으로 달걀을 선보여요.",
+  "quantity": "유정란, 초란, 구운 계란",
+  "storyTitle": "달걀 한 판 뒤에는 매일의 농장이 있습니다",
+  "storyDescription": "신선한 달걀은 하루아침에 나오지 않습니다. 닭을 살피고 알을 거두는 일이 매일 이어집니다. 크로바양계는 홍성에서 쌓은 양계 경험으로 식탁에서 자주 찾는 달걀을 만듭니다.",
+  "shopUrl": "https://hottracks.kyobobook.co.kr/gift/brand-shop/35533",
+  "homepageUrl": "",
+  "traceUrl": "",
+  "phone": "041-632-5295",
+  "published": true,
+  "sortOrder": 6,
+  "publicUrl": "https://fynd-cnd.onrender.com/brands/croba-poultry/",
+  "qrImage": "",
+  "sourceUrls": [
+    "https://chungwoonstore.com/55/?bmode=view&idx=168005535",
+    "https://www.mafra.go.kr/bbs/mafra/68/242307/download.do",
+    "https://hottracks.kyobobook.co.kr/gift/brand-shop/35533"
+  ],
+  "images": {
+    "main": "/assets/brands/croba-poultry/main.svg",
+    "gallery": []
+  }
+}

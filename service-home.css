@@ -552,7 +552,7 @@
 .service-v3 .empty-result button { padding: 11px 17px; color: #fff; background: var(--sv3-black); cursor: pointer; }
 
 .service-v3 .sv3-festival-section {
-  padding: 105px max(36px, calc((100% - 1420px) / 2));
+  padding: 70px max(36px, calc((100% - 1420px) / 2));
   color: #fff;
   background: #171717;
 }
@@ -571,7 +571,7 @@
 .service-v3 .festival-card {
   grid-column: span 4;
   display: flex;
-  min-height: 510px;
+  min-height: 330px;
   flex-direction: column;
   background: #242424;
 }
@@ -579,9 +579,9 @@
 .service-v3 .festival-card:nth-child(4n + 1) { grid-column: span 7; }
 .service-v3 .festival-card:nth-child(4n + 2) { grid-column: span 5; }
 
-.service-v3 .festival-card-media { display: block; height: 330px; overflow: hidden; }
+.service-v3 .festival-card-media { display: block; height: 180px; overflow: hidden; }
 .service-v3 .festival-card:nth-child(4n + 1) .festival-card-media,
-.service-v3 .festival-card:nth-child(4n + 2) .festival-card-media { height: 400px; }
+.service-v3 .festival-card:nth-child(4n + 2) .festival-card-media { height: 220px; }
 
 .service-v3 .festival-card-media img {
   width: 100%;
@@ -594,16 +594,24 @@
 .service-v3 .festival-card:hover img { transform: scale(1.035); }
 
 .service-v3 .festival-card-copy {
-  padding: 24px;
+  min-height: 0;
+  padding: 16px;
   display: flex;
   flex: 1;
   flex-direction: column;
 }
 
 .service-v3 .festival-card-copy small { color: #ff7782; font-size: 11px; font-weight: 800; }
-.service-v3 .festival-card-copy strong { margin-top: 9px; font-size: 25px; font-weight: 800; }
-.service-v3 .festival-card-copy p { margin: 10px 0 20px; color: rgba(255, 255, 255, 0.58); font-size: 13px; line-height: 1.65; }
-.service-v3 .festival-card-copy b { margin-top: auto; font-size: 12px; }
+.service-v3 .festival-card-copy strong,
+.service-v3 .festival-card-copy p {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.service-v3 .festival-card-copy strong { margin-top: 6px; font-size: 19px; font-weight: 800; line-height: 1.25; }
+.service-v3 .festival-card-copy p { margin: 7px 0 12px; color: rgba(255, 255, 255, 0.58); font-size: 12px; line-height: 1.45; }
+.service-v3 .festival-card-copy b { margin-top: auto; padding-top: 9px; font-size: 11px; }
 
 .service-v3 .sv3-map-section { background: #f5f2eb; }
 .service-v3 .map-category-filter { margin-bottom: 20px; }
@@ -914,7 +922,7 @@
   .service-v3 .festival-card:nth-child(4n + 2) { grid-column: span 6; }
   .service-v3 .festival-card-media,
   .service-v3 .festival-card:nth-child(4n + 1) .festival-card-media,
-  .service-v3 .festival-card:nth-child(4n + 2) .festival-card-media { height: 310px; }
+  .service-v3 .festival-card:nth-child(4n + 2) .festival-card-media { height: 180px; }
   .service-v3 .sv3-map-layout { grid-template-columns: 1fr; }
   .service-v3 .map-region-panel { min-height: 260px; }
   .service-v3 .sv3-inquiry { grid-template-columns: 1fr; gap: 48px; }
@@ -979,12 +987,14 @@
   .service-v3 .festival-grid::-webkit-scrollbar { display: none; }
   .service-v3 .festival-card,
   .service-v3 .festival-card:nth-child(4n + 1),
-  .service-v3 .festival-card:nth-child(4n + 2) { flex: 0 0 min(76vw, 300px); min-height: 350px; scroll-snap-align: start; }
+  .service-v3 .festival-card:nth-child(4n + 2) { flex: 0 0 min(56vw, 220px); min-height: 250px; scroll-snap-align: start; }
   .service-v3 .festival-card-media,
   .service-v3 .festival-card:nth-child(4n + 1) .festival-card-media,
-  .service-v3 .festival-card:nth-child(4n + 2) .festival-card-media { height: 210px; }
-  .service-v3 .festival-card-copy { padding: 18px; }
-  .service-v3 .festival-card-copy strong { font-size: 20px; }
+  .service-v3 .festival-card:nth-child(4n + 2) .festival-card-media { height: 125px; }
+  .service-v3 .festival-card-copy { padding: 12px; }
+  .service-v3 .festival-card-copy small { font-size: 9px; }
+  .service-v3 .festival-card-copy strong { font-size: 16px; }
+  .service-v3 .festival-card-copy p { margin: 5px 0 9px; font-size: 11px; }
   .service-v3 .sv3-map-wrap,
   .service-v3 .brand-map { min-height: 440px; }
   .service-v3 .map-fallback { min-height: 0; grid-template-columns: 1fr; }

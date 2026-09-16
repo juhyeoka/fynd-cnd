@@ -1,0 +1,32 @@
+{
+  "slug": "greeny-box",
+  "name": "GREENY BOX",
+  "category": "식당",
+  "categoryKey": "restaurant",
+  "product": "샐러드·포케·샌드위치",
+  "region": "충남 예산",
+  "address": "충남 예산군 삽교읍 청사로 225, 108호·109호",
+  "headline": "샐러드도 배부르게, 내포에서 고르는 한 그릇",
+  "description": "그리니박스에서는 닭가슴살 샐러드와 쉬림프 포케, 아보카도 샌드위치처럼 식사로 먹기 좋은 메뉴를 고를 수 있어요. 소스와 메뉴는 매장에서 직접 개발합니다.",
+  "quantity": "샐러드, 포케, 샌드위치, 단체 주문",
+  "storyTitle": "건강식이 심심할 필요는 없으니까",
+  "storyDescription": "채소만 가득한 한 끼가 아쉽다면 토핑과 소스가 답이 됩니다. 그리니박스는 샐러드와 포케, 샌드위치를 각자 입맛대로 고를 수 있게 준비하고 단체 주문도 받습니다.",
+  "shopUrl": "",
+  "homepageUrl": "https://greenybox.co.kr/",
+  "traceUrl": "",
+  "phone": "041-404-7017",
+  "published": true,
+  "sortOrder": 5,
+  "publicUrl": "https://fynd-cnd.onrender.com/brands/greeny-box/",
+  "qrImage": "",
+  "sourceUrls": [
+    "https://greenybox.co.kr/"
+  ],
+  "images": {
+    "main": "/assets/brands/greeny-box/main.png",
+    "gallery": [
+      "/assets/brands/greeny-box/story-1.png",
+      "/assets/brands/greeny-box/story-2.jpeg"
+    ]
+  }
+}

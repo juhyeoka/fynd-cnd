@@ -1,0 +1,32 @@
+{
+  "slug": "pamp",
+  "name": "PAMP",
+  "category": "기술",
+  "categoryKey": "technology",
+  "product": "스마트 축제 플랫폼",
+  "region": "충남 천안",
+  "address": "충남 천안시 동남구 청수9로 47, 43호",
+  "headline": "축제의 긴 줄과 복잡한 안내를 휴대폰 안으로",
+  "description": "팜프는 원격 주문과 웨이팅, 디지털 안내, 실시간 알림을 한곳에 모은 축제 운영 플랫폼입니다. 행사가 끝난 뒤에는 방문 데이터를 정리한 결과 보고서도 제공합니다.",
+  "quantity": "원격 주문, 웨이팅, 현장 알림, 결과 보고서",
+  "storyTitle": "기다리는 시간은 줄이고 현장의 흐름은 남깁니다",
+  "storyDescription": "푸드트럭 앞에서 기다리거나 공지를 놓치는 일은 축제의 흐름을 끊습니다. 팜프는 방문객이 현장을 편하게 즐기도록 돕고, 운영자에게는 다음 행사를 준비할 자료를 남깁니다.",
+  "shopUrl": "",
+  "homepageUrl": "https://www.pamp.kr/",
+  "traceUrl": "",
+  "phone": "070-8065-7869",
+  "published": true,
+  "sortOrder": 7,
+  "publicUrl": "https://fynd-cnd.onrender.com/brands/pamp/",
+  "qrImage": "",
+  "sourceUrls": [
+    "https://www.pamp.kr/"
+  ],
+  "images": {
+    "main": "/assets/brands/pamp/main.png",
+    "gallery": [
+      "/assets/brands/pamp/story-1.webp",
+      "/assets/brands/pamp/story-2.webp"
+    ]
+  }
+}

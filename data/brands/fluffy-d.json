@@ -1,0 +1,30 @@
+{
+  "slug": "fluffy-d",
+  "name": "FLUFFY·D",
+  "category": "카페",
+  "categoryKey": "cafe",
+  "product": "수제 디저트",
+  "region": "충남 공주",
+  "address": "충남 공주시 이인면 금광로 9",
+  "headline": "미리 주문해 선물 상자로 받아보는 공주의 수제 디저트",
+  "description": "플러피디는 공주 이인면에서 수제 디저트를 만들어요. 예약 주문을 받아 준비하고, 선물하기 좋은 포장도 함께 챙깁니다.",
+  "quantity": "예약 주문, 선물 포장",
+  "storyTitle": "먹는 사람을 떠올리며 만드는 디저트",
+  "storyDescription": "작은 간식 하나도 누군가에게 건넬 때는 모양과 포장이 중요합니다. 플러피디는 필요한 날에 맞춰 디저트를 만들고, 받는 순간까지 기분 좋은 선물로 준비합니다.",
+  "shopUrl": "",
+  "homepageUrl": "",
+  "placeUrl": "https://place.map.kakao.com/1813652674",
+  "traceUrl": "",
+  "phone": "",
+  "published": true,
+  "sortOrder": 4,
+  "publicUrl": "https://fynd-cnd.onrender.com/brands/fluffy-d/",
+  "qrImage": "",
+  "sourceUrls": [
+    "https://place.map.kakao.com/1813652674"
+  ],
+  "images": {
+    "main": "/assets/brands/fluffy-d/main.jpeg",
+    "gallery": []
+  }
+}

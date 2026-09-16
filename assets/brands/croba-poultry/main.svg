@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">크로바양계 유정란</title>
+  <desc id="desc">포근한 종이 상자에 놓인 갈색 달걀과 크로바양계 이름</desc>
+  <rect width="1200" height="900" fill="#eee6d5"/>
+  <path d="M0 625C245 535 387 563 598 682c199 112 367 123 602 15v203H0z" fill="#dce4c2"/>
+  <g fill="#c9894f" stroke="#8e5f35" stroke-width="8">
+    <ellipse cx="225" cy="286" rx="104" ry="137" transform="rotate(-13 225 286)"/>
+    <ellipse cx="465" cy="235" rx="106" ry="139" transform="rotate(8 465 235)"/>
+    <ellipse cx="704" cy="282" rx="103" ry="136" transform="rotate(-7 704 282)"/>
+    <ellipse cx="940" cy="229" rx="106" ry="140" transform="rotate(12 940 229)"/>
+  </g>
+  <rect x="125" y="455" width="950" height="265" rx="24" fill="#fffdf7" stroke="#243728" stroke-width="7"/>
+  <path d="M234 548c34-52 87-51 118-4-35 16-55 43-58 83-34-16-55-43-60-79z" fill="#5d8b3f"/>
+  <path d="M250 552c-8-47 20-83 67-91 18 34 15 67-8 96" fill="none" stroke="#243728" stroke-width="12" stroke-linecap="round"/>
+  <text x="390" y="585" fill="#20231f" font-family="Apple SD Gothic Neo, Noto Sans KR, sans-serif" font-size="88" font-weight="800">크로바양계</text>
+  <text x="394" y="650" fill="#66705f" font-family="Arial, sans-serif" font-size="30" letter-spacing="8">CROBA POULTRY · HONGSEONG</text>
+</svg>

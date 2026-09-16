@@ -71,6 +71,18 @@ def read_brand_files() -> list[dict]:
         if path.name in {"index.json", "brand.example.json"}:
             continue
         brands.append(json.loads(path.read_text(encoding="utf-8")))
+
+    # 축제나 협력사처럼 외부 페이지로 바로 연결되는 항목은 index.json에서
+    # 직접 관리합니다. 새 브랜드를 빌드해도 이 항목들이 사라지지 않게 보존합니다.
+    source_slugs = {brand["slug"] for brand in brands}
+    index_path = DATA_DIR / "index.json"
+    if index_path.exists():
+        indexed_brands = json.loads(index_path.read_text(encoding="utf-8"))
+        brands.extend(
+            brand
+            for brand in indexed_brands
+            if brand.get("externalUrl") and brand.get("slug") not in source_slugs
+        )
     return brands
 
 
@@ -95,6 +107,7 @@ def build_detail_html(brand: dict, base_url: str) -> str:
     category = escape(brand["category"])
     headline = escape(brand["headline"])
     description = escape(brand["description"])
+    address = escape(brand.get("address") or "")
     quantity = escape(brand.get("quantity") or "공식 판매처에서 확인")
     image = escape(
         brand.get("images", {}).get("main")
@@ -123,32 +136,24 @@ def build_detail_html(brand: dict, base_url: str) -> str:
         ensure_ascii=False,
     )
 
-    collab_logo = """
-      <span class="collab-logo">
-        <svg class="fynd-logo" viewBox="90 410 1080 410" role="img" aria-label="FYND 로고">
-          <image href="/assets/brand/fynd-logo-original.jpeg" width="1260" height="1260"></image>
-        </svg>
-        <span class="collab-times" aria-hidden="true">×</span>
-        <span class="market-logo">
-          <svg class="yeongjin-mark" viewBox="115 245 465 335" role="img" aria-label="영진관광 로고">
-            <image href="/assets/brand/yeongjin-logo-original.png" width="2022" height="778"></image>
-          </svg>
-          <span class="market-logo-copy">
-            <strong>영진관광</strong>
-            <small>YEONGJIN TOUR</small>
-          </span>
-        </span>
-      </span>
-    """.strip()
-
+    shop_url = brand.get("shopUrl", "")
+    shop_action_label = (
+        "공식 스마트스토어 방문"
+        if "smartstore.naver.com" in shop_url
+        else "공식 판매처 방문"
+    )
     actions = "".join(
         [
-            optional_action(
-                brand.get("shopUrl", ""), "공식 스마트스토어 방문", "primary"
-            ),
+            optional_action(shop_url, shop_action_label, "primary"),
             optional_action(brand.get("traceUrl", ""), "생산 정보 확인하기"),
-            optional_action(brand.get("homepageUrl", ""), "브랜드 홈페이지"),
+            optional_action(brand.get("homepageUrl", ""), "공식 홈페이지"),
+            optional_action(brand.get("placeUrl", ""), "카카오맵에서 보기"),
+            optional_action(brand.get("instagramUrl", ""), "인스타그램 보기"),
         ]
+    )
+
+    address_row = (
+        f"<div><dt>주소</dt><dd>{address}</dd></div>" if address else ""
     )
 
     phone = re.sub(r"[^\d+]", "", brand.get("phone", ""))
@@ -215,17 +220,17 @@ def build_detail_html(brand: dict, base_url: str) -> str:
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>{name} {product} | FYND × 영진관광</title>
+  <title>{name} {product} | FYND</title>
   <meta name="description" content="{headline}">
   <meta name="keywords" content="{name}, {product}, {region}, FYND, 충남 지역 브랜드">
   <meta name="robots" content="{robots_value}">
   <meta name="theme-color" content="#ffffff">
   <link rel="canonical" href="{page_url}">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/styles.css?v=logo-balance-20260730">
+  <link rel="stylesheet" href="/styles.css?v=service-editorial-9">
   <meta property="og:type" content="product">
-  <meta property="og:site_name" content="FYND × 영진관광">
-  <meta property="og:title" content="{name} {product} | FYND × 영진관광">
+  <meta property="og:site_name" content="FYND">
+  <meta property="og:title" content="{name} {product} | FYND">
   <meta property="og:description" content="{headline}">
   <meta property="og:url" content="{page_url}">
   <meta property="og:image" content="{image_url}">
@@ -236,13 +241,13 @@ def build_detail_html(brand: dict, base_url: str) -> str:
 <body class="brand-detail-body">
   <header class="site-header">
     <div class="header-inner brand-detail-header">
-      <a href="/" aria-label="FYND × 영진관광 홈">{collab_logo}</a>
+      <a class="brand-detail-fynd-home" href="/" aria-label="FYND 홈"><img src="/assets/brand/fynd-logo-transparent.png" alt="FYND"></a>
       <a class="brand-detail-back" href="/">← 브랜드 목록</a>
     </div>
   </header>
 
   <main class="brand-detail-main">
-    <p class="brand-detail-breadcrumb">입점 브랜드{sample_label} · {category} · {region}</p>
+    <p class="brand-detail-breadcrumb">소상공인 이야기{sample_label} · {category} · {region}</p>
     <section class="brand-detail-hero">
       <div class="brand-detail-visual">
         <img src="{image}" alt="{name} {product}" fetchpriority="high">
@@ -257,6 +262,7 @@ def build_detail_html(brand: dict, base_url: str) -> str:
           <div><dt>대표 상품</dt><dd>{product}</dd></div>
           <div><dt>상품 구성</dt><dd>{quantity}</dd></div>
           <div><dt>지역</dt><dd>{region}</dd></div>
+          {address_row}
         </dl>
         <div class="brand-detail-actions">{actions}</div>
       </div>
@@ -271,7 +277,7 @@ def build_detail_html(brand: dict, base_url: str) -> str:
           <strong>{name} {product}</strong>
           <p>{headline}</p>
           <p>상품 구성: {quantity}</p>
-          {shop_action if shop_action else ""}
+{shop_action if shop_action else ""}
         </div>
       </div>
     </section>
@@ -285,14 +291,9 @@ def build_detail_html(brand: dict, base_url: str) -> str:
 
   <footer class="site-footer">
     <div class="footer-inner brand-detail-footer">
-      <a class="footer-signature" href="/" aria-label="FYND × 영진관광 홈">
-        <strong>FYND</strong>
-        <span aria-hidden="true">×</span>
-        <i class="footer-yeongjin-mark" aria-hidden="true"><b></b><b></b><b></b></i>
-        <em>영진관광</em>
-      </a>
-      <p>지역의 좋은 상품과 브랜드 이야기를 소개합니다.</p>
-      <small>© 2026 FYND × 영진관광.</small>
+      <a class="brand-detail-footer-logo" href="/" aria-label="FYND 홈"><img src="/assets/brand/fynd-logo-transparent.png" alt="FYND"></a>
+      <p>충남 곳곳의 가게와 브랜드를 만나보세요.</p>
+      <small>© 2026 FYND.</small>
     </div>
   </footer>
 </body>
@@ -325,7 +326,11 @@ def build_sitemap(brands: list[dict], base_url: str) -> None:
         ),
     ]
     for brand in brands:
-        if brand.get("published", True) and not brand.get("demo"):
+        if (
+            brand.get("published", True)
+            and not brand.get("demo")
+            and not brand.get("externalUrl")
+        ):
             urls.append(
                 (
                     f"{base_url}/brands/{brand['slug']}/",
@@ -352,7 +357,7 @@ def build_sitemap(brands: list[dict], base_url: str) -> None:
     (BASE_DIR / "sitemap.xml").write_text(sitemap, encoding="utf-8")
 
 
-def build_all(base_url: str) -> list[dict]:
+def build_all(base_url: str, detail_slugs: set[str] | None = None) -> list[dict]:
     brands = read_brand_files()
     brands.sort(key=lambda brand: (brand.get("sortOrder", 999), brand["name"]))
     DATA_DIR.mkdir(parents=True, exist_ok=True)
@@ -362,6 +367,10 @@ def build_all(base_url: str) -> list[dict]:
     )
 
     for brand in brands:
+        if brand.get("externalUrl"):
+            continue
+        if detail_slugs and brand["slug"] not in detail_slugs:
+            continue
         page_path = PAGE_DIR / brand["slug"] / "index.html"
         page_path.parent.mkdir(parents=True, exist_ok=True)
         page_path.write_text(
@@ -453,6 +462,12 @@ def main() -> None:
         action="store_true",
         help="기존 데이터로 브랜드 목록·상세 페이지·사이트맵만 다시 만듭니다.",
     )
+    parser.add_argument(
+        "--brand",
+        action="append",
+        dest="brand_slugs",
+        help="상세 페이지를 갱신할 브랜드 slug. 여러 번 지정할 수 있습니다.",
+    )
     args = parser.parse_args()
     base_url = args.base_url.rstrip("/")
 
@@ -460,7 +475,7 @@ def main() -> None:
         brand = create_brand(base_url)
         print(f"\n{brand['name']} 데이터를 저장했습니다.")
 
-    brands = build_all(base_url)
+    brands = build_all(base_url, set(args.brand_slugs or []))
     print(f"총 {len(brands)}개 브랜드 페이지를 갱신했습니다.")
     print("브랜드 노출 순서는 처음 무작위로 정해지고 화면에서 10초마다 다시 섞입니다.")
     print("대표 사진을 assets/brands/<slug>/main.jpg에 넣고 다시 실행하세요.")

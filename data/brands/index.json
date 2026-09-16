@@ -45,7 +45,6 @@
     "published": true,
     "sortOrder": 2,
     "publicUrl": "https://fynd-cnd.onrender.com/brands/yesan-apple-united/",
-    "qrImage": "",
     "images": {
       "main": "/assets/brands/yesan-apple-united/cover-20260904.jpg",
       "gallery": [
@@ -82,6 +81,131 @@
     "images": {
       "main": "/assets/hero-bus.png",
       "gallery": []
+    }
+  },
+  {
+    "slug": "fluffy-d",
+    "name": "FLUFFY·D",
+    "category": "카페",
+    "categoryKey": "cafe",
+    "product": "수제 디저트",
+    "region": "충남 공주",
+    "address": "충남 공주시 이인면 금광로 9",
+    "headline": "미리 주문해 선물 상자로 받아보는 공주의 수제 디저트",
+    "description": "플러피디는 공주 이인면에서 수제 디저트를 만들어요. 예약 주문을 받아 준비하고, 선물하기 좋은 포장도 함께 챙깁니다.",
+    "quantity": "예약 주문, 선물 포장",
+    "storyTitle": "먹는 사람을 떠올리며 만드는 디저트",
+    "storyDescription": "작은 간식 하나도 누군가에게 건넬 때는 모양과 포장이 중요합니다. 플러피디는 필요한 날에 맞춰 디저트를 만들고, 받는 순간까지 기분 좋은 선물로 준비합니다.",
+    "shopUrl": "",
+    "homepageUrl": "",
+    "placeUrl": "https://place.map.kakao.com/1813652674",
+    "traceUrl": "",
+    "phone": "",
+    "published": true,
+    "sortOrder": 4,
+    "publicUrl": "https://fynd-cnd.onrender.com/brands/fluffy-d/",
+    "qrImage": "",
+    "sourceUrls": [
+      "https://place.map.kakao.com/1813652674"
+    ],
+    "images": {
+      "main": "/assets/brands/fluffy-d/main.jpeg",
+      "gallery": []
+    }
+  },
+  {
+    "slug": "greeny-box",
+    "name": "GREENY BOX",
+    "category": "식당",
+    "categoryKey": "restaurant",
+    "product": "샐러드·포케·샌드위치",
+    "region": "충남 예산",
+    "address": "충남 예산군 삽교읍 청사로 225, 108호·109호",
+    "headline": "샐러드도 배부르게, 내포에서 고르는 한 그릇",
+    "description": "그리니박스에서는 닭가슴살 샐러드와 쉬림프 포케, 아보카도 샌드위치처럼 식사로 먹기 좋은 메뉴를 고를 수 있어요. 소스와 메뉴는 매장에서 직접 개발합니다.",
+    "quantity": "샐러드, 포케, 샌드위치, 단체 주문",
+    "storyTitle": "건강식이 심심할 필요는 없으니까",
+    "storyDescription": "채소만 가득한 한 끼가 아쉽다면 토핑과 소스가 답이 됩니다. 그리니박스는 샐러드와 포케, 샌드위치를 각자 입맛대로 고를 수 있게 준비하고 단체 주문도 받습니다.",
+    "shopUrl": "",
+    "homepageUrl": "https://greenybox.co.kr/",
+    "traceUrl": "",
+    "phone": "041-404-7017",
+    "published": true,
+    "sortOrder": 5,
+    "publicUrl": "https://fynd-cnd.onrender.com/brands/greeny-box/",
+    "qrImage": "",
+    "sourceUrls": [
+      "https://greenybox.co.kr/"
+    ],
+    "images": {
+      "main": "/assets/brands/greeny-box/main.png",
+      "gallery": [
+        "/assets/brands/greeny-box/story-1.png",
+        "/assets/brands/greeny-box/story-2.jpeg"
+      ]
+    }
+  },
+  {
+    "slug": "croba-poultry",
+    "name": "크로바양계",
+    "category": "축산",
+    "categoryKey": "livestock",
+    "product": "무항생제 유정란",
+    "region": "충남 홍성",
+    "address": "충남 홍성군 홍성읍 월산로43번길 48-23",
+    "headline": "홍성에서 키운 닭의 알을 식탁 가까이",
+    "description": "크로바양계는 홍성에서 무항생제 유정란을 생산합니다. 생란과 초란은 물론 간편하게 먹는 구운 계란까지 여러 방식으로 달걀을 선보여요.",
+    "quantity": "유정란, 초란, 구운 계란",
+    "storyTitle": "달걀 한 판 뒤에는 매일의 농장이 있습니다",
+    "storyDescription": "신선한 달걀은 하루아침에 나오지 않습니다. 닭을 살피고 알을 거두는 일이 매일 이어집니다. 크로바양계는 홍성에서 쌓은 양계 경험으로 식탁에서 자주 찾는 달걀을 만듭니다.",
+    "shopUrl": "https://hottracks.kyobobook.co.kr/gift/brand-shop/35533",
+    "homepageUrl": "",
+    "traceUrl": "",
+    "phone": "041-632-5295",
+    "published": true,
+    "sortOrder": 6,
+    "publicUrl": "https://fynd-cnd.onrender.com/brands/croba-poultry/",
+    "qrImage": "",
+    "sourceUrls": [
+      "https://chungwoonstore.com/55/?bmode=view&idx=168005535",
+      "https://www.mafra.go.kr/bbs/mafra/68/242307/download.do",
+      "https://hottracks.kyobobook.co.kr/gift/brand-shop/35533"
+    ],
+    "images": {
+      "main": "/assets/brands/croba-poultry/main.svg",
+      "gallery": []
+    }
+  },
+  {
+    "slug": "pamp",
+    "name": "PAMP",
+    "category": "기술",
+    "categoryKey": "technology",
+    "product": "스마트 축제 플랫폼",
+    "region": "충남 천안",
+    "address": "충남 천안시 동남구 청수9로 47, 43호",
+    "headline": "축제의 긴 줄과 복잡한 안내를 휴대폰 안으로",
+    "description": "팜프는 원격 주문과 웨이팅, 디지털 안내, 실시간 알림을 한곳에 모은 축제 운영 플랫폼입니다. 행사가 끝난 뒤에는 방문 데이터를 정리한 결과 보고서도 제공합니다.",
+    "quantity": "원격 주문, 웨이팅, 현장 알림, 결과 보고서",
+    "storyTitle": "기다리는 시간은 줄이고 현장의 흐름은 남깁니다",
+    "storyDescription": "푸드트럭 앞에서 기다리거나 공지를 놓치는 일은 축제의 흐름을 끊습니다. 팜프는 방문객이 현장을 편하게 즐기도록 돕고, 운영자에게는 다음 행사를 준비할 자료를 남깁니다.",
+    "shopUrl": "",
+    "homepageUrl": "https://www.pamp.kr/",
+    "traceUrl": "",
+    "phone": "070-8065-7869",
+    "published": true,
+    "sortOrder": 7,
+    "publicUrl": "https://fynd-cnd.onrender.com/brands/pamp/",
+    "qrImage": "",
+    "sourceUrls": [
+      "https://www.pamp.kr/"
+    ],
+    "images": {
+      "main": "/assets/brands/pamp/main.png",
+      "gallery": [
+        "/assets/brands/pamp/story-1.webp",
+        "/assets/brands/pamp/story-2.webp"
+      ]
     }
   },
   {
