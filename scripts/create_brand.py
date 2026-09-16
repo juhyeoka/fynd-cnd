@@ -215,6 +215,43 @@ def build_detail_html(brand: dict, base_url: str) -> str:
         )
     gallery_block = f"\n      {gallery_html}" if gallery_html else ""
 
+    story_sections: list[str] = []
+    story_character_count = len(brand.get("storyDescription") or "")
+    for index, section in enumerate(brand.get("storySections", []), start=1):
+        section_title = escape(section.get("title") or "")
+        raw_paragraphs = section.get("paragraphs") or []
+        if isinstance(raw_paragraphs, str):
+            raw_paragraphs = [raw_paragraphs]
+        paragraphs = [paragraph for paragraph in raw_paragraphs if paragraph]
+        if not section_title or not paragraphs:
+            continue
+        story_character_count += len(section.get("title") or "")
+        story_character_count += sum(len(paragraph) for paragraph in paragraphs)
+        paragraph_html = "".join(
+            f"<p>{escape(paragraph)}</p>" for paragraph in paragraphs
+        )
+        story_sections.append(
+            f"""
+        <article class="brand-detail-story-section">
+          <small>{index:02d}</small>
+          <div><h3>{section_title}</h3>{paragraph_html}</div>
+        </article>
+            """.strip()
+        )
+    story_article = ""
+    reading_time = ""
+    if story_sections:
+        reading_minutes = max(2, round(story_character_count / 350))
+        reading_time = (
+            '<p class="brand-detail-story-meta">BRAND NOTE'
+            f'<span>약 {reading_minutes}분 읽기</span></p>'
+        )
+        story_article = (
+            '<div class="brand-detail-story-article">'
+            + "".join(story_sections)
+            + "</div>"
+        )
+
     return f"""<!doctype html>
 <html lang="ko">
 <head>
@@ -227,7 +264,7 @@ def build_detail_html(brand: dict, base_url: str) -> str:
   <meta name="theme-color" content="#ffffff">
   <link rel="canonical" href="{page_url}">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/styles.css?v=service-editorial-9">
+  <link rel="stylesheet" href="/styles.css?v=service-editorial-10">
   <meta property="og:type" content="product">
   <meta property="og:site_name" content="FYND">
   <meta property="og:title" content="{name} {product} | FYND">
@@ -285,7 +322,9 @@ def build_detail_html(brand: dict, base_url: str) -> str:
     <section class="brand-detail-story">
       <p class="section-kicker">BRAND STORY</p>
       <h2>{escape(brand.get("storyTitle") or "브랜드가 지키는 가치")}</h2>
+      {reading_time}
       <p>{escape(brand.get("storyDescription") or brand["description"])}</p>{gallery_block}
+      {story_article}
     </section>
   </main>{mobile_shop_block}
 
