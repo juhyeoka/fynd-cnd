@@ -9,8 +9,8 @@ const clearSearchButton = document.querySelector("#clearSearchButton");
 const resetSearchButton = document.querySelector("#resetSearchButton");
 const brandGrid = document.querySelector("#brandGrid");
 const festivalGrid = document.querySelector("#festivalGrid");
-const partnerSection = document.querySelector("#partners");
-const festivalPartner = document.querySelector("#partnerGrid");
+const collaboratorSection = document.querySelector("#collaborators");
+const collaboratorTrack = document.querySelector("#collaboratorTrack");
 const categoryFilter = document.querySelector("#categoryFilter");
 const resultSummary = document.querySelector("#resultSummary");
 const festivalResultSummary = document.querySelector("#festivalResultSummary");
@@ -26,29 +26,15 @@ const brandTicker = document.querySelector("#brandTicker");
 
 const RECENT_BRAND_KEY = "fynd-cnd-recent-brand";
 const BRAND_ROTATION_INTERVAL = 10000;
-const BRAND_CARD_LAYOUTS = [
-  "tall",
-  "compact",
-  "standard",
-  "compact",
-  "tall",
-  "standard",
-  "tall",
-  "standard",
-  "compact"
-];
 
 let randomizedBrands = [];
 let randomizedFestivals = [];
-let partnerBrands = [];
+let collaboratorBrands = [];
 let activeCategory = "all";
 let searchKeyword = "";
 let toastTimer = null;
-let brandRotationTimer = null;
 let festivalRotationTimer = null;
-let brandGridInteractionActive = false;
 let festivalGridInteractionActive = false;
-let brandRotationPauseUntil = 0;
 let brandMap = null;
 let brandMapGeocoder = null;
 let brandMapOverlays = [];
@@ -56,7 +42,6 @@ let brandMapResizeObserver = null;
 let activeMapCategory = "all";
 let mapRenderSequence = 0;
 let mapFallbackActive = false;
-let brandMasonryResizeTimer = null;
 const regionPositionCache = new Map();
 
 function setMenuOpen(open) {
@@ -156,48 +141,6 @@ function shuffledWithNewOrder(items) {
   return [...items.slice(1), items[0]];
 }
 
-function canRotateBrands() {
-  return (
-    randomizedBrands.length > 1 &&
-    activeCategory === "all" &&
-    !searchKeyword &&
-    !document.hidden &&
-    !brandGridInteractionActive &&
-    Date.now() >= brandRotationPauseUntil
-  );
-}
-
-function rotateBrandOrder() {
-  if (!brandGrid || !canRotateBrands()) {
-    return;
-  }
-
-  const applyNewOrder = () => {
-    randomizedBrands = shuffledWithNewOrder(randomizedBrands);
-    renderBrands();
-    renderBrandTicker(randomizedBrands);
-    window.requestAnimationFrame(() => {
-      brandGrid.classList.remove("is-reordering");
-    });
-  };
-
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    applyNewOrder();
-    return;
-  }
-
-  brandGrid.classList.add("is-reordering");
-  window.setTimeout(applyNewOrder, 240);
-}
-
-function startBrandRotation() {
-  window.clearInterval(brandRotationTimer);
-  brandRotationTimer = window.setInterval(
-    rotateBrandOrder,
-    BRAND_ROTATION_INTERVAL
-  );
-}
-
 function canRotateFestivals() {
   return (
     randomizedFestivals.length > 1 &&
@@ -267,8 +210,27 @@ function isFestival(brand) {
   return brand.type === "festival";
 }
 
+function getSeoulDateKey(date = new Date()) {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: "Asia/Seoul",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit"
+  }).formatToParts(date);
+  const values = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+  return `${values.year}-${values.month}-${values.day}`;
+}
+
+function isCurrentFestival(festival) {
+  return !festival.endDate || festival.endDate >= getSeoulDateKey();
+}
+
 function isPartner(brand) {
   return brand.type === "partner";
+}
+
+function isCollaborator(brand) {
+  return brand.type === "collaborator";
 }
 
 function getExternalLinkAttributes(brand) {
@@ -288,13 +250,15 @@ function getRegionBadge(region) {
 
 function renderBrandCard(brand, index) {
   const image =
-    brand.images?.main || "/assets/brands/brand-placeholder.svg";
+    brand.images?.card || brand.images?.main || "/assets/brands/brand-placeholder.svg";
+  const partner = isPartner(brand);
   const location = [brand.category, brand.region].filter(Boolean).join(" · ");
   const cardClass = isFestival(brand)
     ? "brand-card-festival"
-    : "brand-card-real";
-  const layoutClass =
-    BRAND_CARD_LAYOUTS[index % BRAND_CARD_LAYOUTS.length];
+    : partner
+      ? "brand-card-partner"
+      : "brand-card-real";
+  const layoutClass = "standard";
 
   return `
     <a
@@ -311,7 +275,7 @@ function renderBrandCard(brand, index) {
           ${index < 3 ? 'fetchpriority="high"' : 'loading="lazy"'}
         >
         <i class="brand-card-status">
-          ${escapeHtml(getRegionBadge(brand.region))}
+          ${escapeHtml(partner ? "FYND 협력사" : getRegionBadge(brand.region))}
         </i>
       </span>
 
@@ -321,7 +285,7 @@ function renderBrandCard(brand, index) {
         <p>${escapeHtml(brand.headline)}</p>
         <span class="brand-card-meta">
           <i>${escapeHtml(brand.product)}</i>
-          <b>${isFestival(brand) ? "공식 안내" : "브랜드 보기"}</b>
+          <b>${isFestival(brand) ? "공식 안내" : "이야기 보기"}</b>
         </span>
       </span>
     </a>
@@ -358,59 +322,56 @@ function renderFestivalCard(festival, index) {
   `;
 }
 
-function getVisiblePartners() {
-  return partnerBrands.filter(
-    (partner) =>
-      !searchKeyword || searchableText(partner).includes(searchKeyword)
+function getVisibleCollaborators() {
+  return collaboratorBrands.filter(
+    (collaborator) =>
+      !searchKeyword || searchableText(collaborator).includes(searchKeyword)
   );
 }
 
-function renderPartners() {
-  if (!festivalPartner) {
+function renderCollaborators() {
+  if (!collaboratorTrack || !collaboratorSection) {
     return;
   }
 
-  const partners = getVisiblePartners();
-  festivalPartner.hidden = partners.length === 0;
-  if (partnerSection) {
-    partnerSection.hidden = partners.length === 0;
-  }
-
-  if (!partners.length) {
-    festivalPartner.innerHTML = "";
+  const collaborators = getVisibleCollaborators();
+  collaboratorSection.hidden = collaborators.length === 0;
+  if (!collaborators.length) {
+    collaboratorTrack.innerHTML = "";
     return;
   }
 
-  festivalPartner.innerHTML = partners
-    .map((partner) => {
-      const logo =
-        partner.images?.main || "/assets/brands/brand-placeholder.svg";
-      const serviceImage =
-        partner.images?.gallery?.[1] ||
-        partner.images?.gallery?.[0] ||
-        logo;
-      return `
-    <a
-      class="festival-partner-card"
-      href="${getBrandPageUrl(partner)}"
-      data-brand-slug="${escapeHtml(partner.slug)}"
-      data-brand-name="${escapeHtml(partner.name)}"
-    >
-      <span class="festival-partner-copy">
-        <small>FYND 축제 운영 협력사</small>
-        <img src="${escapeHtml(logo)}" alt="${escapeHtml(partner.name)}" loading="lazy">
-        <strong>${escapeHtml(partner.headline)}</strong>
-        <p>${escapeHtml(partner.description)}</p>
-        <b>협력사 이야기 보기 <span aria-hidden="true">↗</span></b>
-      </span>
-      <span class="festival-partner-media">
-        <img src="${escapeHtml(serviceImage)}" alt="${escapeHtml(partner.name)} 축제 운영 화면" loading="lazy">
-        <i>축제 현장을 함께 만드는 기술 파트너</i>
-      </span>
-    </a>
-      `;
-    })
-    .join("");
+  const cards = collaborators.flatMap((brand) => {
+    const brandCards = Array.isArray(brand.collaborationCards) && brand.collaborationCards.length
+      ? brand.collaborationCards
+      : [{}];
+    return brandCards.map((card) => ({ brand, card }));
+  });
+
+  const renderGroup = (hidden = false) => `
+    <div class="sv3-collaborator-group"${hidden ? ' aria-hidden="true"' : ""}>
+      ${cards
+        .map(
+          ({ brand, card }) => `
+            <a class="sv3-collaborator-card" href="${getBrandPageUrl(brand)}"
+               ${getExternalLinkAttributes(brand)}
+               data-brand-slug="${escapeHtml(brand.slug)}"
+               data-brand-name="${escapeHtml(brand.name)}">
+              <span>
+                <small>${escapeHtml(card.eyebrow || "이동 협력사")}</small>
+                <strong>${escapeHtml(card.title || brand.name)}</strong>
+                <p>${escapeHtml(card.description || brand.description)}</p>
+              </span>
+              <img src="${escapeHtml(card.image || brand.images?.main || "/assets/brands/brand-placeholder.svg")}" alt="${escapeHtml(brand.name)} ${escapeHtml(card.title || brand.product)}" loading="lazy">
+              <b>${escapeHtml(card.linkLabel || "협력사 웹사이트 보기")} ↗</b>
+            </a>
+          `
+        )
+        .join("")}
+    </div>
+  `;
+
+  collaboratorTrack.innerHTML = renderGroup() + renderGroup(true);
 }
 
 function renderBrandTicker(brands) {
@@ -481,39 +442,6 @@ function getVisibleFestivals() {
   );
 }
 
-function layoutBrandMasonry() {
-  if (!brandGrid || brandGrid.hidden) {
-    return;
-  }
-
-  const cards = [...brandGrid.querySelectorAll(".brand-card")];
-  if (!cards.length) {
-    brandGrid.classList.remove("is-masonry");
-    return;
-  }
-
-  brandGrid.classList.remove("is-masonry");
-  cards.forEach((card) => card.style.removeProperty("grid-row-end"));
-
-  const gutter =
-    Number.parseFloat(
-      window.getComputedStyle(brandGrid).getPropertyValue("--brand-grid-gap")
-    ) || 18;
-  const cardHeights = cards.map((card) =>
-    Math.ceil(card.getBoundingClientRect().height + gutter)
-  );
-
-  cards.forEach((card, index) => {
-    card.style.gridRowEnd = `span ${cardHeights[index]}`;
-  });
-  brandGrid.classList.add("is-masonry");
-}
-
-window.addEventListener("resize", () => {
-  window.clearTimeout(brandMasonryResizeTimer);
-  brandMasonryResizeTimer = window.setTimeout(layoutBrandMasonry, 120);
-});
-
 function renderBrands() {
   if (!brandGrid) {
     return;
@@ -526,11 +454,10 @@ function renderBrands() {
     .join("");
 
   brandGrid.hidden = brands.length === 0;
-  layoutBrandMasonry();
   if (emptyResult) {
     const hasAnotherSearchResult =
       Boolean(searchKeyword) &&
-      (getVisiblePartners().length > 0 || getVisibleFestivals().length > 0);
+      (getVisibleCollaborators().length > 0 || getVisibleFestivals().length > 0);
     emptyResult.hidden = brands.length !== 0 || hasAnotherSearchResult;
   }
 
@@ -538,7 +465,7 @@ function renderBrands() {
     if (searchKeyword) {
       const totalCount =
         brands.length +
-        getVisiblePartners().length +
+        getVisibleCollaborators().length +
         getVisibleFestivals().length;
       resultSummary.textContent = `"${brandSearchInput.value.trim()}" 전체 검색 결과 ${totalCount}개`;
     } else if (activeCategory !== "all") {
@@ -596,7 +523,7 @@ function resetFilters() {
   url.searchParams.delete("search");
   window.history.replaceState({}, "", url);
   renderBrands();
-  renderPartners();
+  renderCollaborators();
   renderFestivals();
 }
 
@@ -614,7 +541,7 @@ function applySearch(value) {
   }
   window.history.replaceState({}, "", url);
   renderBrands();
-  renderPartners();
+  renderCollaborators();
   renderFestivals();
 }
 
@@ -682,45 +609,12 @@ festivalGrid?.addEventListener("click", (event) => {
   }
 });
 
-festivalPartner?.addEventListener("click", (event) => {
-  const link = event.target.closest("a[data-brand-slug]");
-  if (link) {
-    saveRecentBrand(link);
-  }
-});
-
 brandTicker?.addEventListener("click", (event) => {
   const link = event.target.closest("a[data-brand-slug]");
   if (link) {
     saveRecentBrand(link);
   }
 });
-
-brandGrid?.addEventListener("mouseenter", () => {
-  brandGridInteractionActive = true;
-});
-
-brandGrid?.addEventListener("mouseleave", () => {
-  brandGridInteractionActive = false;
-});
-
-brandGrid?.addEventListener("focusin", () => {
-  brandGridInteractionActive = true;
-});
-
-brandGrid?.addEventListener("focusout", (event) => {
-  if (!brandGrid.contains(event.relatedTarget)) {
-    brandGridInteractionActive = false;
-  }
-});
-
-brandGrid?.addEventListener(
-  "touchstart",
-  () => {
-    brandRotationPauseUntil = Date.now() + BRAND_ROTATION_INTERVAL;
-  },
-  { passive: true }
-);
 
 festivalGrid?.addEventListener("mouseenter", () => {
   festivalGridInteractionActive = true;
@@ -1202,14 +1096,18 @@ async function loadBrands() {
 
     const brands = await response.json();
     const publishedItems = brands.filter((brand) => brand.published !== false);
-    partnerBrands = publishedItems.filter((brand) => isPartner(brand));
-    randomizedBrands = shuffled(
-      publishedItems.filter(
-        (brand) => !isFestival(brand) && !isPartner(brand)
-      )
-    );
+    collaboratorBrands = publishedItems.filter((brand) => isCollaborator(brand));
+    randomizedBrands = publishedItems
+      .filter((brand) => !isFestival(brand) && !isCollaborator(brand))
+      .sort(
+        (first, second) =>
+          (first.sortOrder ?? 999) - (second.sortOrder ?? 999) ||
+          first.name.localeCompare(second.name, "ko")
+      );
     randomizedFestivals = shuffled(
-      publishedItems.filter((brand) => isFestival(brand))
+      publishedItems.filter(
+        (brand) => isFestival(brand) && isCurrentFestival(brand)
+      )
     );
 
     renderCategoryButtons(randomizedBrands);
@@ -1225,10 +1123,9 @@ async function loadBrands() {
     }
 
     renderBrands();
-    renderPartners();
+    renderCollaborators();
     renderFestivals();
     renderBrandTicker(randomizedBrands);
-    startBrandRotation();
     startFestivalRotation();
     if (document.querySelector("#brandMap")) {
       loadKakaoMapSdk();
@@ -1237,25 +1134,24 @@ async function loadBrands() {
     console.error(error);
     randomizedBrands = [
       {
-        slug: "i4",
-        name: "아이뽀란",
-        category: "농산",
-        product: "계란",
-        region: "충남 홍성",
-        headline: "농장에서 식탁까지 과정을 살펴볼 수 있는 계란",
+        slug: "greeny-box",
+        name: "GREENY BOX",
+        category: "건강",
+        product: "샐러드·포케·샌드위치",
+        region: "충남 예산",
+        headline: "샐러드냐 포케냐, 내포에서 점심을 고르는 세 갈래",
         published: true,
-        images: { main: "/assets/i4-eggs.png" }
+        images: { main: "/assets/brands/greeny-box/main.png" }
       }
     ];
     randomizedFestivals = [];
-    partnerBrands = [];
+    collaboratorBrands = [];
     renderCategoryButtons(randomizedBrands);
     renderMapCategoryButtons(randomizedBrands);
     renderBrands();
-    renderPartners();
+    renderCollaborators();
     renderFestivals();
     renderBrandTicker(randomizedBrands);
-    startBrandRotation();
     startFestivalRotation();
     if (document.querySelector("#brandMap")) {
       loadKakaoMapSdk();

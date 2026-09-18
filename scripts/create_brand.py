@@ -141,8 +141,8 @@ def build_detail_html(brand: dict, base_url: str) -> str:
         }
     structured_data = json.dumps(structured_data_value, ensure_ascii=False)
     detail_label = "협력사" if is_partner else "소상공인 이야기"
-    detail_kicker = "MEET THE PARTNER" if is_partner else "MEET THE BRAND"
-    product_kicker = "PARTNER SERVICE" if is_partner else "REPRESENTATIVE PRODUCT"
+    detail_kicker = "FYND 협력사" if is_partner else "충남 업체 이야기"
+    product_kicker = "협력 서비스" if is_partner else "대표 메뉴와 상품"
     product_heading = "협력 서비스" if is_partner else "대표 상품"
     feature_kicker = escape(brand.get("featureKicker") or product_kicker)
     feature_heading = escape(brand.get("featureTitle") or product_heading)
@@ -151,8 +151,7 @@ def build_detail_html(brand: dict, base_url: str) -> str:
     quantity_info_label = "지원 범위" if is_partner else "상품 구성"
     product_detail_label = "지원 범위" if is_partner else "상품 구성"
     product_image_alt = "협력 서비스" if is_partner else "대표 상품"
-    story_kicker = "PARTNER STORY" if is_partner else "BRAND STORY"
-    story_note_label = "PARTNER NOTE" if is_partner else "BRAND NOTE"
+    story_kicker = "현장에서 시작된 이야기" if is_partner else "조금 더 알아보기"
     visual_note = escape(brand.get("visualNote") or "")
     visual_caption = (
         f'<figcaption>{visual_note}</figcaption>' if visual_note else ""
@@ -364,7 +363,9 @@ def build_detail_html(brand: dict, base_url: str) -> str:
     story_sections: list[str] = []
     for index, section in enumerate(brand.get("storySections", []), start=1):
         section_title = escape(section.get("title") or "")
-        section_label = escape(section.get("label") or f"{index:02d}")
+        section_label = escape(section.get("label") or "")
+        section_class = " has-label" if section_label else ""
+        section_label_html = f"<small>{section_label}</small>" if section_label else ""
         raw_paragraphs = section.get("paragraphs") or []
         if isinstance(raw_paragraphs, str):
             raw_paragraphs = [raw_paragraphs]
@@ -397,13 +398,13 @@ def build_detail_html(brand: dict, base_url: str) -> str:
             )
             story_sections.append(
                 f"""
-        <article class="brand-detail-story-section has-image">
+        <article class="brand-detail-story-section has-image{section_class}">
           <figure>
             <img src="{escape(section_image)}" alt="{section_alt}" loading="lazy">
             {caption_html}
           </figure>
           <div class="brand-detail-story-section-copy">
-            <small>{section_label}</small>
+            {section_label_html}
             <h3>{section_title}</h3>{paragraph_html}
           </div>
         </article>
@@ -412,8 +413,8 @@ def build_detail_html(brand: dict, base_url: str) -> str:
         else:
             story_sections.append(
                 f"""
-        <article class="brand-detail-story-section">
-          <small>{section_label}</small>
+        <article class="brand-detail-story-section{section_class}">
+          {section_label_html}
           <div><h3>{section_title}</h3>{paragraph_html}</div>
         </article>
                 """.strip()
@@ -423,8 +424,7 @@ def build_detail_html(brand: dict, base_url: str) -> str:
     if story_sections:
         reading_minutes = max(2, round(story_character_count / 350))
         reading_time = (
-            f'<p class="brand-detail-story-meta">{story_note_label}'
-            f'<span>약 {reading_minutes}분 읽기</span></p>'
+            f'<p class="brand-detail-story-meta"><span>천천히 읽으면 약 {reading_minutes}분</span></p>'
         )
         story_article = (
             '<div class="brand-detail-story-article">'
@@ -444,7 +444,7 @@ def build_detail_html(brand: dict, base_url: str) -> str:
   <meta name="theme-color" content="#ffffff">
   <link rel="canonical" href="{page_url}">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/styles.css?v=service-editorial-11">
+  <link rel="stylesheet" href="/styles.css?v=service-editorial-13">
   <meta property="og:type" content="{'website' if is_partner else 'product'}">
   <meta property="og:site_name" content="FYND">
   <meta property="og:title" content="{name} {product} | FYND">
@@ -504,10 +504,10 @@ def build_detail_html(brand: dict, base_url: str) -> str:
       <h2>{escape(brand.get("storyTitle") or "브랜드가 지키는 가치")}</h2>
       {reading_time}
       <p>{escape(brand.get("storyDescription") or brand["description"])}</p>{gallery_block}
+      {story_article}
       {highlights_block}
       {process_block}
       {story_links_block}
-      {story_article}
     </section>
   </main>{mobile_shop_block}
 
@@ -585,7 +585,7 @@ def build_all(base_url: str, detail_slugs: set[str] | None = None) -> list[dict]
     )
 
     for brand in brands:
-        if brand.get("externalUrl"):
+        if brand.get("externalUrl") or brand.get("published", True) is False:
             continue
         if detail_slugs and brand["slug"] not in detail_slugs:
             continue
@@ -696,11 +696,15 @@ def main() -> None:
         print(f"\n{brand['name']} 데이터를 저장했습니다.")
 
     brands = build_all(base_url, set(args.brand_slugs or []))
-    detail_count = sum(1 for brand in brands if not brand.get("externalUrl"))
+    detail_count = sum(
+        1
+        for brand in brands
+        if not brand.get("externalUrl") and brand.get("published", True)
+    )
     print(
         f"공개 항목 {len(brands)}개와 내부 상세 페이지 {detail_count}개를 갱신했습니다."
     )
-    print("브랜드 노출 순서는 처음 무작위로 정해지고 화면에서 10초마다 다시 섞입니다.")
+    print("업체 노출 순서는 sortOrder 값에 따라 고정됩니다.")
     print("대표 사진을 assets/brands/<slug>/main.jpg에 넣고 다시 실행하세요.")
 
 
