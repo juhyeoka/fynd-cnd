@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /brands/demo-
+Disallow: /assets/brands/demo/
 
 Sitemap: https://fynd-cnd.onrender.com/sitemap.xml
