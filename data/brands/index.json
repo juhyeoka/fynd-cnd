@@ -88,47 +88,145 @@
     "name": "FLUFFY·D",
     "category": "카페",
     "categoryKey": "cafe",
-    "product": "수제 디저트",
+    "product": "필링 스콘·제피르·쿠키",
     "region": "충남 공주",
     "address": "충남 공주시 이인면 금광로 9",
-    "headline": "미리 주문해 선물 상자로 받아보는 공주의 수제 디저트",
-    "description": "플러피디는 공주 이인면에서 수제 디저트를 만들어요. 예약 주문을 받아 준비하고, 선물하기 좋은 포장도 함께 챙깁니다.",
-    "quantity": "예약 주문, 선물 포장",
-    "storyTitle": "먹는 사람을 떠올리며 만드는 디저트",
-    "storyDescription": "작은 간식 하나도 누군가에게 건넬 때는 모양과 포장이 중요합니다. 플러피디는 필요한 날에 맞춰 디저트를 만들고, 받는 순간까지 기분 좋은 선물로 준비합니다.",
+    "headline": "스콘을 가르면 밤과 딸기, 블루베리가 먼저 보입니다",
+    "description": "플러피디는 공주 이인면에서 필링 스콘과 꽃 모양 제피르, 쿠키를 만드는 디저트 가게입니다. 2026년 9월 12일 공주 피크타임 페스티벌에서 첫 판매를 마쳤고, 온라인 주문을 준비하고 있습니다.",
+    "quantity": "밤·딸기·블루베리 필링 스콘, 제피르, 쿠키",
+    "featureKicker": "INSIDE THE SCONE",
+    "featureTitle": "둥근 스콘 안에 숨긴 세 가지 필링",
+    "storyTitle": "개발자가 공주에서 디저트 가게를 열기까지",
+    "storyDescription": "처음부터 메뉴가 완성돼 있었던 건 아닙니다. 러시아식 제피르의 신맛을 줄이고, 커피에 넣었을 때 얼마나 부드럽게 녹는지 시험하고, 공주 알밤을 스콘 속에 넣는 과정을 하나씩 기록했습니다. 플러피디의 공식 제작기에는 예쁜 완성 사진보다 실패하고 다시 만드는 장면이 더 많이 남아 있습니다.",
+    "storyHighlights": [
+      {
+        "label": "공주 알밤",
+        "title": "밤 크림 사이에 통알밤",
+        "text": "밤 필링만 채우지 않고 통알밤을 함께 넣어 속을 가른 순간이 또렷합니다."
+      },
+      {
+        "label": "세 가지 필링",
+        "title": "밤, 딸기, 블루베리",
+        "text": "딸기와 블루베리는 크림치즈 필링에 과일 맛과 과육을 더했습니다."
+      },
+      {
+        "label": "꽃 제피르",
+        "title": "한 송이씩 짜서 컵에",
+        "text": "과일 맛과 향을 넣은 제피르를 꽃 모양으로 짜고 작은 컵에 나눠 담습니다."
+      },
+      {
+        "label": "첫 판매",
+        "title": "2026년 9월 12일",
+        "text": "공주 피크타임 페스티벌에서 스콘과 제피르, 쿠키를 처음 손님에게 건넸습니다."
+      }
+    ],
+    "processTitle": "제피르 한 송이를 만들며 반복한 것",
+    "processSteps": [
+      {
+        "title": "기본 배합",
+        "text": "러시아식 제피르의 질감부터 익혔습니다."
+      },
+      {
+        "title": "산미 조절",
+        "text": "강한 신맛을 줄이려고 비율을 바꿨습니다."
+      },
+      {
+        "title": "꽃 모양",
+        "text": "짤주머니로 한 송이씩 모양을 잡았습니다."
+      },
+      {
+        "title": "커피 실험",
+        "text": "뜨거운 커피에서 녹는 정도도 확인했습니다."
+      }
+    ],
+    "storyLinksTitle": "공식 제작기로 보는 실험 노트",
+    "storyLinks": [
+      {
+        "title": "공주 알밤 스콘 만들기",
+        "text": "밤 필링과 통알밤을 넣는 과정을 영상으로 봅니다.",
+        "url": "https://www.instagram.com/yeyy1025/reel/DbsK-M8TuYd/"
+      },
+      {
+        "title": "제피르의 신맛 줄이기",
+        "text": "한국 입맛에 맞추려고 배합을 다시 잡은 기록입니다.",
+        "url": "https://www.instagram.com/yeyy1025/reel/DbnNyIOTGzp/"
+      },
+      {
+        "title": "커피에 제피르를 넣어보기",
+        "text": "뜨거운 커피에서 사르르 녹는 정도를 시험합니다.",
+        "url": "https://www.instagram.com/yeyy1025/reel/DcXvQGczbsv/"
+      },
+      {
+        "title": "개발자에서 디저트 사장으로",
+        "text": "공주에서 가게를 준비하게 된 이야기를 직접 들려줍니다.",
+        "url": "https://www.instagram.com/yeyy1025/reel/Dc-WmAwTSJT/"
+      }
+    ],
     "storySections": [
       {
-        "title": "필요한 날을 먼저 정하는 디저트",
+        "label": "전환",
+        "title": "코드를 닫고, 오븐 앞에 섰습니다",
         "paragraphs": [
-          "예약 주문 디저트는 진열대 앞에서 바로 고르는 간식과 출발점이 다릅니다. 먼저 필요한 날짜가 있고, 그날 누구와 나눌지 생각한 다음 주문합니다. 플러피디가 명함에 ‘Pre-Order’를 적어 둔 이유도 여기에서 읽힙니다.",
-          "생일이나 작은 모임처럼 날짜가 정해진 날에는 준비 시간도 디저트의 일부가 됩니다. 급하게 고르기보다 여유를 두고 모양과 수량을 정해 놓으면, 받는 날에는 상자를 챙기는 일만 남습니다."
+          "플러피디 제작자는 원래 개발자로 일했습니다. 공주에서 디저트 사업을 시작하기로 마음먹은 뒤에는 화면 대신 반죽 상태를 들여다보는 시간이 길어졌습니다. 코드는 틀리면 오류를 띄우지만, 디저트는 온도와 습도에 따라 말없이 달라집니다.",
+          "공식 제작기에는 잘 나온 한 판만 모아두지 않았습니다. 배합을 바꾸고, 모양이 무너지면 다시 짜고, 한 번 만든 메뉴를 커피에 넣어보는 과정까지 남겼습니다. 완성품만 볼 때보다 가게의 성격이 더 잘 보이는 기록입니다."
         ]
       },
       {
-        "title": "작은 상자를 여는 순간까지",
+        "label": "스콘",
+        "title": "겉은 둥글고, 속은 세 가지입니다",
         "paragraphs": [
-          "선물용 디저트는 맛만으로 끝나지 않습니다. 상자를 건네는 순간과 포장을 풀 때, 마지막 한 조각을 꺼낼 때까지가 한 번의 경험입니다. 플러피디가 수제 디저트와 선물 포장을 나란히 내세우는 이유입니다.",
-          "누구에게 줄지 생각하면 선택도 조금 쉬워집니다. 혼자 먹을 작은 간식인지, 여러 사람이 나눌 상자인지, 차와 곁들일지부터 정해보세요. 메뉴를 고르는 시간 자체가 선물을 준비하는 시간이 됩니다."
+          "필링 스콘은 반으로 갈랐을 때 비로소 이름이 이해됩니다. 밤 스콘에는 부드러운 밤 필링과 통알밤이 함께 들어갑니다. 딸기와 블루베리도 겉모습은 비슷하지만 속을 보면 색부터 다릅니다.",
+          "밤은 공주라는 지역과 자연스럽게 연결됩니다. 딸기와 블루베리는 과일 맛이 크림치즈 필링에 묻히지 않도록 조합했습니다. 어떤 메뉴가 실제로 판매되는지는 주문 시점의 공식 안내를 확인해야 합니다."
         ]
       },
       {
-        "title": "공주 이인면에서 챙겨 가는 단맛",
+        "label": "제피르",
+        "title": "러시아 디저트를 꽃 모양으로 다시 만들었습니다",
+        "image": "/assets/brands/fluffy-d/zephyr-making.jpg",
+        "imageAlt": "플러피디가 꽃 모양 제피르를 투명 컵에 나눠 담는 실제 작업 사진",
+        "caption": "플러피디 공식 인스타그램에 공개된 꽃 제피르 작업 장면입니다.",
         "paragraphs": [
-          "플러피디가 있는 곳은 공주시 이인면입니다. 번화가의 대형 매장처럼 우연히 들르기보다는 필요한 날을 정해 찾아가는 쪽에 가깝습니다. 그래서 주소와 수령 날짜를 미리 확인하는 편이 좋습니다.",
-          "공주를 오가는 길에 약속이 있다면 동선을 맞춰 볼 수도 있습니다. 목적지에 도착하기 전 작은 상자 하나를 챙겨 가는 일. 그 정도의 수고가 평범한 만남을 조금 다르게 만듭니다."
+          "제피르는 과일 맛과 향을 넣어 만드는 러시아식 마시멜로입니다. 플러피디는 반죽을 꽃처럼 짜서 한 송이씩 굳히고, 투명한 컵에 나눠 담았습니다. 분홍과 초록이 섞인 모양은 실제 꽃봉오리와 닮았습니다.",
+          "문제는 맛이었습니다. 러시아식 제피르의 강한 신맛을 그대로 내기보다 한국에서 편하게 먹을 수 있도록 배합을 여러 번 손봤습니다. 딸기 맛을 따로 연습하고, 모양이 흐트러지지 않는 지점도 다시 확인했습니다."
         ]
       },
       {
-        "title": "주문 전에 함께 확인할 것",
+        "label": "실험",
+        "title": "커피에 넣어본 것도 우연은 아니었습니다",
         "paragraphs": [
-          "예약할 때는 날짜와 수량, 포장 여부를 한 번에 묻는 편이 편합니다. 알레르기가 있거나 보관 방법이 궁금하다면 함께 확인해야 합니다. 사진만 보고 짐작하기보다 만드는 사람에게 직접 묻는 게 정확합니다.",
-          "디저트는 오래 설명하지 않아도 마음을 전하기 좋은 물건입니다. 다만 기억에 남는 선물에는 대개 서두르지 않고 준비한 흔적이 있습니다. 플러피디는 그 준비를 맡길 수 있는 공주의 작은 선택지입니다."
+          "완성한 제피르를 뜨거운 커피에 넣으면 어떻게 될까. 제작자는 실제로 잔에 넣고 녹는 모습을 확인했습니다. 너무 빨리 사라져도 아쉽고, 끝까지 덩어리로 남아도 먹기 불편합니다. 디저트 하나를 다른 방식으로 먹어보며 질감을 다시 본 셈입니다.",
+          "이런 장면은 메뉴 설명 한 줄에는 잘 드러나지 않습니다. 그런데 만드는 사람의 기록을 따라가면 왜 배합을 바꿨는지, 왜 꽃 모양을 고집했는지 조금씩 보입니다. 실패한 날도 다음 레시피의 메모가 됐습니다."
+        ]
+      },
+      {
+        "label": "첫날",
+        "title": "9월 12일, 첫 디저트를 축제에 들고 나갔습니다",
+        "paragraphs": [
+          "2026년 9월 12일, 플러피디는 공주 피크타임 페스티벌에서 첫 판매를 시작했습니다. 온라인 가게가 정식으로 채워지기 전, 손님을 먼저 만난 자리가 축제였습니다. 꽃 제피르를 컵에 담고 필링 스콘과 쿠키를 함께 준비했습니다.",
+          "처음 만든 메뉴를 실제 손님이 고르는 순간은 연습과 다릅니다. 어떤 맛 앞에서 오래 머무는지, 상자를 어떻게 들고 가는지, 무엇을 다시 묻는지가 모두 다음 판매를 위한 단서가 됩니다. 플러피디의 첫날은 완성이 아니라 첫 번째 현장 테스트에 가까웠습니다."
+        ]
+      },
+      {
+        "label": "돌아가는 길",
+        "title": "버스 좌석 옆에 디저트 상자를 놓는다면",
+        "paragraphs": [
+          "축제에서 디저트 상자를 하나 골랐다고 생각해봅니다. 버스에 오르면 빈 옆자리가 평소보다 반갑습니다. 무릎에 올리자니 흔들릴 것 같고, 바닥에 두자니 마음이 쓰여서 결국 좌석 위에 조심스럽게 놓게 됩니다.",
+          "아직 열지 않은 상자를 옆에 두면 자꾸 한 번씩 눈이 갑니다. 밤 스콘을 반으로 갈랐을 때 통알밤이 얼마나 보일지, 꽃 제피르는 커피에서 정말 부드럽게 녹을지. 집에 도착하기 전에 상자를 열지 말지 잠깐 고민하게 됩니다."
+        ]
+      },
+      {
+        "label": "지금",
+        "title": "스마트스토어는 아직 Coming soon입니다",
+        "paragraphs": [
+          "플러피디 스마트스토어에는 현재 판매 상품 대신 Coming soon 배너가 걸려 있습니다. 첫 축제 판매는 시작했지만 택배 주문은 준비 중이라는 뜻입니다. 지금 바로 주문할 수 있다고 잘못 안내하지 않는 게 중요합니다.",
+          "새 판매 일정과 메뉴는 공식 인스타그램에서 먼저 확인하는 편이 빠릅니다. 방문 위치는 카카오맵에서 볼 수 있습니다. 디저트 사진이 마음에 들었다면 제작기 영상을 먼저 보고, 다음 판매 소식을 기다려보세요."
         ]
       }
     ],
-    "shopUrl": "",
+    "shopUrl": "https://m.smartstore.naver.com/fluffyd",
     "homepageUrl": "",
     "placeUrl": "https://place.map.kakao.com/1813652674",
+    "instagramUrl": "https://www.instagram.com/fluffy._.d/",
     "traceUrl": "",
     "phone": "",
     "published": true,
@@ -136,10 +234,32 @@
     "publicUrl": "https://fynd-cnd.onrender.com/brands/fluffy-d/",
     "qrImage": "",
     "sourceUrls": [
-      "https://place.map.kakao.com/1813652674"
+      "https://www.instagram.com/fluffy._.d/",
+      "https://www.instagram.com/yeyy1025/",
+      "https://m.smartstore.naver.com/fluffyd",
+      "https://place.map.kakao.com/1813652674",
+      "https://inhu.kr/permits/94233612"
     ],
     "images": {
-      "main": "/assets/brands/fluffy-d/main.jpeg",
+      "main": "/assets/brands/fluffy-d/scone-chestnut.jpg",
+      "product": "/assets/brands/fluffy-d/store-banner.jpg",
+      "productGallery": [
+        {
+          "src": "/assets/brands/fluffy-d/scone-chestnut.jpg",
+          "alt": "플러피디 밤 필링과 통알밤이 든 스콘의 실제 단면 사진",
+          "label": "공주 알밤"
+        },
+        {
+          "src": "/assets/brands/fluffy-d/scone-strawberry.jpg",
+          "alt": "플러피디 딸기 크림치즈 필링 스콘의 실제 단면 사진",
+          "label": "딸기"
+        },
+        {
+          "src": "/assets/brands/fluffy-d/scone-blueberry.jpg",
+          "alt": "플러피디 블루베리 필링과 과육이 든 스콘의 실제 단면 사진",
+          "label": "블루베리"
+        }
+      ],
       "gallery": []
     }
   },
@@ -272,6 +392,7 @@
   },
   {
     "slug": "pamp",
+    "type": "partner",
     "name": "PAMP",
     "category": "기술",
     "categoryKey": "technology",
@@ -326,322 +447,11 @@
     ],
     "images": {
       "main": "/assets/brands/pamp/main.png",
+      "product": "/assets/brands/pamp/story-2.webp",
       "gallery": [
         "/assets/brands/pamp/story-1.webp",
         "/assets/brands/pamp/story-2.webp"
       ]
-    }
-  },
-  {
-    "slug": "demo-sunshine-orchard",
-    "name": "햇살담은농원",
-    "category": "농산",
-    "categoryKey": "agriculture",
-    "product": "부사 사과",
-    "region": "충남 예산",
-    "headline": "예산의 일교차를 품은 아삭하고 달콤한 사과",
-    "description": "예산의 햇살과 큰 일교차 속에서 사과를 키우는 과수원입니다.",
-    "quantity": "부사 사과",
-    "storyTitle": "한 해를 기다린 사과",
-    "storyDescription": "가지마다 상태를 살피고 알맞게 익은 사과를 골라 수확합니다.",
-    "shopUrl": "",
-    "homepageUrl": "",
-    "traceUrl": "",
-    "phone": "",
-    "published": true,
-    "demo": true,
-    "sortOrder": 901,
-    "publicUrl": "https://fynd-cnd.onrender.com/brands/demo-sunshine-orchard/",
-    "qrImage": "",
-    "images": {
-      "main": "/assets/brands/demo/sunshine-orchard.jpg",
-      "gallery": []
-    }
-  },
-  {
-    "slug": "demo-green-fields",
-    "name": "바른들채소",
-    "category": "농산",
-    "categoryKey": "agriculture",
-    "product": "제철 채소",
-    "region": "충남 논산",
-    "headline": "매일의 식탁을 채우는 신선한 제철 채소",
-    "description": "논산 들녘에서 계절에 맞는 채소를 기르는 농가입니다.",
-    "quantity": "제철 채소",
-    "storyTitle": "제철을 지키는 밭",
-    "storyDescription": "그 계절에 가장 맛있는 채소를 정직하게 길러 식탁에 전합니다.",
-    "shopUrl": "",
-    "homepageUrl": "",
-    "traceUrl": "",
-    "phone": "",
-    "published": true,
-    "demo": true,
-    "sortOrder": 902,
-    "publicUrl": "https://fynd-cnd.onrender.com/brands/demo-green-fields/",
-    "qrImage": "",
-    "images": {
-      "main": "/assets/brands/demo/green-fields.jpg",
-      "gallery": []
-    }
-  },
-  {
-    "slug": "demo-cozy-eggs",
-    "name": "포근한알",
-    "category": "축산",
-    "categoryKey": "livestock",
-    "product": "신선 계란",
-    "region": "충남 공주",
-    "headline": "매일의 기본을 생각한 신선한 계란",
-    "description": "공주의 농장에서 매일 신선한 계란을 선별해 전합니다.",
-    "quantity": "신선 계란",
-    "storyTitle": "매일 챙기는 기본",
-    "storyDescription": "산란일과 상태를 꼼꼼히 살펴 깨끗한 계란만 골라 담습니다.",
-    "shopUrl": "",
-    "homepageUrl": "",
-    "traceUrl": "",
-    "phone": "",
-    "published": true,
-    "demo": true,
-    "sortOrder": 903,
-    "publicUrl": "https://fynd-cnd.onrender.com/brands/demo-cozy-eggs/",
-    "qrImage": "",
-    "images": {
-      "main": "/assets/brands/demo/cozy-eggs.jpg",
-      "gallery": []
-    }
-  },
-  {
-    "slug": "demo-mountain-honey",
-    "name": "산들꿀방",
-    "category": "건강",
-    "categoryKey": "health",
-    "product": "아카시아 꿀",
-    "region": "충남 청양",
-    "headline": "산지의 계절과 꽃향기를 담은 벌꿀",
-    "description": "청양의 산과 들에서 벌이 모은 꿀을 정성껏 담습니다.",
-    "quantity": "아카시아 꿀",
-    "storyTitle": "꽃이 피는 때를 따라",
-    "storyDescription": "계절마다 달라지는 꽃과 향을 살피며 벌통을 돌봅니다.",
-    "shopUrl": "",
-    "homepageUrl": "",
-    "traceUrl": "",
-    "phone": "",
-    "published": true,
-    "demo": true,
-    "sortOrder": 904,
-    "publicUrl": "https://fynd-cnd.onrender.com/brands/demo-mountain-honey/",
-    "qrImage": "",
-    "images": {
-      "main": "/assets/brands/demo/mountain-honey.jpg",
-      "gallery": []
-    }
-  },
-  {
-    "slug": "demo-wind-roasters",
-    "name": "바람로스터스",
-    "category": "카페",
-    "categoryKey": "cafe",
-    "product": "스페셜티 원두",
-    "region": "충남 천안",
-    "headline": "지역의 풍경을 한 잔에 담은 로컬 로스터리",
-    "description": "천안에서 원두의 개성을 살려 볶는 작은 로스터리입니다.",
-    "quantity": "스페셜티 원두",
-    "storyTitle": "한 잔의 기준",
-    "storyDescription": "산지와 품종에 맞춰 볶는 온도와 시간을 세심하게 조절합니다.",
-    "shopUrl": "",
-    "homepageUrl": "",
-    "traceUrl": "",
-    "phone": "",
-    "published": true,
-    "demo": true,
-    "sortOrder": 905,
-    "publicUrl": "https://fynd-cnd.onrender.com/brands/demo-wind-roasters/",
-    "qrImage": "",
-    "images": {
-      "main": "/assets/brands/demo/wind-roasters.jpg",
-      "gallery": []
-    }
-  },
-  {
-    "slug": "demo-warm-table",
-    "name": "온기한상",
-    "category": "식당",
-    "categoryKey": "restaurant",
-    "product": "제철 한상차림",
-    "region": "충남 공주",
-    "headline": "제철 재료로 차려내는 정갈한 지역 한상",
-    "description": "공주에서 난 제철 재료로 정갈한 한 상을 차리는 식당입니다.",
-    "quantity": "제철 한상차림",
-    "storyTitle": "오늘의 재료로",
-    "storyDescription": "시장과 산지에서 고른 재료를 그날 가장 맛있는 방식으로 차립니다.",
-    "shopUrl": "",
-    "homepageUrl": "",
-    "traceUrl": "",
-    "phone": "",
-    "published": true,
-    "demo": true,
-    "sortOrder": 906,
-    "publicUrl": "https://fynd-cnd.onrender.com/brands/demo-warm-table/",
-    "qrImage": "",
-    "images": {
-      "main": "/assets/brands/demo/warm-table.jpg",
-      "gallery": []
-    }
-  },
-  {
-    "slug": "demo-fire-grill",
-    "name": "불향고기집",
-    "category": "식당",
-    "categoryKey": "restaurant",
-    "product": "숯불구이",
-    "region": "충남 천안",
-    "headline": "불향과 육즙을 제대로 살린 든든한 숯불구이",
-    "description": "천안에서 참숯 불향과 고기의 맛을 살려 굽는 식당입니다.",
-    "quantity": "숯불구이",
-    "storyTitle": "불 앞에서 지키는 맛",
-    "storyDescription": "고기마다 굽는 온도와 시간을 달리해 육즙과 불향을 살립니다.",
-    "shopUrl": "",
-    "homepageUrl": "",
-    "traceUrl": "",
-    "phone": "",
-    "published": true,
-    "demo": true,
-    "sortOrder": 907,
-    "publicUrl": "https://fynd-cnd.onrender.com/brands/demo-fire-grill/",
-    "qrImage": "",
-    "images": {
-      "main": "/assets/brands/demo/fire-grill.jpg",
-      "gallery": []
-    }
-  },
-  {
-    "slug": "demo-village-noodles",
-    "name": "마을면가",
-    "category": "식당",
-    "categoryKey": "restaurant",
-    "product": "온면",
-    "region": "충남 예산",
-    "headline": "따뜻한 국물과 정성으로 완성한 한 그릇",
-    "description": "예산에서 깊은 국물과 손맛을 담은 온면을 내는 식당입니다.",
-    "quantity": "온면",
-    "storyTitle": "따뜻한 한 그릇",
-    "storyDescription": "오래 우린 육수와 매일 준비한 고명으로 편안한 한 끼를 만듭니다.",
-    "shopUrl": "",
-    "homepageUrl": "",
-    "traceUrl": "",
-    "phone": "",
-    "published": true,
-    "demo": true,
-    "sortOrder": 908,
-    "publicUrl": "https://fynd-cnd.onrender.com/brands/demo-village-noodles/",
-    "qrImage": "",
-    "images": {
-      "main": "/assets/brands/demo/village-noodles.jpg",
-      "gallery": []
-    }
-  },
-  {
-    "slug": "demo-daily-bakery",
-    "name": "오늘의빵집",
-    "category": "카페",
-    "categoryKey": "cafe",
-    "product": "천연발효빵",
-    "region": "충남 아산",
-    "headline": "매일 아침 천천히 구워내는 담백한 빵",
-    "description": "아산에서 천연발효종으로 매일 아침 빵을 굽는 동네 빵집입니다.",
-    "quantity": "천연발효빵",
-    "storyTitle": "아침을 여는 빵",
-    "storyDescription": "반죽을 천천히 발효해 담백한 맛과 부드러운 식감을 살립니다.",
-    "shopUrl": "",
-    "homepageUrl": "",
-    "traceUrl": "",
-    "phone": "",
-    "published": true,
-    "demo": true,
-    "sortOrder": 909,
-    "publicUrl": "https://fynd-cnd.onrender.com/brands/demo-daily-bakery/",
-    "qrImage": "",
-    "images": {
-      "main": "/assets/brands/demo/daily-bakery.jpg",
-      "gallery": []
-    }
-  },
-  {
-    "slug": "demo-sea-table",
-    "name": "바다찬상",
-    "category": "수산",
-    "categoryKey": "seafood",
-    "product": "제철 해산물",
-    "region": "충남 보령",
-    "headline": "보령 바다의 신선함을 한 상에 담은 해산물",
-    "description": "보령 앞바다에서 난 제철 해산물을 손질해 선보이는 식당입니다.",
-    "quantity": "제철 해산물",
-    "storyTitle": "바다에서 식탁까지",
-    "storyDescription": "제철에 가장 맛있는 해산물을 골라 본연의 맛을 살려 냅니다.",
-    "shopUrl": "",
-    "homepageUrl": "",
-    "traceUrl": "",
-    "phone": "",
-    "published": true,
-    "demo": true,
-    "sortOrder": 910,
-    "publicUrl": "https://fynd-cnd.onrender.com/brands/demo-sea-table/",
-    "qrImage": "",
-    "images": {
-      "main": "/assets/brands/demo/sea-table.jpg",
-      "gallery": []
-    }
-  },
-  {
-    "slug": "demo-shine-grapes",
-    "name": "샤인마루",
-    "category": "농산",
-    "categoryKey": "agriculture",
-    "product": "샤인머스켓",
-    "region": "충남 논산",
-    "headline": "논산의 햇살로 키운 향긋하고 아삭한 포도",
-    "description": "논산의 포도밭에서 향과 당도를 살려 샤인머스켓을 기릅니다.",
-    "quantity": "샤인머스켓",
-    "storyTitle": "한 송이씩 살피며",
-    "storyDescription": "송이마다 햇빛과 바람이 고르게 닿도록 손질하며 수확을 기다립니다.",
-    "shopUrl": "",
-    "homepageUrl": "",
-    "traceUrl": "",
-    "phone": "",
-    "published": true,
-    "demo": true,
-    "sortOrder": 911,
-    "publicUrl": "https://fynd-cnd.onrender.com/brands/demo-shine-grapes/",
-    "qrImage": "",
-    "images": {
-      "main": "/assets/brands/demo/shine-grapes.jpg",
-      "gallery": []
-    }
-  },
-  {
-    "slug": "demo-seed-oil",
-    "name": "들꽃기름방",
-    "category": "건강",
-    "categoryKey": "health",
-    "product": "저온압착 들기름",
-    "region": "충남 공주",
-    "headline": "고소한 향과 원재료의 맛을 지킨 저온압착 기름",
-    "description": "공주에서 국산 들깨를 낮은 온도로 눌러 고소한 기름을 만듭니다.",
-    "quantity": "저온압착 들기름",
-    "storyTitle": "재료의 향을 그대로",
-    "storyDescription": "들깨를 깨끗이 고르고 낮은 온도로 천천히 짜 깊은 향을 지킵니다.",
-    "shopUrl": "",
-    "homepageUrl": "",
-    "traceUrl": "",
-    "phone": "",
-    "published": true,
-    "demo": true,
-    "sortOrder": 912,
-    "publicUrl": "https://fynd-cnd.onrender.com/brands/demo-seed-oil/",
-    "qrImage": "",
-    "images": {
-      "main": "/assets/brands/demo/seed-oil.jpg",
-      "gallery": []
     }
   },
   {

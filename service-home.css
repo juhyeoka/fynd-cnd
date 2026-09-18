@@ -338,6 +338,7 @@
 .service-v3 .sv3-hero-directory > a b { color: var(--sv3-red); font-size: 18px; }
 
 .service-v3 .sv3-brand-section,
+.service-v3 .sv3-partner-section,
 .service-v3 .sv3-map-section {
   padding: 100px max(36px, calc((100% - 1420px) / 2));
   background: var(--sv3-paper);
@@ -551,6 +552,113 @@
 .service-v3 .empty-result p { color: var(--sv3-muted); }
 .service-v3 .empty-result button { padding: 11px 17px; color: #fff; background: var(--sv3-black); cursor: pointer; }
 
+.service-v3 .sv3-partner-section {
+  scroll-margin-top: 90px;
+  padding-top: 78px;
+  padding-bottom: 78px;
+  background: #eee8dc;
+}
+
+.service-v3 .sv3-partner-section[hidden],
+.service-v3 .sv3-festival-partner[hidden] { display: none; }
+
+.service-v3 .sv3-partner-section .sv3-section-head h2 {
+  font-size: clamp(34px, 3.7vw, 54px);
+}
+
+.service-v3 .sv3-festival-partner {
+  display: grid;
+  gap: 20px;
+}
+
+.service-v3 .festival-partner-card {
+  min-height: 360px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(360px, 0.9fr);
+  color: #171717;
+  background: #fff;
+  border: 1px solid #d7d0c3;
+}
+
+.service-v3 .festival-partner-copy {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 40px 44px;
+}
+
+.service-v3 .festival-partner-copy > small {
+  color: var(--sv3-red);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.service-v3 .festival-partner-copy > img {
+  width: 174px;
+  height: 66px;
+  margin-top: 22px;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.service-v3 .festival-partner-copy > strong {
+  max-width: 650px;
+  margin-top: 20px;
+  font-size: clamp(25px, 2.6vw, 38px);
+  line-height: 1.18;
+  letter-spacing: -0.055em;
+}
+
+.service-v3 .festival-partner-copy > p {
+  max-width: 660px;
+  margin: 14px 0 0;
+  color: #666159;
+  font-size: 13px;
+  line-height: 1.75;
+}
+
+.service-v3 .festival-partner-copy > b {
+  width: 100%;
+  margin-top: auto;
+  padding-top: 22px;
+  border-top: 1px solid #ded8ce;
+  font-size: 12px;
+}
+
+.service-v3 .festival-partner-media {
+  position: relative;
+  min-width: 0;
+  min-height: 360px;
+  display: grid;
+  place-items: center;
+  padding: 25px;
+  background: #fff4df;
+  border-left: 1px solid #ded4c3;
+}
+
+.service-v3 .festival-partner-media > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-height: 310px;
+  object-fit: contain;
+}
+
+.service-v3 .festival-partner-media > i {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  padding: 9px 11px;
+  color: #171717;
+  background: #ff9f1a;
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 900;
+}
+
 .service-v3 .sv3-festival-section {
   padding: 70px max(36px, calc((100% - 1420px) / 2));
   color: #fff;
@@ -571,17 +679,21 @@
 .service-v3 .festival-card {
   grid-column: span 4;
   display: flex;
-  min-height: 330px;
+  min-height: 292px;
   flex-direction: column;
   background: #242424;
 }
 
-.service-v3 .festival-card:nth-child(4n + 1) { grid-column: span 7; }
-.service-v3 .festival-card:nth-child(4n + 2) { grid-column: span 5; }
+.service-v3 .festival-card:nth-child(1) { grid-column: span 7; }
+.service-v3 .festival-card:nth-child(2) { grid-column: span 5; }
+.service-v3 .festival-card:only-child,
+.service-v3 .festival-card:nth-child(3n + 3):last-child { grid-column: 1 / -1; }
+.service-v3 .festival-card:nth-child(3n + 3):nth-last-child(2),
+.service-v3 .festival-card:nth-child(3n + 4):last-child { grid-column: span 6; }
 
-.service-v3 .festival-card-media { display: block; height: 180px; overflow: hidden; }
-.service-v3 .festival-card:nth-child(4n + 1) .festival-card-media,
-.service-v3 .festival-card:nth-child(4n + 2) .festival-card-media { height: 220px; }
+.service-v3 .festival-card-media { display: block; height: 154px; overflow: hidden; }
+.service-v3 .festival-card:nth-child(1) .festival-card-media,
+.service-v3 .festival-card:nth-child(2) .festival-card-media { height: 190px; }
 
 .service-v3 .festival-card-media img {
   width: 100%;
@@ -917,12 +1029,11 @@
   .service-v3 .sv3-hero-copy { max-width: 760px; }
   .service-v3 .sv3-hero-directory { min-height: 470px; }
   .service-v3 .brand-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .service-v3 .festival-card,
-  .service-v3 .festival-card:nth-child(4n + 1),
-  .service-v3 .festival-card:nth-child(4n + 2) { grid-column: span 6; }
+  .service-v3 .festival-grid > .festival-card { grid-column: span 6; }
+  .service-v3 .festival-grid > .festival-card:last-child:nth-child(odd) { grid-column: 1 / -1; }
   .service-v3 .festival-card-media,
-  .service-v3 .festival-card:nth-child(4n + 1) .festival-card-media,
-  .service-v3 .festival-card:nth-child(4n + 2) .festival-card-media { height: 180px; }
+  .service-v3 .festival-card:nth-child(1) .festival-card-media,
+  .service-v3 .festival-card:nth-child(2) .festival-card-media { height: 166px; }
   .service-v3 .sv3-map-layout { grid-template-columns: 1fr; }
   .service-v3 .map-region-panel { min-height: 260px; }
   .service-v3 .sv3-inquiry { grid-template-columns: 1fr; gap: 48px; }
@@ -964,13 +1075,24 @@
   .service-v3 .sv3-hero-directory > a { right: 24px; bottom: 24px; left: 24px; }
   .service-v3 .sv3-hero-directory::after { display: none; }
   .service-v3 .sv3-brand-section,
+  .service-v3 .sv3-partner-section,
   .service-v3 .sv3-map-section,
   .service-v3 .sv3-festival-section,
   .service-v3 .sv3-inquiry { padding: 46px 16px; }
   .service-v3 .sv3-section-head { margin-bottom: 28px; display: block; }
   .service-v3 .sv3-section-head h2 { font-size: 36px; line-height: 1.17; }
   .service-v3 .sv3-section-head > span { display: block; margin-top: 16px; font-size: 13px; }
-  .service-v3 .sv3-brand-toolbar { align-items: flex-start; flex-direction: column; }
+  .service-v3 .sv3-brand-toolbar {
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .service-v3 .sv3-brand-toolbar .category-filter {
+    width: 100%;
+    min-width: 0;
+  }
   .service-v3 .brand-grid { --brand-grid-gap: 10px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .service-v3 .brand-card-media { height: clamp(142px, 42vw, 178px); }
   .service-v3 .brand-card-tall .brand-card-media { height: clamp(176px, 52vw, 220px); }
@@ -983,14 +1105,20 @@
   .service-v3 .brand-card-meta { gap: 7px; }
   .service-v3 .brand-card-meta i,
   .service-v3 .brand-card-meta b { font-size: 9px; }
+  .service-v3 .festival-partner-card { min-height: 0; grid-template-columns: 1fr; }
+  .service-v3 .festival-partner-copy { padding: 28px 22px; }
+  .service-v3 .festival-partner-copy > img { width: 142px; height: 52px; margin-top: 18px; }
+  .service-v3 .festival-partner-copy > strong { margin-top: 15px; font-size: 27px; }
+  .service-v3 .festival-partner-copy > p { font-size: 12px; }
+  .service-v3 .festival-partner-copy > b { margin-top: 24px; }
+  .service-v3 .festival-partner-media { min-height: 238px; padding: 20px; border-top: 1px solid #ded4c3; border-left: 0; }
+  .service-v3 .festival-partner-media > img { max-height: 214px; }
   .service-v3 .festival-grid { display: flex; gap: 12px; margin-right: -16px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
   .service-v3 .festival-grid::-webkit-scrollbar { display: none; }
-  .service-v3 .festival-card,
-  .service-v3 .festival-card:nth-child(4n + 1),
-  .service-v3 .festival-card:nth-child(4n + 2) { flex: 0 0 min(56vw, 220px); min-height: 250px; scroll-snap-align: start; }
+  .service-v3 .festival-grid > .festival-card { flex: 0 0 min(56vw, 220px); min-height: 250px; scroll-snap-align: start; }
   .service-v3 .festival-card-media,
-  .service-v3 .festival-card:nth-child(4n + 1) .festival-card-media,
-  .service-v3 .festival-card:nth-child(4n + 2) .festival-card-media { height: 125px; }
+  .service-v3 .festival-card:nth-child(1) .festival-card-media,
+  .service-v3 .festival-card:nth-child(2) .festival-card-media { height: 125px; }
   .service-v3 .festival-card-copy { padding: 12px; }
   .service-v3 .festival-card-copy small { font-size: 9px; }
   .service-v3 .festival-card-copy strong { font-size: 16px; }

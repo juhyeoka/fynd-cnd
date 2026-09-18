@@ -1,5 +1,6 @@
 {
   "slug": "pamp",
+  "type": "partner",
   "name": "PAMP",
   "category": "기술",
   "categoryKey": "technology",
@@ -54,6 +55,7 @@
   ],
   "images": {
     "main": "/assets/brands/pamp/main.png",
+    "product": "/assets/brands/pamp/story-2.webp",
     "gallery": [
       "/assets/brands/pamp/story-1.webp",
       "/assets/brands/pamp/story-2.webp"

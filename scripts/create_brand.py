@@ -109,21 +109,27 @@ def build_detail_html(brand: dict, base_url: str) -> str:
     description = escape(brand["description"])
     address = escape(brand.get("address") or "")
     quantity = escape(brand.get("quantity") or "공식 판매처에서 확인")
-    image = escape(
-        brand.get("images", {}).get("main")
-        or "/assets/brands/brand-placeholder.svg"
-    )
+    images = brand.get("images", {})
+    image = escape(images.get("main") or "/assets/brands/brand-placeholder.svg")
+    product_image = escape(images.get("product") or image)
     page_url = f"{base_url}/brands/{escape(brand['slug'])}/"
     image_url = image if image.startswith("http") else f"{base_url}{image}"
-    is_demo = bool(brand.get("demo"))
-    robots_value = (
-        "noindex, nofollow, noarchive"
-        if is_demo
-        else "index, follow, max-image-preview:large"
-    )
-    sample_label = " · 샘플 브랜드" if is_demo else ""
-    structured_data = json.dumps(
-        {
+    is_partner = brand.get("type") == "partner"
+    robots_value = "index, follow, max-image-preview:large"
+    if is_partner:
+        structured_data_value = {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": f"{brand['name']} {brand['product']}",
+            "image": image_url,
+            "description": brand["description"],
+            "serviceType": brand["product"],
+            "provider": {"@type": "Organization", "name": brand["name"]},
+            "areaServed": brand["region"],
+            "url": page_url,
+        }
+    else:
+        structured_data_value = {
             "@context": "https://schema.org",
             "@type": "Product",
             "name": f"{brand['name']} {brand['product']}",
@@ -132,8 +138,24 @@ def build_detail_html(brand: dict, base_url: str) -> str:
             "category": brand["category"],
             "brand": {"@type": "Brand", "name": brand["name"]},
             "url": page_url,
-        },
-        ensure_ascii=False,
+        }
+    structured_data = json.dumps(structured_data_value, ensure_ascii=False)
+    detail_label = "협력사" if is_partner else "소상공인 이야기"
+    detail_kicker = "MEET THE PARTNER" if is_partner else "MEET THE BRAND"
+    product_kicker = "PARTNER SERVICE" if is_partner else "REPRESENTATIVE PRODUCT"
+    product_heading = "협력 서비스" if is_partner else "대표 상품"
+    feature_kicker = escape(brand.get("featureKicker") or product_kicker)
+    feature_heading = escape(brand.get("featureTitle") or product_heading)
+    entity_info_label = "협력사" if is_partner else "브랜드"
+    product_info_label = "협력 서비스" if is_partner else "대표 상품"
+    quantity_info_label = "지원 범위" if is_partner else "상품 구성"
+    product_detail_label = "지원 범위" if is_partner else "상품 구성"
+    product_image_alt = "협력 서비스" if is_partner else "대표 상품"
+    story_kicker = "PARTNER STORY" if is_partner else "BRAND STORY"
+    story_note_label = "PARTNER NOTE" if is_partner else "BRAND NOTE"
+    visual_note = escape(brand.get("visualNote") or "")
+    visual_caption = (
+        f'<figcaption>{visual_note}</figcaption>' if visual_note else ""
     )
 
     shop_url = brand.get("shopUrl", "")
@@ -164,14 +186,6 @@ def build_detail_html(brand: dict, base_url: str) -> str:
           </a>
         """
 
-    if is_demo:
-        actions = """
-          <div class="brand-detail-sample-notice">
-            <strong>화면 확인용 샘플 브랜드입니다.</strong>
-            <span>실제 업체 입점 시 공식 판매처 정보로 교체됩니다.</span>
-          </div>
-        """
-
     shop_action = ""
     mobile_shop_action = ""
     if brand.get("shopUrl"):
@@ -193,16 +207,66 @@ def build_detail_html(brand: dict, base_url: str) -> str:
         """.strip()
     mobile_shop_block = f"\n\n  {mobile_shop_action}" if mobile_shop_action else ""
 
+    product_gallery_items: list[str] = []
+    for product_entry in images.get("productGallery", []):
+        if isinstance(product_entry, dict):
+            product_gallery_image = product_entry.get("src") or ""
+            product_gallery_alt = product_entry.get("alt") or f"{brand['name']} {brand['product']}"
+            product_gallery_label = product_entry.get("label") or ""
+        else:
+            product_gallery_image = product_entry
+            product_gallery_alt = f"{brand['name']} {brand['product']}"
+            product_gallery_label = ""
+        if not product_gallery_image:
+            continue
+        product_gallery_path = BASE_DIR / product_gallery_image.lstrip("/")
+        if product_gallery_image.startswith(("http://", "https://")) or product_gallery_path.exists():
+            product_gallery_items.append(
+                f"""
+          <figure>
+            <img src="{escape(product_gallery_image)}" alt="{escape(product_gallery_alt)}" loading="lazy">
+            {f'<figcaption>{escape(product_gallery_label)}</figcaption>' if product_gallery_label else ''}
+          </figure>
+                """.strip()
+            )
+    if product_gallery_items:
+        product_media_html = (
+            '<div class="brand-detail-product-media">'
+            + "".join(product_gallery_items)
+            + "</div>"
+        )
+    else:
+        product_media_html = (
+            f'<img src="{product_image}" alt="{name} {product} {product_image_alt}" '
+            'loading="lazy">'
+        )
+
     gallery_items: list[str] = []
-    for gallery_image in brand.get("images", {}).get("gallery", []):
+    for gallery_entry in images.get("gallery", []):
+        if isinstance(gallery_entry, dict):
+            gallery_image = gallery_entry.get("src") or ""
+            gallery_alt = gallery_entry.get("alt") or f"{brand['name']} 브랜드 스토리 사진"
+            gallery_caption = gallery_entry.get("caption") or ""
+            gallery_class = " is-cover" if gallery_entry.get("cover") else ""
+        else:
+            gallery_image = gallery_entry
+            gallery_alt = f"{brand['name']} 브랜드 스토리 사진"
+            gallery_caption = ""
+            gallery_class = ""
         if not gallery_image:
             continue
         local_path = BASE_DIR / gallery_image.lstrip("/")
         if gallery_image.startswith(("http://", "https://")) or local_path.exists():
+            gallery_caption_html = (
+                f"<figcaption>{escape(gallery_caption)}</figcaption>"
+                if gallery_caption
+                else ""
+            )
             gallery_items.append(
                 f"""
-          <figure>
-            <img src="{escape(gallery_image)}" alt="{name} 브랜드 스토리 사진" loading="lazy">
+          <figure class="{gallery_class.strip()}">
+            <img src="{escape(gallery_image)}" alt="{escape(gallery_alt)}" loading="lazy">
+            {gallery_caption_html}
           </figure>
                 """.strip()
             )
@@ -215,10 +279,92 @@ def build_detail_html(brand: dict, base_url: str) -> str:
         )
     gallery_block = f"\n      {gallery_html}" if gallery_html else ""
 
-    story_sections: list[str] = []
     story_character_count = len(brand.get("storyDescription") or "")
+
+    highlight_items: list[str] = []
+    for highlight in brand.get("storyHighlights", []):
+        label = escape(highlight.get("label") or "")
+        title = escape(highlight.get("title") or "")
+        text = escape(highlight.get("text") or "")
+        if not title or not text:
+            continue
+        story_character_count += len(highlight.get("title") or "")
+        story_character_count += len(highlight.get("text") or "")
+        highlight_items.append(
+            f"""
+        <article>
+          {f'<small>{label}</small>' if label else ''}
+          <strong>{title}</strong>
+          <p>{text}</p>
+        </article>
+            """.strip()
+        )
+    highlights_block = ""
+    if highlight_items:
+        highlights_block = (
+            '<div class="brand-detail-story-highlights" '
+            'aria-label="이럴 때 떠올려보세요">'
+            + "".join(highlight_items)
+            + "</div>"
+        )
+
+    process_items: list[str] = []
+    for index, step in enumerate(brand.get("processSteps", []), start=1):
+        title = escape(step.get("title") or "")
+        text = escape(step.get("text") or "")
+        if not title or not text:
+            continue
+        story_character_count += len(step.get("title") or "")
+        story_character_count += len(step.get("text") or "")
+        process_items.append(
+            f"""
+          <li><small>{index:02d}</small><strong>{title}</strong><span>{text}</span></li>
+            """.strip()
+        )
+    process_block = ""
+    if process_items:
+        process_title = escape(
+            brand.get("processTitle") or "이용 전에 확인할 순서"
+        )
+        process_block = f"""
+      <aside class="brand-detail-process">
+        <h3>{process_title}</h3>
+        <ol>{''.join(process_items)}</ol>
+      </aside>
+        """.strip()
+
+    story_link_items: list[str] = []
+    for link in brand.get("storyLinks", []):
+        link_url = validate_url(link.get("url") or "")
+        link_title = escape(link.get("title") or "")
+        link_text = escape(link.get("text") or "")
+        if not link_url or not link_title:
+            continue
+        story_link_items.append(
+            f"""
+          <a href="{escape(link_url)}" target="_blank" rel="noopener noreferrer">
+            <strong>{link_title}</strong>
+            {f'<span>{link_text}</span>' if link_text else ''}
+            <b aria-hidden="true">↗</b>
+          </a>
+            """.strip()
+        )
+    story_links_block = ""
+    if story_link_items:
+        story_links_title = escape(
+            brand.get("storyLinksTitle") or "공식 채널에서 더 보기"
+        )
+        story_links_block = f"""
+      <section class="brand-detail-story-links" aria-label="{story_links_title}">
+        <h3>{story_links_title}</h3>
+        <div>{''.join(story_link_items)}</div>
+      </section>
+        """.strip()
+
+    story_sections: list[str] = []
     for index, section in enumerate(brand.get("storySections", []), start=1):
         section_title = escape(section.get("title") or "")
+        section_label = escape(section.get("label") or f"{index:02d}")
         raw_paragraphs = section.get("paragraphs") or []
         if isinstance(raw_paragraphs, str):
             raw_paragraphs = [raw_paragraphs]
@@ -230,20 +376,54 @@ def build_detail_html(brand: dict, base_url: str) -> str:
         paragraph_html = "".join(
             f"<p>{escape(paragraph)}</p>" for paragraph in paragraphs
         )
-        story_sections.append(
-            f"""
+        section_image = section.get("image") or ""
+        section_image_path = BASE_DIR / section_image.lstrip("/")
+        has_section_image = bool(
+            section_image
+            and (
+                section_image.startswith(("http://", "https://"))
+                or section_image_path.exists()
+            )
+        )
+        if has_section_image:
+            section_alt = escape(
+                section.get("imageAlt") or f"{brand['name']} 이야기 장면"
+            )
+            section_caption = escape(section.get("caption") or "")
+            caption_html = (
+                f"<figcaption>{section_caption}</figcaption>"
+                if section_caption
+                else ""
+            )
+            story_sections.append(
+                f"""
+        <article class="brand-detail-story-section has-image">
+          <figure>
+            <img src="{escape(section_image)}" alt="{section_alt}" loading="lazy">
+            {caption_html}
+          </figure>
+          <div class="brand-detail-story-section-copy">
+            <small>{section_label}</small>
+            <h3>{section_title}</h3>{paragraph_html}
+          </div>
+        </article>
+                """.strip()
+            )
+        else:
+            story_sections.append(
+                f"""
         <article class="brand-detail-story-section">
-          <small>{index:02d}</small>
+          <small>{section_label}</small>
           <div><h3>{section_title}</h3>{paragraph_html}</div>
         </article>
-            """.strip()
-        )
+                """.strip()
+            )
     story_article = ""
     reading_time = ""
     if story_sections:
         reading_minutes = max(2, round(story_character_count / 350))
         reading_time = (
-            '<p class="brand-detail-story-meta">BRAND NOTE'
+            f'<p class="brand-detail-story-meta">{story_note_label}'
             f'<span>약 {reading_minutes}분 읽기</span></p>'
         )
         story_article = (
@@ -264,8 +444,8 @@ def build_detail_html(brand: dict, base_url: str) -> str:
   <meta name="theme-color" content="#ffffff">
   <link rel="canonical" href="{page_url}">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/styles.css?v=service-editorial-10">
-  <meta property="og:type" content="product">
+  <link rel="stylesheet" href="/styles.css?v=service-editorial-11">
+  <meta property="og:type" content="{'website' if is_partner else 'product'}">
   <meta property="og:site_name" content="FYND">
   <meta property="og:title" content="{name} {product} | FYND">
   <meta property="og:description" content="{headline}">
@@ -275,29 +455,29 @@ def build_detail_html(brand: dict, base_url: str) -> str:
   {structured_data}
   </script>
 </head>
-<body class="brand-detail-body">
+<body class="brand-detail-body brand-detail-page-{escape(brand['slug'])}">
   <header class="site-header">
     <div class="header-inner brand-detail-header">
       <a class="brand-detail-fynd-home" href="/" aria-label="FYND 홈"><img src="/assets/brand/fynd-logo-transparent.png" alt="FYND"></a>
-      <a class="brand-detail-back" href="/">← 브랜드 목록</a>
+      <a class="brand-detail-back" href="/">← 전체 목록</a>
     </div>
   </header>
 
   <main class="brand-detail-main">
-    <p class="brand-detail-breadcrumb">소상공인 이야기{sample_label} · {category} · {region}</p>
+    <p class="brand-detail-breadcrumb">{detail_label} · {category} · {region}</p>
     <section class="brand-detail-hero">
-      <div class="brand-detail-visual">
+      <figure class="brand-detail-visual">
         <img src="{image}" alt="{name} {product}" fetchpriority="high">
-        <span>{name}</span>
-      </div>
+        {visual_caption}
+      </figure>
       <div class="brand-detail-copy">
-        <p class="section-kicker">MEET THE BRAND</p>
+        <p class="section-kicker">{detail_kicker}</p>
         <h1>{headline}</h1>
         <p>{description}</p>
         <dl>
-          <div><dt>브랜드</dt><dd>{name}</dd></div>
-          <div><dt>대표 상품</dt><dd>{product}</dd></div>
-          <div><dt>상품 구성</dt><dd>{quantity}</dd></div>
+          <div><dt>{entity_info_label}</dt><dd>{name}</dd></div>
+          <div><dt>{product_info_label}</dt><dd>{product}</dd></div>
+          <div><dt>{quantity_info_label}</dt><dd>{quantity}</dd></div>
           <div><dt>지역</dt><dd>{region}</dd></div>
           {address_row}
         </dl>
@@ -306,24 +486,27 @@ def build_detail_html(brand: dict, base_url: str) -> str:
     </section>
 
     <section class="brand-detail-product">
-      <p class="section-kicker">REPRESENTATIVE PRODUCT</p>
-      <h2>대표 상품</h2>
+      <p class="section-kicker">{feature_kicker}</p>
+      <h2>{feature_heading}</h2>
       <div class="brand-detail-product-card">
-        <img src="{image}" alt="{name} {product} 대표 상품" loading="lazy">
+        {product_media_html}
         <div class="brand-detail-product-copy">
           <strong>{name} {product}</strong>
           <p>{headline}</p>
-          <p>상품 구성: {quantity}</p>
+          <p>{product_detail_label}: {quantity}</p>
 {shop_action if shop_action else ""}
         </div>
       </div>
     </section>
 
     <section class="brand-detail-story">
-      <p class="section-kicker">BRAND STORY</p>
+      <p class="section-kicker">{story_kicker}</p>
       <h2>{escape(brand.get("storyTitle") or "브랜드가 지키는 가치")}</h2>
       {reading_time}
       <p>{escape(brand.get("storyDescription") or brand["description"])}</p>{gallery_block}
+      {highlights_block}
+      {process_block}
+      {story_links_block}
       {story_article}
     </section>
   </main>{mobile_shop_block}
@@ -365,11 +548,7 @@ def build_sitemap(brands: list[dict], base_url: str) -> None:
         ),
     ]
     for brand in brands:
-        if (
-            brand.get("published", True)
-            and not brand.get("demo")
-            and not brand.get("externalUrl")
-        ):
+        if brand.get("published", True) and not brand.get("externalUrl"):
             urls.append(
                 (
                     f"{base_url}/brands/{brand['slug']}/",
@@ -412,8 +591,10 @@ def build_all(base_url: str, detail_slugs: set[str] | None = None) -> list[dict]
             continue
         page_path = PAGE_DIR / brand["slug"] / "index.html"
         page_path.parent.mkdir(parents=True, exist_ok=True)
+        page_html = build_detail_html(brand, base_url)
+        page_html = "\n".join(line.rstrip() for line in page_html.splitlines()) + "\n"
         page_path.write_text(
-            build_detail_html(brand, base_url),
+            page_html,
             encoding="utf-8",
         )
 
@@ -515,7 +696,10 @@ def main() -> None:
         print(f"\n{brand['name']} 데이터를 저장했습니다.")
 
     brands = build_all(base_url, set(args.brand_slugs or []))
-    print(f"총 {len(brands)}개 브랜드 페이지를 갱신했습니다.")
+    detail_count = sum(1 for brand in brands if not brand.get("externalUrl"))
+    print(
+        f"공개 항목 {len(brands)}개와 내부 상세 페이지 {detail_count}개를 갱신했습니다."
+    )
     print("브랜드 노출 순서는 처음 무작위로 정해지고 화면에서 10초마다 다시 섞입니다.")
     print("대표 사진을 assets/brands/<slug>/main.jpg에 넣고 다시 실행하세요.")
 

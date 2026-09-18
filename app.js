@@ -9,6 +9,8 @@ const clearSearchButton = document.querySelector("#clearSearchButton");
 const resetSearchButton = document.querySelector("#resetSearchButton");
 const brandGrid = document.querySelector("#brandGrid");
 const festivalGrid = document.querySelector("#festivalGrid");
+const partnerSection = document.querySelector("#partners");
+const festivalPartner = document.querySelector("#partnerGrid");
 const categoryFilter = document.querySelector("#categoryFilter");
 const resultSummary = document.querySelector("#resultSummary");
 const festivalResultSummary = document.querySelector("#festivalResultSummary");
@@ -38,6 +40,7 @@ const BRAND_CARD_LAYOUTS = [
 
 let randomizedBrands = [];
 let randomizedFestivals = [];
+let partnerBrands = [];
 let activeCategory = "all";
 let searchKeyword = "";
 let toastTimer = null;
@@ -264,6 +267,10 @@ function isFestival(brand) {
   return brand.type === "festival";
 }
 
+function isPartner(brand) {
+  return brand.type === "partner";
+}
+
 function getExternalLinkAttributes(brand) {
   return brand.externalUrl
     ? ' target="_blank" rel="noopener noreferrer"'
@@ -285,9 +292,7 @@ function renderBrandCard(brand, index) {
   const location = [brand.category, brand.region].filter(Boolean).join(" · ");
   const cardClass = isFestival(brand)
     ? "brand-card-festival"
-    : brand.demo
-      ? "brand-card-demo"
-      : "brand-card-real";
+    : "brand-card-real";
   const layoutClass =
     BRAND_CARD_LAYOUTS[index % BRAND_CARD_LAYOUTS.length];
 
@@ -353,6 +358,61 @@ function renderFestivalCard(festival, index) {
   `;
 }
 
+function getVisiblePartners() {
+  return partnerBrands.filter(
+    (partner) =>
+      !searchKeyword || searchableText(partner).includes(searchKeyword)
+  );
+}
+
+function renderPartners() {
+  if (!festivalPartner) {
+    return;
+  }
+
+  const partners = getVisiblePartners();
+  festivalPartner.hidden = partners.length === 0;
+  if (partnerSection) {
+    partnerSection.hidden = partners.length === 0;
+  }
+
+  if (!partners.length) {
+    festivalPartner.innerHTML = "";
+    return;
+  }
+
+  festivalPartner.innerHTML = partners
+    .map((partner) => {
+      const logo =
+        partner.images?.main || "/assets/brands/brand-placeholder.svg";
+      const serviceImage =
+        partner.images?.gallery?.[1] ||
+        partner.images?.gallery?.[0] ||
+        logo;
+      return `
+    <a
+      class="festival-partner-card"
+      href="${getBrandPageUrl(partner)}"
+      data-brand-slug="${escapeHtml(partner.slug)}"
+      data-brand-name="${escapeHtml(partner.name)}"
+    >
+      <span class="festival-partner-copy">
+        <small>FYND 축제 운영 협력사</small>
+        <img src="${escapeHtml(logo)}" alt="${escapeHtml(partner.name)}" loading="lazy">
+        <strong>${escapeHtml(partner.headline)}</strong>
+        <p>${escapeHtml(partner.description)}</p>
+        <b>협력사 이야기 보기 <span aria-hidden="true">↗</span></b>
+      </span>
+      <span class="festival-partner-media">
+        <img src="${escapeHtml(serviceImage)}" alt="${escapeHtml(partner.name)} 축제 운영 화면" loading="lazy">
+        <i>축제 현장을 함께 만드는 기술 파트너</i>
+      </span>
+    </a>
+      `;
+    })
+    .join("");
+}
+
 function renderBrandTicker(brands) {
   if (!brandTicker || !brands.length) {
     return;
@@ -364,7 +424,7 @@ function renderBrandTicker(brands) {
         .map(
           (brand) => `
             <a
-              class="${brand.demo ? "" : "real"}"
+              class="real"
               href="${getBrandPageUrl(brand)}"
               ${getExternalLinkAttributes(brand)}
               data-brand-slug="${escapeHtml(brand.slug)}"
@@ -468,22 +528,23 @@ function renderBrands() {
   brandGrid.hidden = brands.length === 0;
   layoutBrandMasonry();
   if (emptyResult) {
-    emptyResult.hidden = brands.length !== 0;
+    const hasAnotherSearchResult =
+      Boolean(searchKeyword) &&
+      (getVisiblePartners().length > 0 || getVisibleFestivals().length > 0);
+    emptyResult.hidden = brands.length !== 0 || hasAnotherSearchResult;
   }
 
   if (resultSummary) {
-    const realCount = brands.filter((brand) => !brand.demo).length;
-    const demoCount = brands.filter((brand) => brand.demo).length;
-    const sampleSuffix = demoCount > 0 ? " · 소개 예시 포함" : "";
-
     if (searchKeyword) {
-      resultSummary.textContent = `"${brandSearchInput.value.trim()}" 검색 결과 ${brands.length}개${sampleSuffix}`;
+      const totalCount =
+        brands.length +
+        getVisiblePartners().length +
+        getVisibleFestivals().length;
+      resultSummary.textContent = `"${brandSearchInput.value.trim()}" 전체 검색 결과 ${totalCount}개`;
     } else if (activeCategory !== "all") {
-      resultSummary.textContent = `${activeCategory} 이야기 ${brands.length}곳${sampleSuffix}`;
+      resultSummary.textContent = `${activeCategory} 이야기 ${brands.length}곳`;
     } else {
-      resultSummary.textContent =
-        `등록된 이야기 ${realCount}곳` +
-        (demoCount > 0 ? ` · 소개 예시 ${demoCount}곳` : "");
+      resultSummary.textContent = `등록된 이야기 ${brands.length}곳`;
     }
   }
 
@@ -509,7 +570,7 @@ function renderFestivals() {
   }
   if (festivalResultSummary) {
     festivalResultSummary.textContent = searchKeyword
-      ? `검색 결과 ${festivals.length}개`
+      ? `행사 검색 결과 ${festivals.length}개`
       : `행사와 축제 ${festivals.length}개`;
   }
 }
@@ -535,6 +596,7 @@ function resetFilters() {
   url.searchParams.delete("search");
   window.history.replaceState({}, "", url);
   renderBrands();
+  renderPartners();
   renderFestivals();
 }
 
@@ -552,6 +614,7 @@ function applySearch(value) {
   }
   window.history.replaceState({}, "", url);
   renderBrands();
+  renderPartners();
   renderFestivals();
 }
 
@@ -613,6 +676,13 @@ brandGrid?.addEventListener("click", (event) => {
 });
 
 festivalGrid?.addEventListener("click", (event) => {
+  const link = event.target.closest("a[data-brand-slug]");
+  if (link) {
+    saveRecentBrand(link);
+  }
+});
+
+festivalPartner?.addEventListener("click", (event) => {
   const link = event.target.closest("a[data-brand-slug]");
   if (link) {
     saveRecentBrand(link);
@@ -1132,8 +1202,11 @@ async function loadBrands() {
 
     const brands = await response.json();
     const publishedItems = brands.filter((brand) => brand.published !== false);
+    partnerBrands = publishedItems.filter((brand) => isPartner(brand));
     randomizedBrands = shuffled(
-      publishedItems.filter((brand) => !isFestival(brand))
+      publishedItems.filter(
+        (brand) => !isFestival(brand) && !isPartner(brand)
+      )
     );
     randomizedFestivals = shuffled(
       publishedItems.filter((brand) => isFestival(brand))
@@ -1152,6 +1225,7 @@ async function loadBrands() {
     }
 
     renderBrands();
+    renderPartners();
     renderFestivals();
     renderBrandTicker(randomizedBrands);
     startBrandRotation();
@@ -1174,9 +1248,11 @@ async function loadBrands() {
       }
     ];
     randomizedFestivals = [];
+    partnerBrands = [];
     renderCategoryButtons(randomizedBrands);
     renderMapCategoryButtons(randomizedBrands);
     renderBrands();
+    renderPartners();
     renderFestivals();
     renderBrandTicker(randomizedBrands);
     startBrandRotation();
