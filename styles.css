@@ -3382,3 +3382,97 @@ img {
     padding: 24px 18px;
   }
 }
+
+/* i4 report captures need their original ratio; Apple photos share one frame. */
+:is(.brand-detail-page-i4, .brand-detail-page-yesan-apple-united) .brand-detail-product-card {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+:is(.brand-detail-page-i4, .brand-detail-page-yesan-apple-united) .brand-detail-product-media {
+  height: auto;
+  gap: 12px;
+  padding: 12px;
+  background: #e9e6df;
+}
+
+:is(.brand-detail-page-i4, .brand-detail-page-yesan-apple-united) .brand-detail-product-media figure {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  background: #fff;
+}
+
+:is(.brand-detail-page-i4, .brand-detail-page-yesan-apple-united) .brand-detail-product-media img {
+  display: block;
+  flex: 0 0 auto;
+  width: 100%;
+  padding: 0;
+}
+
+:is(.brand-detail-page-i4, .brand-detail-page-yesan-apple-united) .brand-detail-product-media figcaption {
+  position: static;
+  min-height: 50px;
+  display: grid;
+  place-items: center;
+  margin-top: auto;
+  padding: 10px 12px;
+  color: #fff;
+  background: #55524c;
+  font-size: 12px;
+  line-height: 1.35;
+  text-align: center;
+  backdrop-filter: none;
+}
+
+.brand-detail-page-i4 .brand-detail-product-media {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.brand-detail-page-i4 .brand-detail-product-media img {
+  height: auto;
+  object-fit: contain;
+}
+
+.brand-detail-page-yesan-apple-united .brand-detail-product-media {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.brand-detail-page-yesan-apple-united .brand-detail-product-media img {
+  aspect-ratio: 4 / 3;
+  height: auto;
+  object-fit: cover;
+}
+
+:is(.brand-detail-page-i4, .brand-detail-page-yesan-apple-united) .brand-detail-product-copy {
+  border-top: 1px solid #d8d5ce;
+}
+
+@media (max-width: 820px) {
+  :is(.brand-detail-page-i4, .brand-detail-page-yesan-apple-united) .brand-detail-product-media {
+    grid-template-columns: minmax(0, 1fr);
+    height: auto;
+    gap: 10px;
+    padding: 10px;
+  }
+
+  :is(.brand-detail-page-i4, .brand-detail-page-yesan-apple-united) .brand-detail-product-media figcaption {
+    right: auto;
+    bottom: auto;
+    left: auto;
+    min-height: 46px;
+    padding: 9px 12px;
+    font-size: 12px;
+  }
+
+  .brand-detail-page-yesan-apple-united .brand-detail-product-media img {
+    aspect-ratio: 16 / 10;
+  }
+}
+
+@media (max-width: 480px) {
+  :is(.brand-detail-page-i4, .brand-detail-page-yesan-apple-united) .brand-detail-product {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+}

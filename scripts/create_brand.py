@@ -444,7 +444,7 @@ def build_detail_html(brand: dict, base_url: str) -> str:
   <meta name="theme-color" content="#ffffff">
   <link rel="canonical" href="{page_url}">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/styles.css?v=service-editorial-13">
+  <link rel="stylesheet" href="/styles.css?v=service-editorial-14">
   <meta property="og:type" content="{'website' if is_partner else 'product'}">
   <meta property="og:site_name" content="FYND">
   <meta property="og:title" content="{name} {product} | FYND">
@@ -535,11 +535,6 @@ def build_sitemap(brands: list[dict], base_url: str) -> None:
             f"{base_url}/guide.html",
             "monthly",
             "0.6",
-        ),
-        (
-            f"{base_url}/map.html",
-            "weekly",
-            "0.7",
         ),
         (
             f"{base_url}/partnership.html",
