@@ -4,121 +4,148 @@
     "name": "아이뽀란",
     "category": "축산",
     "categoryKey": "livestock",
-    "product": "QR 농장 투명성 리포트",
+    "schemaType": "Service",
+    "product": "농장 투명성 리포트",
     "region": "충남 홍성",
-    "headline": "포장지의 QR을 열면 최근 농장 기록이 나옵니다",
-    "description": "아이뽀란은 계란 포장지의 QR을 통해 최근 농장 영상과 움직임 기록을 확인하는 서비스입니다. 공개 리포트에는 현장 영상, 활동 요약, 분석 수치와 기록 시점이 함께 표시됩니다.",
-    "quantity": "농장 영상, 움직임 요약, 먹거리 안심 정보, 분석 기록",
-    "featureKicker": "포장지에서 바로 확인",
-    "featureTitle": "이번 주 농장 기록을 휴대폰에서 봅니다",
-    "storyTitle": "계란을 고른 뒤, 생산 현장을 한 번 더 확인하는 방법",
-    "storyDescription": "아이뽀란의 공개 리포트를 열면 최근 농장 상태가 요약된 화면부터 나옵니다. 탭을 옮기면 닭의 움직임, 먹거리 안심 정보, 분석에 사용된 수치를 차례로 볼 수 있습니다. 화면에 적힌 숫자가 무엇을 뜻하는지, 어디까지 참고하면 되는지도 함께 정리했습니다.",
+    "location": {
+      "label": "서비스 운영 지역",
+      "name": "충남 홍성",
+      "address": "아이뽀란의 정확한 사업장 주소는 공개 자료에서 확인되지 않습니다.",
+      "note": "아래 지도는 특정 농장이나 매장 위치가 아니라 홍성군 지역을 보여 줍니다.",
+      "latitude": 36.6013576,
+      "longitude": 126.6608324,
+      "zoom": 12,
+      "showPin": false,
+      "mapAriaLabel": "홍성군 지역 지도",
+      "mapCaption": "홍성군 중심을 기준으로 본 지역 지도이며 실제 사업장 위치를 뜻하지 않습니다.",
+      "placeLinkLabel": "카카오맵에서 홍성군 보기",
+      "placeUrl": "https://map.kakao.com/?q=%EC%B6%A9%EB%82%A8%20%ED%99%8D%EC%84%B1"
+    },
+    "headline": "계란을 고르기 전, 닭이 지내는 공간부터 확인하는 방법",
+    "description": "아이뽀란 공개 리포트에 들어가면 농장 영상이 먼저 보입니다. 화면을 내리면 페이지에 표시된 인증 정보와 영상에서 읽힌 활동량, 밀집 구간, 패턴 변화를 차례로 확인할 수 있습니다.",
+    "quantity": "농장 영상, 인증 정보 4종, 활동량·밀집도·패턴 분석",
+    "featureKicker": "공개 리포트 안에서",
+    "featureTitle": "영상부터 분석 화면까지 한 번에",
+    "storyTitle": "농장 영상을 처음 보는 사람도 차근차근 볼 수 있게",
+    "storyDescription": "농장 영상은 익숙한 상품 사진보다 낯섭니다. 어디부터 봐야 할지 몰라 금방 닫기 쉬운 화면이기도 합니다. 아이뽀란 리포트는 원본 영상, 인증 정보, 짧은 요약, 분석 영상을 한 페이지에 놓고 순서대로 살펴보게 만듭니다.",
     "storySections": [
       {
-        "label": "QR을 연 첫 화면",
-        "title": "최근 기록을 먼저 보여줍니다",
+        "label": "첫 화면",
+        "title": "숫자보다 농장 영상이 먼저 나옵니다",
         "paragraphs": [
-          "포장지의 QR을 휴대폰 카메라로 읽으면 아이뽀란 농장 리포트가 열립니다. 첫 화면에는 최근 농장 상태를 설명하는 문장과 평균 움직임, 공간 이용, 시간별 변화가 나란히 표시됩니다. 마지막 분석 시각도 화면 아래에 적혀 있어 언제 만들어진 기록인지 확인할 수 있습니다.",
-          "결과만 짧게 읽어도 되고, 궁금한 항목은 아래 탭에서 더 자세히 볼 수 있습니다. 한눈에 보기, 닭 생활 상태, 먹거리 안심 정보, 분석 자세히로 화면이 나뉘어 있어 필요한 내용부터 골라 읽기 쉽습니다."
+          "리포트를 열면 닭이 머무는 공간을 찍은 영상과 ‘오늘의 농장을 영상으로 확인하세요’라는 안내가 나란히 보입니다. 분석 수치부터 보여 주지 않고 실제 장면을 먼저 보게 한 구성입니다.",
+          "영상은 재생과 정지, 구간 이동이 가능합니다. 전체 분위기를 한 번 보고 나서 아래 설명으로 내려가면 뒤에 나오는 활동량과 밀집도 문장이 무엇을 가리키는지 이해하기 수월합니다."
         ],
-        "image": "/assets/brands/i4/report-overview.png",
-        "imageAlt": "아이뽀란 공개 리포트의 최근 농장 상태 요약 화면",
-        "caption": "공개 리포트에 표시된 최근 농장 상태와 기록 시각"
+        "image": "/assets/brands/i4/report-hero-2026-09.png",
+        "imageAlt": "i4 COMPANY 공개 리포트의 농장 영상 첫 화면",
+        "caption": "2026년 9월 29일 확인한 공개 리포트 첫 화면",
+        "sourceLabel": "i4 COMPANY 공개 리포트",
+        "sourceUrl": "https://eggtrace-82hy.onrender.com/p/EGG-0001"
       },
       {
-        "label": "닭 생활 상태",
-        "title": "움직임을 세 가지 항목으로 나눠 봅니다",
+        "label": "영상 아래",
+        "title": "인증 표기는 네 칸으로 모아 두었습니다",
         "paragraphs": [
-          "긴 영상을 매번 처음부터 끝까지 보기 어려운 사람을 위해 움직임을 몇 가지 항목으로 나눠 둡니다. 평균 움직임은 전체 화면에서 움직임이 확인된 비율이고, 움직임 변화 정도는 시간에 따라 움직임이 얼마나 달라졌는지를 보여줍니다. 주요 이동 방향도 같은 화면에서 확인할 수 있습니다.",
-          "공간별 활동에는 움직임이 많이 잡힌 구역이 표시됩니다. 숫자가 높고 낮다는 이유만으로 닭의 건강 상태를 판단할 수는 없습니다. 최근 영상에서 어느 시간과 공간을 다시 살펴볼지 찾는 참고 자료로 보는 편이 알맞습니다."
+          "영상 바로 아래에는 6차산업, 내포천애, 무항생제, 안전관리 인증 표기가 한 줄로 놓입니다. 작은 상품 사진 사이에 흩어 두지 않아 휴대폰에서도 항목 이름을 비교하기 쉽습니다.",
+          "이 영역은 공개 페이지에 표시된 인증 정보를 옮겨 보여 주는 부분입니다. 인증의 적용 대상과 유효 여부가 더 궁금하다면 제품 포장이나 해당 인증기관의 안내를 함께 확인하는 편이 정확합니다."
         ],
-        "image": "/assets/brands/i4/report-welfare.png",
-        "imageAlt": "아이뽀란 리포트의 평균 움직임과 이동 방향 화면",
-        "caption": "평균 움직임과 시간별 변화, 이동 방향을 풀어 쓴 화면"
+        "image": "/assets/brands/i4/report-certifications-2026-09.png",
+        "imageAlt": "공개 리포트에 표시된 네 가지 인증 정보",
+        "caption": "공개 페이지에 표시된 인증 정보 4종",
+        "sourceLabel": "i4 COMPANY 공개 리포트",
+        "sourceUrl": "https://eggtrace-82hy.onrender.com/p/EGG-0001"
       },
       {
-        "label": "분석 값 읽기",
-        "title": "숫자 옆에 뜻을 함께 적었습니다",
+        "label": "짧게 읽기",
+        "title": "긴 영상을 보기 전에는 주간 요약부터 읽어도 됩니다",
         "paragraphs": [
-          "분석 자세히 화면에는 평균 움직임 비율, 가장 활발했던 순간의 비율, 움직임 변화 정도, 평균 이동 강도 같은 값이 나옵니다. 각 카드 아래에는 그 숫자가 어떤 장면을 계산한 것인지 짧은 설명이 붙습니다.",
-          "원본 파일명과 분석에 사용한 기록 수가 화면에 남는 점도 눈에 띕니다. 자료가 충분하지 않은 항목은 기록이 없다고 표시됩니다. 값이 없는 칸을 임의로 채우지 않아 이번 분석에서 확인된 범위를 구분할 수 있습니다."
+          "공개 화면의 ‘이번 주 농장 인사이트’에는 영상에서 읽힌 활동 흐름과 특정 구역의 밀집 여부가 문장으로 정리돼 있습니다. 영상 전체를 바로 보기 어려운 사람이라면 이 부분에서 먼저 관찰 포인트를 잡을 수 있습니다.",
+          "요약은 화면을 이해하기 위한 길잡이에 가깝습니다. 상태를 확정하는 판정문으로 읽기보다 어느 구간을 다시 볼지 고르는 메모처럼 보는 편이 좋습니다."
         ],
-        "image": "/assets/brands/i4/report-analysis-detail.png",
-        "imageAlt": "아이뽀란 공개 리포트의 분석 수치 상세 화면",
-        "caption": "수치의 뜻과 분석에 사용한 기록 수를 함께 표시합니다"
+        "image": "/assets/brands/i4/report-summary-2026-09.png",
+        "imageAlt": "농장 영상의 활동 흐름과 밀집 구역을 설명한 주간 요약 화면",
+        "caption": "공개 리포트가 영상 내용을 문장으로 풀어 쓴 화면",
+        "sourceLabel": "i4 COMPANY 공개 리포트",
+        "sourceUrl": "https://eggtrace-82hy.onrender.com/p/EGG-0001"
       },
       {
-        "label": "현장 영상",
-        "title": "요약이 궁금하면 원래 장면으로 돌아갑니다",
+        "label": "자세히 보기",
+        "title": "활동량, 밀집도, 패턴 변화를 탭으로 나눠 봅니다",
         "paragraphs": [
-          "리포트 상단에는 최근 농장 영상을 재생하는 영역이 있습니다. 움직임 요약을 읽다가 특정 수치가 궁금해지면 영상을 열어 닭이 머문 공간과 이동하는 모습을 직접 확인할 수 있습니다.",
-          "짧은 요약은 영상을 대신하는 결론이 아닙니다. 화면에서 눈에 띄는 항목을 찾고, 실제 장면과 함께 보는 순서가 중요합니다. 공개 페이지도 현장 영상과 분석 결과를 같은 리포트 안에 둡니다."
+          "분석 화면에는 활동량, 밀집도 히트맵, 패턴 변화 탭이 있습니다. 한 화면에 모든 그래프를 몰아넣지 않고 보고 싶은 항목을 하나씩 고르는 방식입니다.",
+          "선택한 탭 아래에는 분석 영상과 함께 활동 상태, 집중 영역, 감지 기준이 표시됩니다. 문장만 읽다가 궁금한 부분이 생기면 같은 자리에서 영상을 다시 재생할 수 있습니다."
+        ],
+        "image": "/assets/brands/i4/report-analysis-2026-09.png",
+        "imageAlt": "활동량 탭이 선택된 농장 영상 분석 화면",
+        "caption": "활동량 분석 탭과 원본 장면을 함께 보여 주는 공개 화면",
+        "sourceLabel": "i4 COMPANY 공개 리포트",
+        "sourceUrl": "https://eggtrace-82hy.onrender.com/p/EGG-0001"
+      },
+      {
+        "label": "읽을 때 주의할 점",
+        "title": "‘보통 수준’이라는 한 문장만 떼어 보지 않습니다",
+        "paragraphs": [
+          "움직임이 많거나 적다는 사실만으로 닭의 건강 상태를 판단할 수는 없습니다. 촬영 시간, 날씨, 급이 시간처럼 영상 바깥의 조건도 움직임에 영향을 줍니다.",
+          "리포트의 분석 결과는 수의학적 진단이나 동물복지 인증을 대신하지 않습니다. 화면에 표시된 값은 그 영상에서 다시 볼 장면을 찾는 보조 정보로 쓰는 것이 알맞습니다."
         ]
       },
       {
-        "label": "먹거리 안심 정보",
-        "title": "생산 정보와 기록 출처를 따로 확인합니다",
+        "label": "계란을 살 때",
+        "title": "리포트를 본 뒤에는 포장 정보도 따로 확인합니다",
         "paragraphs": [
-          "먹거리 안심 정보 탭에서는 생산과 관리에 관한 안내를 확인할 수 있습니다. 농장 영상에서 보이는 움직임 정보와 제품에 적힌 생산 정보를 한 화면 안에서 섞지 않고 구분해 둔 구성입니다.",
-          "구매할 때는 포장지의 산란일자, 난각번호, 보관 방법을 함께 살펴보는 것이 좋습니다. 아이뽀란 리포트는 그 정보에 최근 현장 기록을 더해 주는 자료입니다."
-        ]
-      },
-      {
-        "label": "확인할 때",
-        "title": "기록 날짜와 표본 수를 먼저 봅니다",
-        "paragraphs": [
-          "리포트의 수치는 분석 시점과 사용된 영상 기록에 따라 달라집니다. 다른 날짜의 결과와 비교하려면 마지막 분석 시각과 기록 수가 같은 조건인지 먼저 확인해야 합니다.",
-          "화면의 움직임 값은 수의학적 진단이나 동물복지 인증을 대신하지 않습니다. 소비자가 최근 농장 장면을 더 쉽게 찾아보고, 생산자에게 궁금한 점을 구체적으로 물을 수 있게 돕는 기록으로 활용할 수 있습니다."
+          "농장 영상을 봤더라도 계란 포장지의 산란일자, 난각번호, 보관 방법은 별도로 살펴야 합니다. 영상과 분석 화면은 생산 현장을 이해하는 자료이고, 실제 구매 정보는 포장에 적힌 표시가 기준입니다.",
+          "공개 화면의 내용은 이후 업데이트될 수 있습니다. FYND에 담긴 캡처는 2026년 9월 29일 확인한 모습이며, 가장 최근 화면은 아래 공식 리포트 링크에서 볼 수 있습니다."
         ]
       }
     ],
     "storyHighlights": [
       {
-        "label": "첫 화면",
-        "title": "최근 농장 상태",
-        "text": "평균 움직임과 공간 이용, 시간별 변화를 한 화면에서 봅니다."
+        "label": "먼저 볼 것",
+        "title": "농장 원본 영상",
+        "text": "요약을 읽기 전에 실제 장면의 전체 흐름을 한 번 확인합니다."
       },
       {
-        "label": "상세 화면",
-        "title": "수치와 뜻을 함께 표시",
-        "text": "분석 값 아래에 계산한 대상과 의미가 짧게 적혀 있습니다."
+        "label": "다음으로",
+        "title": "인증 정보와 주간 요약",
+        "text": "페이지에 표시된 인증 항목과 영상에서 읽힌 관찰 포인트를 봅니다."
       },
       {
-        "label": "기록 확인",
-        "title": "분석 시각과 표본 수",
-        "text": "언제, 몇 개의 기록으로 만든 결과인지 화면에서 확인합니다."
+        "label": "궁금한 장면은",
+        "title": "분석 탭에서 다시 보기",
+        "text": "활동량, 밀집도, 패턴 변화 중 한 항목을 골라 영상과 함께 봅니다."
       }
     ],
     "processTitle": "리포트를 보는 순서",
     "processSteps": [
       {
-        "title": "포장지 QR 열기",
-        "text": "휴대폰 카메라로 QR을 읽어 해당 농장 리포트에 들어갑니다."
+        "title": "농장 영상 재생",
+        "text": "처음부터 끝까지 훑어보며 공간과 닭의 움직임을 익힙니다."
       },
       {
-        "title": "최근 기록 날짜 확인",
-        "text": "첫 화면 아래의 마지막 분석 시각부터 확인합니다."
+        "title": "인증 정보 확인",
+        "text": "공개 화면에 표시된 네 가지 인증 항목의 이름을 살펴봅니다."
       },
       {
-        "title": "생활 상태와 상세 값 보기",
-        "text": "탭을 옮기며 움직임 요약과 분석에 사용된 기록 수를 살펴봅니다."
+        "title": "주간 요약 읽기",
+        "text": "활동 흐름과 밀집 구역에 관한 짧은 설명에서 다시 볼 지점을 찾습니다."
       },
       {
-        "title": "영상과 포장 정보 함께 보기",
-        "text": "궁금한 항목은 현장 영상으로 돌아가 보고, 제품 정보는 포장지에서 다시 확인합니다."
+        "title": "분석 영상 대조",
+        "text": "궁금한 탭을 고르고 설명과 영상 장면을 나란히 확인합니다."
       }
     ],
-    "storyLinksTitle": "아이뽀란 공개 리포트",
+    "storyLinksTitle": "지금 공개된 화면에서 확인하기",
     "storyLinks": [
       {
-        "title": "농장 투명성 리포트 보기",
-        "text": "최근 농장 상태, 움직임 기록과 분석 상세 화면을 직접 확인할 수 있습니다.",
+        "title": "i4 COMPANY 농장 투명성 리포트",
+        "text": "농장 영상과 인증 정보, 영상 분석 화면을 직접 볼 수 있습니다.",
         "url": "https://eggtrace-82hy.onrender.com/p/EGG-0001"
       }
     ],
     "shopUrl": "",
-    "homepageUrl": "https://eggtrace-82hy.onrender.com/p/EGG-0001",
+    "homepageUrl": "",
     "traceUrl": "https://eggtrace-82hy.onrender.com/p/EGG-0001",
+    "traceLabel": "공개 리포트 보기",
     "phone": "",
     "published": true,
     "sortOrder": 1,
@@ -127,37 +154,41 @@
     "sourceUrls": [
       "https://eggtrace-82hy.onrender.com/p/EGG-0001"
     ],
-    "visualNote": "아이뽀란 공개 리포트 화면을 그대로 캡처한 이미지입니다.",
+    "visualNote": "2026년 9월 29일 i4 COMPANY 공개 리포트에서 직접 캡처한 화면입니다.",
     "images": {
-      "main": "/assets/brands/i4/report-overview.png",
-      "card": "/assets/brands/i4/report-overview.png",
+      "main": "/assets/brands/i4/report-hero-2026-09.png",
+      "card": "/assets/brands/i4/report-hero-2026-09.png",
       "productGallery": [
         {
-          "src": "/assets/brands/i4/report-overview.png",
-          "alt": "아이뽀란 최근 농장 상태 요약 화면",
-          "label": "최근 농장 상태"
+          "src": "/assets/brands/i4/report-hero-2026-09.png",
+          "alt": "농장 영상이 먼저 보이는 공개 리포트 첫 화면",
+          "label": "농장 영상 첫 화면"
         },
         {
-          "src": "/assets/brands/i4/report-welfare.png",
-          "alt": "아이뽀란 닭 생활 상태 화면",
-          "label": "닭 생활 상태"
+          "src": "/assets/brands/i4/report-certifications-2026-09.png",
+          "alt": "공개 리포트의 인증 정보 네 칸",
+          "label": "페이지에 표시된 인증 정보"
         },
         {
-          "src": "/assets/brands/i4/report-analysis-detail.png",
-          "alt": "아이뽀란 분석 자세히 화면",
-          "label": "분석 자세히"
+          "src": "/assets/brands/i4/report-analysis-2026-09.png",
+          "alt": "농장 영상의 활동량을 분석한 공개 화면",
+          "label": "영상 분석 화면"
         }
       ],
       "gallery": [
         {
-          "src": "/assets/brands/i4/report-overview.png",
-          "alt": "아이뽀란 공개 리포트 요약 화면",
-          "caption": "최근 농장 상태를 정리한 첫 화면"
+          "src": "/assets/brands/i4/report-hero-2026-09.png",
+          "alt": "농장 영상과 안내 문구가 나란히 놓인 공개 리포트",
+          "caption": "2026년 9월 29일 확인한 공개 리포트 첫 화면",
+          "sourceLabel": "i4 COMPANY 공개 리포트",
+          "sourceUrl": "https://eggtrace-82hy.onrender.com/p/EGG-0001"
         },
         {
-          "src": "/assets/brands/i4/report-analysis-detail.png",
-          "alt": "아이뽀란 공개 리포트 분석 화면",
-          "caption": "분석 값과 기록 수를 함께 표시한 화면"
+          "src": "/assets/brands/i4/report-summary-2026-09.png",
+          "alt": "농장 영상의 활동 흐름을 풀어 쓴 주간 요약 화면",
+          "caption": "영상에서 읽힌 흐름을 문장으로 정리한 화면",
+          "sourceLabel": "i4 COMPANY 공개 리포트",
+          "sourceUrl": "https://eggtrace-82hy.onrender.com/p/EGG-0001"
         }
       ]
     }
@@ -169,6 +200,16 @@
     "categoryKey": "education",
     "product": "유소년·성인 축구 교육",
     "region": "충남 예산",
+    "address": "충남 예산군 삽교읍 예목로 154 6층",
+    "placeUrl": "https://place.map.kakao.com/1819309610",
+    "location": {
+      "label": "훈련장 위치",
+      "name": "예산 애플 유나이티드",
+      "address": "충남 예산군 삽교읍 예목로 154 6층",
+      "latitude": 36.6708226,
+      "longitude": 126.6838626,
+      "placeUrl": "https://place.map.kakao.com/1819309610"
+    },
     "headline": "작전판을 둘러앉던 아이들이 프로 경기장 입구에도 섰습니다",
     "description": "예산 애플 유나이티드는 삽교읍 예목로 154의 실내구장에서 운영하는 축구교실입니다. 영어축구반과 유치부, 초등부, 성인여자부 모집 소식부터 대회와 경기장 활동까지 공식 채널에 직접 기록합니다.",
     "quantity": "영어축구반, 유치부, 초등부, 성인여자부",
@@ -326,7 +367,6 @@
     "instagramUrl": "https://www.instagram.com/yesanappleunited/",
     "traceUrl": "",
     "phone": "010-7688-5546",
-    "address": "충청남도 예산군 삽교읍 예목로 154 제1동 제6층",
     "published": true,
     "sortOrder": 2,
     "publicUrl": "https://fynd-cnd.onrender.com/brands/yesan-apple-united/",
@@ -396,12 +436,16 @@
     "description": "영진관광은 천안을 중심으로 기업과 학교, 기관의 단체 이동을 맡는 FYND 이동 협력사입니다. 공식 웹은 대형 120대와 중형 60대의 운행망을 안내합니다.",
     "collaborationCards": [
       {
-        "eyebrow": "버스 좌석에서 만나는 FYND",
-        "title": "영진관광",
-        "description": "전세버스 좌석의 QR을 열면 이동 중에도 충남 가게 이야기를 천천히 둘러볼 수 있습니다.",
-        "fact": "45인승 버스 100대",
-        "image": "/assets/brands/yeongjin-tour/bus-side-view.jpg",
-        "linkLabel": "협력사 웹사이트 보기"
+        "medium": "버스 좌석",
+        "headline": "버스에서 보내는 동안, 다음에 들를 곳을 찾아봅니다.",
+        "description": "좌석 앞 QR을 열면 지나가는 지역의 가게 이야기와 위치를 볼 수 있습니다.",
+        "placement": "전세버스 좌석 앞면",
+        "image": "/assets/brands/yeongjin-tour/bus-interior.jpg",
+        "imageAlt": "영진관광 전세버스의 좌석과 통로",
+        "imagePosition": "center 66%",
+        "mediaKind": "photo",
+        "caption": "영진관광 공식 차량 내부",
+        "linkLabel": "영진관광 웹사이트"
       }
     ],
     "quantity": "전세버스 운송",
@@ -432,6 +476,14 @@
     "product": "필링 스콘·제피르·쿠키",
     "region": "충남 공주",
     "address": "충남 공주시 이인면 금광로 9",
+    "location": {
+      "label": "매장 위치",
+      "name": "FLUFFY·D",
+      "address": "충남 공주시 이인면 금광로 9",
+      "latitude": 36.3613569,
+      "longitude": 127.0645032,
+      "placeUrl": "https://place.map.kakao.com/1813652674"
+    },
     "headline": "스콘을 가르면 밤과 딸기, 블루베리가 먼저 보입니다",
     "description": "플러피디는 공주 이인면에서 필링 스콘과 꽃 모양 제피르, 쿠키를 만드는 디저트 가게입니다. 2026년 9월 12일 공주 피크타임 페스티벌에서 첫 판매를 마쳤고, 온라인 주문을 준비하고 있습니다.",
     "quantity": "밤·딸기·블루베리 필링 스콘, 제피르, 쿠키",
@@ -614,7 +666,16 @@
     "categoryKey": "restaurant",
     "product": "샐러드·포케·샌드위치",
     "region": "충남 예산",
-    "address": "충남 예산군 삽교읍 청사로 225, 108호·109호",
+    "address": "충남 예산군 삽교읍 청사로 225 엔젤스타워2 108~109호",
+    "placeUrl": "https://place.map.kakao.com/656982906",
+    "location": {
+      "label": "매장 위치",
+      "name": "GREENY BOX",
+      "address": "충남 예산군 삽교읍 청사로 225 엔젤스타워2 108~109호",
+      "latitude": 36.6638073,
+      "longitude": 126.6754844,
+      "placeUrl": "https://place.map.kakao.com/656982906"
+    },
     "headline": "샐러드냐 포케냐, 내포에서 점심을 고르는 세 갈래",
     "description": "그리니박스는 내포신도시에서 샐러드와 포케, 샌드위치를 만듭니다. 잎채소와 토핑을 고르는 한 끼부터 기업·관공서 단체 주문까지 한 메뉴판 안에 담았습니다.",
     "quantity": "샐러드, 포케, 샌드위치, 20개 이상 단체 주문",
@@ -782,15 +843,28 @@
     "product": "유정란·구운계란",
     "region": "충남 홍성",
     "address": "충남 홍성군 홍성읍 월산로43번길 48-23",
+    "placeUrl": "https://place.map.kakao.com/12245421",
+    "location": {
+      "label": "농장·생산지 위치",
+      "name": "크로바양계식품",
+      "address": "충남 홍성군 홍성읍 월산로43번길 48-23",
+      "latitude": 36.5948088,
+      "longitude": 126.6437806,
+      "placeUrl": "https://place.map.kakao.com/12245421"
+    },
     "headline": "병아리 50마리에서 세 아들이 함께하는 농장까지",
     "description": "크로바양계는 1973년 홍성 월산리의 작은 방에서 시작했습니다. 계란값 폭락과 수많은 가공 실패를 지나 생란, 클로렐란, 맥반석 구운계란을 생산하는 3대 가족 농장으로 이어졌습니다.",
     "collaborationCards": [
       {
-        "eyebrow": "배송 상자에서 만나는 FYND",
-        "title": "크로바양계",
-        "description": "계란을 받은 뒤 상자 안 QR을 열면 홍성의 다른 가게 이야기도 이어서 볼 수 있습니다.",
-        "fact": "월평균 약 2,000상자",
-        "image": "/assets/brands/croba-poultry/official-producer.jpg",
+        "medium": "택배 상자",
+        "headline": "계란 상자 안쪽에서 홍성 가게를 더 찾아봅니다.",
+        "description": "택배를 받은 뒤 상자 안 QR을 열어 농장 이야기와 가까운 지역 가게를 함께 봅니다.",
+        "placement": "배송 상자 안쪽",
+        "image": "/assets/brands/croba-poultry/shipping-pack.jpg",
+        "imageAlt": "배송용 완충 포장을 마친 크로바양계 계란",
+        "imagePosition": "center",
+        "mediaKind": "package",
+        "caption": "크로바양계 공식 판매 페이지의 실제 배송 포장",
         "linkLabel": "크로바양계 이야기 보기"
       }
     ],
@@ -994,15 +1068,29 @@
     "product": "스마트 축제 플랫폼",
     "region": "충남 천안",
     "address": "충남 천안시 동남구 청수9로 47, 43호",
+    "placeUrl": "https://map.kakao.com/?q=%EC%B6%A9%EC%B2%AD%EB%82%A8%EB%8F%84%20%EC%B2%9C%EC%95%88%EC%8B%9C%20%EB%8F%99%EB%82%A8%EA%B5%AC%20%EC%B2%AD%EC%88%989%EB%A1%9C%2047%2C%2043%ED%98%B8",
+    "location": {
+      "label": "본사 위치",
+      "name": "PAMP 본사",
+      "address": "충남 천안시 동남구 청수9로 47, 43호",
+      "note": "방문 전 운영 여부와 상담 일정을 공식 채널에서 확인해 주세요.",
+      "latitude": 36.7821741,
+      "longitude": 127.1548588,
+      "placeUrl": "https://map.kakao.com/?q=%EC%B6%A9%EC%B2%AD%EB%82%A8%EB%8F%84%20%EC%B2%9C%EC%95%88%EC%8B%9C%20%EB%8F%99%EB%82%A8%EA%B5%AC%20%EC%B2%AD%EC%88%989%EB%A1%9C%2047%2C%2043%ED%98%B8"
+    },
     "headline": "축제의 긴 줄부터 마지막 결과 보고서까지",
-    "description": "PAMP는 주문·정산, 원격 웨이팅, 디지털 안내와 방문객 분석을 한 흐름으로 연결하는 FYND 협력사입니다. 관람객에게는 줄에 묶이지 않는 시간을, 운영자에게는 다음 축제를 준비할 기록을 남깁니다.",
+    "description": "PAMP는 축제장에서 주문·정산, 원격 웨이팅과 디지털 안내를 맡는 FYND 협력사입니다. 관람객은 휴대폰으로 순서와 일정을 보고, 운영팀은 행사 뒤 주문과 방문 기록을 정리할 수 있습니다.",
     "collaborationCards": [
       {
-        "eyebrow": "축제 안내 화면에서 만나는 FYND",
-        "title": "PAMP",
-        "description": "디지털 리플렛과 행사 배너에서 FYND를 열어 축제 주변의 가게를 더 찾아볼 수 있습니다.",
-        "fact": "축제·행사 디지털 안내",
+        "medium": "축제 안내 화면",
+        "headline": "축제 일정 확인 뒤, 근처 가게도 같이 찾아봅니다.",
+        "description": "디지털 리플릿에서 행사 일정과 부스를 확인하고 FYND로 주변 가게를 이어서 봅니다.",
+        "placement": "디지털 리플릿·행사 배너",
         "image": "/assets/brands/pamp/service-leaflet.webp",
+        "imageAlt": "PAMP 디지털 리플릿의 축제 일정과 안내 화면",
+        "imageFit": "contain",
+        "mediaKind": "screen",
+        "caption": "PAMP 공식 서비스의 실제 디지털 리플릿 화면",
         "linkLabel": "PAMP 이야기 보기"
       }
     ],

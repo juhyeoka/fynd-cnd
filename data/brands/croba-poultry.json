@@ -6,15 +6,28 @@
   "product": "유정란·구운계란",
   "region": "충남 홍성",
   "address": "충남 홍성군 홍성읍 월산로43번길 48-23",
+  "placeUrl": "https://place.map.kakao.com/12245421",
+  "location": {
+    "label": "농장·생산지 위치",
+    "name": "크로바양계식품",
+    "address": "충남 홍성군 홍성읍 월산로43번길 48-23",
+    "latitude": 36.5948088,
+    "longitude": 126.6437806,
+    "placeUrl": "https://place.map.kakao.com/12245421"
+  },
   "headline": "병아리 50마리에서 세 아들이 함께하는 농장까지",
   "description": "크로바양계는 1973년 홍성 월산리의 작은 방에서 시작했습니다. 계란값 폭락과 수많은 가공 실패를 지나 생란, 클로렐란, 맥반석 구운계란을 생산하는 3대 가족 농장으로 이어졌습니다.",
   "collaborationCards": [
     {
-      "eyebrow": "배송 상자에서 만나는 FYND",
-      "title": "크로바양계",
-      "description": "계란을 받은 뒤 상자 안 QR을 열면 홍성의 다른 가게 이야기도 이어서 볼 수 있습니다.",
-      "fact": "월평균 약 2,000상자",
-      "image": "/assets/brands/croba-poultry/official-producer.jpg",
+      "medium": "택배 상자",
+      "headline": "계란 상자 안쪽에서 홍성 가게를 더 찾아봅니다.",
+      "description": "택배를 받은 뒤 상자 안 QR을 열어 농장 이야기와 가까운 지역 가게를 함께 봅니다.",
+      "placement": "배송 상자 안쪽",
+      "image": "/assets/brands/croba-poultry/shipping-pack.jpg",
+      "imageAlt": "배송용 완충 포장을 마친 크로바양계 계란",
+      "imagePosition": "center",
+      "mediaKind": "package",
+      "caption": "크로바양계 공식 판매 페이지의 실제 배송 포장",
       "linkLabel": "크로바양계 이야기 보기"
     }
   ],

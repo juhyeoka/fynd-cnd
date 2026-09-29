@@ -13,6 +13,13 @@ const collaboratorSection = document.querySelector("#collaborators");
 const collaboratorViewport = document.querySelector(".sv3-collaborator-viewport");
 const collaboratorTrack = document.querySelector("#collaboratorTrack");
 const collaboratorDots = document.querySelector("#collaboratorDots");
+const collaboratorNav = document.querySelector("#collaboratorNav");
+const collaboratorCurrent = document.querySelector("#collaboratorCurrent");
+const collaboratorPrevious = document.querySelector("#collaboratorPrevious");
+const collaboratorNext = document.querySelector("#collaboratorNext");
+const collaboratorPause = document.querySelector("#collaboratorPause");
+const collaboratorProgress = document.querySelector("#collaboratorProgress");
+const collaboratorReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const resultSummary = document.querySelector("#resultSummary");
 const festivalResultSummary = document.querySelector("#festivalResultSummary");
 const emptyResult = document.querySelector("#emptyResult");
@@ -35,7 +42,9 @@ let festivalGridInteractionActive = false;
 let collaboratorIndex = 0;
 let collaboratorCount = 0;
 let collaboratorTimer = null;
-let collaboratorPaused = false;
+let collaboratorHoverPaused = false;
+let collaboratorFocusPaused = false;
+let collaboratorManualPaused = false;
 let toastTimer = null;
 
 function setMenuOpen(open) {
@@ -130,29 +139,17 @@ function getRegionBadge(region) {
   );
 }
 
-function getLocationLabel(brand) {
-  return brand.address || brand.region || "위치 정보 준비 중";
-}
-
-function getMapSearchUrl(brand) {
-  if (brand.placeUrl) return brand.placeUrl;
-  const query = brand.address || [brand.region, brand.name].filter(Boolean).join(" ");
-  return query ? `https://map.kakao.com/?q=${encodeURIComponent(query)}` : "";
-}
-
 function renderBrandCard(brand, index) {
   const image = brand.images?.card || brand.images?.main || "/assets/brands/brand-placeholder.svg";
   const partner = isPartner(brand);
   const location = [brand.category, brand.region].filter(Boolean).join(" · ");
+  const url = getBrandPageUrl(brand);
 
   return `
     <article class="brand-card-shell" data-brand-slug="${escapeHtml(brand.slug)}">
-      <button
-        class="brand-card brand-card-real brand-card-standard brand-card-toggle"
-        type="button"
-        aria-expanded="false"
-        aria-controls="brandLocationPanel"
-      >
+      <a class="brand-card brand-card-real brand-card-standard${partner ? " brand-card-partner" : ""}"
+         href="${escapeHtml(url)}"${getExternalLinkAttributes(brand)}
+         data-brand-slug="${escapeHtml(brand.slug)}" data-brand-name="${escapeHtml(brand.name)}">
         <span class="brand-card-media">
           <img
             src="${escapeHtml(image)}"
@@ -167,24 +164,11 @@ function renderBrandCard(brand, index) {
           <p>${escapeHtml(brand.headline)}</p>
           <span class="brand-card-meta">
             <i>${escapeHtml(brand.product)}</i>
-            <b>위치 보기</b>
+            <b>이야기 보기</b>
           </span>
         </span>
-      </button>
+      </a>
     </article>
-  `;
-}
-
-function renderLocationPanelContent(brand) {
-  const detailUrl = getBrandPageUrl(brand);
-  const mapUrl = getMapSearchUrl(brand);
-  return `
-    <small>${escapeHtml(brand.name)} 위치</small>
-    <strong>${escapeHtml(getLocationLabel(brand))}</strong>
-    <div>
-      <a href="${escapeHtml(detailUrl)}"${getExternalLinkAttributes(brand)} data-brand-slug="${escapeHtml(brand.slug)}" data-brand-name="${escapeHtml(brand.name)}">이야기 자세히 보기</a>
-      ${mapUrl ? `<a href="${escapeHtml(mapUrl)}" target="_blank" rel="noopener noreferrer">지도에서 보기 <span aria-hidden="true">↗</span></a>` : ""}
-    </div>
   `;
 }
 
@@ -241,8 +225,7 @@ function countUniqueResults(...groups) {
 function renderBrands() {
   if (!brandGrid) return;
   const visibleBrands = getVisibleBrands();
-  brandGrid.innerHTML = visibleBrands.map(renderBrandCard).join("") +
-    '<div class="brand-location-panel" id="brandLocationPanel" hidden></div>';
+  brandGrid.innerHTML = visibleBrands.map(renderBrandCard).join("");
   brandGrid.hidden = visibleBrands.length === 0;
 
   if (emptyResult) {
@@ -268,20 +251,49 @@ function renderBrands() {
   if (onboardingSlots) onboardingSlots.hidden = Boolean(searchKeyword) || brands.length >= 4;
 }
 
-function setCollaboratorSlide(nextIndex, announce = false) {
+function setCollaboratorSlide(nextIndex) {
   if (!collaboratorTrack || collaboratorCount === 0) return;
   collaboratorIndex = (nextIndex + collaboratorCount) % collaboratorCount;
   collaboratorTrack.style.transform = `translate3d(-${collaboratorIndex * 100}%, 0, 0)`;
   collaboratorTrack.querySelectorAll(".sv3-collaborator-card").forEach((card, index) => {
     card.setAttribute("aria-hidden", String(index !== collaboratorIndex));
-    card.tabIndex = index === collaboratorIndex ? 0 : -1;
+    const link = card.querySelector("a");
+    if (link) link.tabIndex = index === collaboratorIndex ? 0 : -1;
   });
   collaboratorDots?.querySelectorAll("button").forEach((dot, index) => {
     const current = index === collaboratorIndex;
     dot.classList.toggle("active", current);
     dot.setAttribute("aria-current", current ? "true" : "false");
-    if (announce) dot.focus({ preventScroll: true });
   });
+  if (collaboratorCurrent) {
+    collaboratorCurrent.textContent = `${collaboratorIndex + 1} / ${collaboratorCount}`;
+  }
+  restartCollaboratorProgress();
+}
+
+function restartCollaboratorProgress() {
+  if (!collaboratorProgress) return;
+  collaboratorProgress.style.animation = "none";
+  void collaboratorProgress.offsetWidth;
+  collaboratorProgress.style.animation = "";
+}
+
+function hasBlockingCollaboratorFocus() {
+  return collaboratorFocusPaused && document.activeElement !== collaboratorPause;
+}
+
+function updateCollaboratorPauseState() {
+  const isPaused = collaboratorHoverPaused || hasBlockingCollaboratorFocus() || collaboratorManualPaused;
+  collaboratorSection?.classList.toggle("is-paused", isPaused);
+  if (collaboratorPause) {
+    collaboratorPause.hidden = collaboratorReducedMotion.matches;
+    collaboratorPause.textContent = collaboratorManualPaused ? "재생" : "멈춤";
+    collaboratorPause.setAttribute("aria-pressed", String(collaboratorManualPaused));
+    collaboratorPause.setAttribute(
+      "aria-label",
+      collaboratorManualPaused ? "협력 파트너 자동 넘김 재생" : "협력 파트너 자동 넘김 멈춤"
+    );
+  }
 }
 
 function stopCollaboratorSlider() {
@@ -293,11 +305,14 @@ function startCollaboratorSlider() {
   stopCollaboratorSlider();
   if (
     collaboratorCount < 2 ||
-    collaboratorPaused ||
+    collaboratorHoverPaused ||
+    hasBlockingCollaboratorFocus() ||
+    collaboratorManualPaused ||
     document.hidden ||
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    collaboratorReducedMotion.matches
   ) return;
 
+  restartCollaboratorProgress();
   collaboratorTimer = window.setInterval(() => {
     setCollaboratorSlide(collaboratorIndex + 1);
   }, COLLABORATOR_ROTATION_INTERVAL);
@@ -313,20 +328,28 @@ function renderCollaborators() {
   collaboratorSection.hidden = cards.length === 0;
   collaboratorCount = cards.length;
   collaboratorIndex = 0;
+  if (collaboratorNav) collaboratorNav.hidden = cards.length < 2;
 
   collaboratorTrack.innerHTML = cards.map(({ brand, card }, index) => `
-    <a class="sv3-collaborator-card" href="${getBrandPageUrl(brand)}"${getExternalLinkAttributes(brand)}
-       data-brand-slug="${escapeHtml(brand.slug)}" data-brand-name="${escapeHtml(brand.name)}"
-       aria-hidden="${index === 0 ? "false" : "true"}" tabindex="${index === 0 ? "0" : "-1"}">
-      <span>
-        <small>${escapeHtml(card.eyebrow || "FYND 협력 파트너")}</small>
-        <strong>${escapeHtml(card.title || brand.name)}</strong>
+    <article class="sv3-collaborator-card" aria-hidden="${index === 0 ? "false" : "true"}"
+             data-media-kind="${escapeHtml(card.mediaKind || "photo")}">
+      <figure class="sv3-collaborator-media ${card.imageFit === "contain" ? "is-contain" : ""}">
+        <img src="${escapeHtml(card.image || brand.images?.main || "/assets/brands/brand-placeholder.svg")}"
+             alt="${escapeHtml(card.imageAlt || `${brand.name} 협력 장면`)}"
+             style="object-position:${escapeHtml(card.imagePosition || "center")}" loading="eager" decoding="async">
+        ${card.caption ? `<figcaption>${escapeHtml(card.caption)}</figcaption>` : ""}
+      </figure>
+      <div class="sv3-collaborator-copy">
+        <small>${escapeHtml(card.medium || card.eyebrow || "FYND 협력 파트너")}</small>
+        <span>${escapeHtml(brand.name)}</span>
+        <strong>${escapeHtml(card.headline || card.title || brand.name)}</strong>
         <p>${escapeHtml(card.description || brand.description)}</p>
-        ${card.fact ? `<i>${escapeHtml(card.fact)}</i>` : ""}
-      </span>
-      <img src="${escapeHtml(card.image || brand.images?.main || "/assets/brands/brand-placeholder.svg")}" alt="${escapeHtml(brand.name)} ${escapeHtml(card.title || brand.product)}" loading="lazy">
-      <b>${escapeHtml(card.linkLabel || "이야기 보기")} <span aria-hidden="true">↗</span></b>
-    </a>
+        ${card.placement || card.fact ? `<dl><dt>FYND를 만나는 곳</dt><dd>${escapeHtml(card.placement || card.fact)}</dd></dl>` : ""}
+        <a href="${getBrandPageUrl(brand)}"${getExternalLinkAttributes(brand)}
+           data-brand-slug="${escapeHtml(brand.slug)}" data-brand-name="${escapeHtml(brand.name)}"
+           tabindex="${index === 0 ? "0" : "-1"}">${escapeHtml(card.linkLabel || "이야기 보기")} <span aria-hidden="true">→</span></a>
+      </div>
+    </article>
   `).join("");
 
   if (collaboratorDots) {
@@ -337,6 +360,8 @@ function renderCollaborators() {
   }
 
   collaboratorTrack.style.transform = "translate3d(0, 0, 0)";
+  updateCollaboratorPauseState();
+  setCollaboratorSlide(0);
   startCollaboratorSlider();
 }
 
@@ -347,26 +372,52 @@ collaboratorDots?.addEventListener("click", (event) => {
   startCollaboratorSlider();
 });
 
+collaboratorPrevious?.addEventListener("click", () => {
+  setCollaboratorSlide(collaboratorIndex - 1);
+  startCollaboratorSlider();
+});
+
+collaboratorNext?.addEventListener("click", () => {
+  setCollaboratorSlide(collaboratorIndex + 1);
+  startCollaboratorSlider();
+});
+
+collaboratorPause?.addEventListener("click", () => {
+  collaboratorManualPaused = !collaboratorManualPaused;
+  updateCollaboratorPauseState();
+  if (collaboratorManualPaused) stopCollaboratorSlider();
+  else startCollaboratorSlider();
+});
+
 collaboratorViewport?.addEventListener("mouseenter", () => {
-  collaboratorPaused = true;
+  collaboratorHoverPaused = true;
+  updateCollaboratorPauseState();
   stopCollaboratorSlider();
 });
 
 collaboratorViewport?.addEventListener("mouseleave", () => {
-  collaboratorPaused = false;
+  collaboratorHoverPaused = false;
+  updateCollaboratorPauseState();
   startCollaboratorSlider();
 });
 
 collaboratorSection?.addEventListener("focusin", () => {
-  collaboratorPaused = true;
-  stopCollaboratorSlider();
+  collaboratorFocusPaused = true;
+  updateCollaboratorPauseState();
+  if (hasBlockingCollaboratorFocus()) stopCollaboratorSlider();
+  else startCollaboratorSlider();
 });
 
 collaboratorSection?.addEventListener("focusout", (event) => {
-  if (!collaboratorSection.contains(event.relatedTarget)) {
-    collaboratorPaused = false;
-    startCollaboratorSlider();
-  }
+  if (collaboratorSection.contains(event.relatedTarget)) return;
+  collaboratorFocusPaused = false;
+  updateCollaboratorPauseState();
+  startCollaboratorSlider();
+});
+
+collaboratorReducedMotion.addEventListener?.("change", () => {
+  updateCollaboratorPauseState();
+  startCollaboratorSlider();
 });
 
 function renderFestivals() {
@@ -464,45 +515,6 @@ function saveRecentBrand(link) {
 }
 
 brandGrid?.addEventListener("click", (event) => {
-  const toggle = event.target.closest(".brand-card-toggle");
-  if (toggle) {
-    const shell = toggle.closest(".brand-card-shell");
-    const panel = brandGrid.querySelector("#brandLocationPanel");
-    if (!shell || !panel) return;
-    const willOpen = toggle.getAttribute("aria-expanded") !== "true";
-
-    brandGrid.querySelectorAll(".brand-card-toggle[aria-expanded='true']").forEach((openToggle) => {
-      openToggle.setAttribute("aria-expanded", "false");
-      const openLabel = openToggle.querySelector(".brand-card-meta b");
-      if (openLabel) openLabel.textContent = "위치 보기";
-    });
-
-    if (!willOpen) {
-      panel.hidden = true;
-      return;
-    }
-
-    const brand = brands.find((item) => item.slug === shell.dataset.brandSlug);
-    if (!brand) return;
-    const shells = [...brandGrid.querySelectorAll(".brand-card-shell")];
-    const shellIndex = shells.indexOf(shell);
-    const columnCount = Math.max(
-      1,
-      getComputedStyle(brandGrid).gridTemplateColumns.split(" ").filter(Boolean).length
-    );
-    const rowEndIndex = Math.min(
-      Math.ceil((shellIndex + 1) / columnCount) * columnCount - 1,
-      shells.length - 1
-    );
-    shells[rowEndIndex].after(panel);
-    panel.innerHTML = renderLocationPanelContent(brand);
-    panel.hidden = false;
-    toggle.setAttribute("aria-expanded", String(willOpen));
-    const label = toggle.querySelector(".brand-card-meta b");
-    if (label) label.textContent = "위치 닫기";
-    return;
-  }
-
   const link = event.target.closest("a[data-brand-slug]");
   if (link) saveRecentBrand(link);
 });

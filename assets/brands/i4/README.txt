@@ -1,14 +1,15 @@
-[i4 이미지 넣는 위치]
+[아이뽀란 / i4 공개 리포트 화면]
 
-대표 이미지:
-main.jpg
+출처:
+https://eggtrace-82hy.onrender.com/p/EGG-0001
 
-추가 사진:
-gallery-1.jpg
-gallery-2.jpg
-gallery-3.jpg
+확인 및 캡처일:
+2026-09-29
 
-권장 크기:
-- 대표 이미지: 1200 x 1200 이상
-- 추가 이미지: 가로 1200px 이상
-- JPG 또는 PNG
+파일:
+- report-hero-2026-09.png: 농장 영상 첫 화면
+- report-certifications-2026-09.png: 공개 페이지의 인증 정보
+- report-summary-2026-09.png: 주간 영상 요약
+- report-analysis-2026-09.png: 영상 분석 화면
+
+모두 공개 리포트를 브라우저에서 직접 캡처한 화면이며 AI로 생성한 이미지는 없습니다.

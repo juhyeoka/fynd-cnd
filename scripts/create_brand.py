@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import re
 from datetime import date
 from html import escape
@@ -100,6 +101,92 @@ def optional_action(url: str, label: str, class_name: str = "") -> str:
     )
 
 
+def figure_caption(
+    text: str = "", source_url: str = "", source_label: str = "출처 보기"
+) -> str:
+    if not text and not source_url:
+        return ""
+    source = ""
+    if source_url:
+        source = (
+            f'<a href="{escape(validate_url(source_url))}" target="_blank" '
+            f'rel="noopener noreferrer">{escape(source_label or "출처 보기")} ↗</a>'
+        )
+    separator = "<span>·</span>" if text and source else ""
+    return f"<figcaption>{escape(text)}{separator}{source}</figcaption>"
+
+
+def build_location_html(brand: dict) -> str:
+    location = brand.get("location") or {}
+    latitude = location.get("latitude")
+    longitude = location.get("longitude")
+    if latitude is None or longitude is None:
+        return ""
+
+    latitude = float(latitude)
+    longitude = float(longitude)
+    zoom = int(location.get("zoom") or 16)
+    tile_scale = 2**zoom
+    tile_x = (longitude + 180.0) / 360.0 * tile_scale
+    latitude_radians = math.radians(latitude)
+    tile_y = (
+        1.0 - math.asinh(math.tan(latitude_radians)) / math.pi
+    ) / 2.0 * tile_scale
+    tile_start_x = math.floor(tile_x) - 2
+    tile_start_y = math.floor(tile_y) - 1
+    marker_x = (tile_x - tile_start_x) * 256
+    marker_y = (tile_y - tile_start_y) * 256
+    tiles = "".join(
+        f'<img src="https://tile.openstreetmap.org/{zoom}/{x}/{y}.png" alt="" '
+        'width="256" height="256" loading="lazy" decoding="async">'
+        for y in range(tile_start_y, tile_start_y + 3)
+        for x in range(tile_start_x, tile_start_x + 5)
+    )
+    label = escape(location.get("label") or "위치")
+    name = escape(location.get("name") or brand["name"])
+    address = escape(location.get("address") or brand.get("address") or brand["region"])
+    note = escape(location.get("note") or "")
+    place_url = validate_url(location.get("placeUrl") or brand.get("placeUrl") or "")
+    place_link_label = escape(location.get("placeLinkLabel") or "카카오맵에서 보기")
+    place_link = (
+        f'<a href="{escape(place_url)}" target="_blank" rel="noopener noreferrer">'
+        f'{place_link_label} <span aria-hidden="true">→</span></a>'
+        if place_url
+        else ""
+    )
+    show_pin = location.get("showPin", True)
+    map_caption = escape(
+        location.get("mapCaption")
+        or "방문 전 운영 시간과 예약 여부를 확인해 주세요."
+    )
+    map_aria_label = escape(location.get("mapAriaLabel") or f"{name} 주변 지도")
+    pin_html = (
+        '<span class="brand-detail-location-pin" aria-hidden="true"><i></i></span>'
+        if show_pin
+        else ""
+    )
+    section_id = f"brandLocation-{escape(brand['slug'])}"
+    return f"""
+    <section class="brand-detail-location" aria-labelledby="{section_id}">
+      <div class="brand-detail-location-copy">
+        <p class="section-kicker">{label}</p>
+        <h2 id="{section_id}">{name}</h2>
+        <p class="brand-detail-location-address">{address}</p>
+        {f'<p class="brand-detail-location-note">{note}</p>' if note else ''}
+        {place_link}
+      </div>
+      <figure class="brand-detail-location-map">
+        <div class="brand-detail-location-stage" role="img" aria-label="{map_aria_label}">
+          <div class="brand-detail-location-tiles" aria-hidden="true"
+               style="left:calc(50% - {marker_x:.2f}px);top:calc(50% - {marker_y:.2f}px)">{tiles}</div>
+          {pin_html}
+        </div>
+        <figcaption><a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">© OpenStreetMap contributors</a><span>·</span>{map_caption}</figcaption>
+      </figure>
+    </section>
+    """.strip()
+
+
 def build_detail_html(brand: dict, base_url: str) -> str:
     name = escape(brand["name"])
     product = escape(brand["product"])
@@ -115,8 +202,9 @@ def build_detail_html(brand: dict, base_url: str) -> str:
     page_url = f"{base_url}/brands/{escape(brand['slug'])}/"
     image_url = image if image.startswith("http") else f"{base_url}{image}"
     is_partner = brand.get("type") == "partner"
+    is_service = is_partner or brand.get("schemaType") == "Service"
     robots_value = "index, follow, max-image-preview:large"
-    if is_partner:
+    if is_service:
         structured_data_value = {
             "@context": "https://schema.org",
             "@type": "Service",
@@ -142,15 +230,15 @@ def build_detail_html(brand: dict, base_url: str) -> str:
     structured_data = json.dumps(structured_data_value, ensure_ascii=False)
     detail_label = "협력사" if is_partner else "소상공인 이야기"
     detail_kicker = "FYND 협력사" if is_partner else "충남 업체 이야기"
-    product_kicker = "협력 서비스" if is_partner else "대표 메뉴와 상품"
-    product_heading = "협력 서비스" if is_partner else "대표 상품"
+    product_kicker = "협력 서비스" if is_partner else ("서비스 화면" if is_service else "대표 메뉴와 상품")
+    product_heading = "협력 서비스" if is_partner else ("서비스 화면" if is_service else "대표 상품")
     feature_kicker = escape(brand.get("featureKicker") or product_kicker)
     feature_heading = escape(brand.get("featureTitle") or product_heading)
     entity_info_label = "협력사" if is_partner else "브랜드"
-    product_info_label = "협력 서비스" if is_partner else "대표 상품"
-    quantity_info_label = "지원 범위" if is_partner else "상품 구성"
-    product_detail_label = "지원 범위" if is_partner else "상품 구성"
-    product_image_alt = "협력 서비스" if is_partner else "대표 상품"
+    product_info_label = "협력 서비스" if is_partner else ("서비스" if is_service else "대표 상품")
+    quantity_info_label = "지원 범위" if is_partner else ("확인 항목" if is_service else "상품 구성")
+    product_detail_label = "지원 범위" if is_partner else ("확인 항목" if is_service else "상품 구성")
+    product_image_alt = "협력 서비스" if is_partner else ("서비스 화면" if is_service else "대표 상품")
     story_kicker = "현장에서 시작된 이야기" if is_partner else "조금 더 알아보기"
     visual_note = escape(brand.get("visualNote") or "")
     visual_caption = (
@@ -166,8 +254,14 @@ def build_detail_html(brand: dict, base_url: str) -> str:
     actions = "".join(
         [
             optional_action(shop_url, shop_action_label, "primary"),
-            optional_action(brand.get("traceUrl", ""), "생산 정보 확인하기"),
-            optional_action(brand.get("homepageUrl", ""), "공식 홈페이지"),
+            optional_action(
+                brand.get("traceUrl", ""),
+                brand.get("traceLabel", "생산 정보 확인하기"),
+            ),
+            optional_action(
+                brand.get("homepageUrl", ""),
+                brand.get("homepageLabel", "공식 홈페이지"),
+            ),
             optional_action(brand.get("placeUrl", ""), "카카오맵에서 보기"),
             optional_action(brand.get("instagramUrl", ""), "인스타그램 보기"),
         ]
@@ -247,19 +341,23 @@ def build_detail_html(brand: dict, base_url: str) -> str:
             gallery_alt = gallery_entry.get("alt") or f"{brand['name']} 브랜드 스토리 사진"
             gallery_caption = gallery_entry.get("caption") or ""
             gallery_class = " is-cover" if gallery_entry.get("cover") else ""
+            gallery_source_url = gallery_entry.get("sourceUrl") or ""
+            gallery_source_label = gallery_entry.get("sourceLabel") or "출처 보기"
         else:
             gallery_image = gallery_entry
             gallery_alt = f"{brand['name']} 브랜드 스토리 사진"
             gallery_caption = ""
             gallery_class = ""
+            gallery_source_url = ""
+            gallery_source_label = "출처 보기"
         if not gallery_image:
             continue
         local_path = BASE_DIR / gallery_image.lstrip("/")
         if gallery_image.startswith(("http://", "https://")) or local_path.exists():
-            gallery_caption_html = (
-                f"<figcaption>{escape(gallery_caption)}</figcaption>"
-                if gallery_caption
-                else ""
+            gallery_caption_html = figure_caption(
+                gallery_caption,
+                gallery_source_url,
+                gallery_source_label,
             )
             gallery_items.append(
                 f"""
@@ -390,11 +488,10 @@ def build_detail_html(brand: dict, base_url: str) -> str:
             section_alt = escape(
                 section.get("imageAlt") or f"{brand['name']} 이야기 장면"
             )
-            section_caption = escape(section.get("caption") or "")
-            caption_html = (
-                f"<figcaption>{section_caption}</figcaption>"
-                if section_caption
-                else ""
+            caption_html = figure_caption(
+                section.get("caption") or "",
+                section.get("sourceUrl") or "",
+                section.get("sourceLabel") or "출처 보기",
             )
             story_sections.append(
                 f"""
@@ -432,6 +529,8 @@ def build_detail_html(brand: dict, base_url: str) -> str:
             + "</div>"
         )
 
+    location_block = build_location_html(brand)
+
     return f"""<!doctype html>
 <html lang="ko">
 <head>
@@ -444,8 +543,8 @@ def build_detail_html(brand: dict, base_url: str) -> str:
   <meta name="theme-color" content="#ffffff">
   <link rel="canonical" href="{page_url}">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/styles.css?v=service-editorial-14">
-  <meta property="og:type" content="{'website' if is_partner else 'product'}">
+  <link rel="stylesheet" href="/styles.css?v=service-editorial-16">
+  <meta property="og:type" content="{'website' if is_service else 'product'}">
   <meta property="og:site_name" content="FYND">
   <meta property="og:title" content="{name} {product} | FYND">
   <meta property="og:description" content="{headline}">
@@ -509,6 +608,7 @@ def build_detail_html(brand: dict, base_url: str) -> str:
       {process_block}
       {story_links_block}
     </section>
+    {location_block}
   </main>{mobile_shop_block}
 
   <footer class="site-footer">

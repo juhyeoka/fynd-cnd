@@ -11,8 +11,8 @@
   <meta name="theme-color" content="#151515">
   <link rel="canonical" href="https://fynd-cnd.onrender.com/">
   <link rel="icon" href="/assets/fynd-favicon-20260729.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/styles.css?v=service-editorial-14">
-  <link rel="stylesheet" href="/service-home.css?v=service-editorial-14">
+  <link rel="stylesheet" href="/styles.css?v=service-editorial-16">
+  <link rel="stylesheet" href="/service-home.css?v=service-editorial-16">
 
   <meta property="og:locale" content="ko_KR">
   <meta property="og:type" content="website">
@@ -112,19 +112,36 @@
 
     <section class="sv3-collaboration-section" id="collaborators" aria-labelledby="collaboratorSectionTitle">
       <div class="sv3-section-head sv3-section-head-light">
-        <div><p>FYND와 함께 움직이는 곳</p><h2 id="collaboratorSectionTitle">지역을 잇는 협력 파트너</h2></div>
-        <span>가게를 소개하는 일 너머에서 이동과 현장 운영을 함께합니다.</span>
+        <div><p>협력 파트너 3곳</p><h2 id="collaboratorSectionTitle">버스, 택배 상자, 축제 안내 화면</h2></div>
+        <span>영진관광 좌석 앞면, 크로바양계 배송 상자 안쪽, PAMP 디지털 리플릿에 FYND를 연결합니다.</span>
       </div>
       <div class="sv3-collaborator-viewport">
         <div class="sv3-collaborator-track" id="collaboratorTrack">
-          <a class="sv3-collaborator-card" href="https://yeongjin-tour.onrender.com/" target="_blank" rel="noopener noreferrer">
-            <span><small>이동 협력사</small><strong>영진관광</strong><p>학교·기업·기관의 단체 이동을 연결합니다.</p></span>
-            <img src="/assets/brands/yeongjin-tour/bus-side-view.jpg" alt="영진관광 전세버스 실사">
-            <b>협력사 웹사이트 보기 ↗</b>
-          </a>
+          <article class="sv3-collaborator-card">
+            <figure class="sv3-collaborator-media">
+              <img src="/assets/brands/yeongjin-tour/bus-interior.jpg" alt="영진관광 전세버스의 좌석과 통로">
+              <figcaption>영진관광 공식 차량 내부</figcaption>
+            </figure>
+            <div class="sv3-collaborator-copy">
+              <small>버스 좌석</small><span>영진관광</span>
+              <strong>버스에서 보내는 동안, 다음에 들를 곳을 찾아봅니다.</strong>
+              <p>좌석 앞 QR을 열면 지나가는 지역의 가게 이야기와 위치를 볼 수 있습니다.</p>
+              <dl><dt>FYND를 만나는 곳</dt><dd>전세버스 좌석 앞면</dd></dl>
+              <a href="https://yeongjin-tour.onrender.com/" target="_blank" rel="noopener noreferrer">영진관광 웹사이트 <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
         </div>
       </div>
-      <div class="sv3-collaborator-dots" id="collaboratorDots" aria-label="협력 파트너 슬라이드"></div>
+      <div class="sv3-collaborator-nav" id="collaboratorNav" hidden>
+        <span id="collaboratorCurrent">1 / 1</span>
+        <div class="sv3-collaborator-progress" aria-hidden="true"><i id="collaboratorProgress"></i></div>
+        <div class="sv3-collaborator-dots" id="collaboratorDots" aria-label="협력 파트너 슬라이드"></div>
+        <div class="sv3-collaborator-controls">
+          <button type="button" id="collaboratorPrevious" aria-label="이전 협력 파트너">←</button>
+          <button type="button" id="collaboratorPause" aria-label="협력 파트너 자동 넘김 멈춤" aria-pressed="false">멈춤</button>
+          <button type="button" id="collaboratorNext" aria-label="다음 협력 파트너">→</button>
+        </div>
+      </div>
     </section>
 
     <section class="sv3-festival-section" id="festivals" aria-labelledby="festivalSectionTitle">
@@ -184,6 +201,6 @@
   </footer>
 
   <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
-  <script src="/app.js?v=service-editorial-14"></script>
+  <script src="/app.js?v=service-editorial-16"></script>
 </body>
 </html>

@@ -5,7 +5,16 @@
   "categoryKey": "restaurant",
   "product": "샐러드·포케·샌드위치",
   "region": "충남 예산",
-  "address": "충남 예산군 삽교읍 청사로 225, 108호·109호",
+  "address": "충남 예산군 삽교읍 청사로 225 엔젤스타워2 108~109호",
+  "placeUrl": "https://place.map.kakao.com/656982906",
+  "location": {
+    "label": "매장 위치",
+    "name": "GREENY BOX",
+    "address": "충남 예산군 삽교읍 청사로 225 엔젤스타워2 108~109호",
+    "latitude": 36.6638073,
+    "longitude": 126.6754844,
+    "placeUrl": "https://place.map.kakao.com/656982906"
+  },
   "headline": "샐러드냐 포케냐, 내포에서 점심을 고르는 세 갈래",
   "description": "그리니박스는 내포신도시에서 샐러드와 포케, 샌드위치를 만듭니다. 잎채소와 토핑을 고르는 한 끼부터 기업·관공서 단체 주문까지 한 메뉴판 안에 담았습니다.",
   "quantity": "샐러드, 포케, 샌드위치, 20개 이상 단체 주문",

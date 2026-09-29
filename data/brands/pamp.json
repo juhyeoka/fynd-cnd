@@ -7,15 +7,29 @@
   "product": "스마트 축제 플랫폼",
   "region": "충남 천안",
   "address": "충남 천안시 동남구 청수9로 47, 43호",
+  "placeUrl": "https://map.kakao.com/?q=%EC%B6%A9%EC%B2%AD%EB%82%A8%EB%8F%84%20%EC%B2%9C%EC%95%88%EC%8B%9C%20%EB%8F%99%EB%82%A8%EA%B5%AC%20%EC%B2%AD%EC%88%989%EB%A1%9C%2047%2C%2043%ED%98%B8",
+  "location": {
+    "label": "본사 위치",
+    "name": "PAMP 본사",
+    "address": "충남 천안시 동남구 청수9로 47, 43호",
+    "note": "방문 전 운영 여부와 상담 일정을 공식 채널에서 확인해 주세요.",
+    "latitude": 36.7821741,
+    "longitude": 127.1548588,
+    "placeUrl": "https://map.kakao.com/?q=%EC%B6%A9%EC%B2%AD%EB%82%A8%EB%8F%84%20%EC%B2%9C%EC%95%88%EC%8B%9C%20%EB%8F%99%EB%82%A8%EA%B5%AC%20%EC%B2%AD%EC%88%989%EB%A1%9C%2047%2C%2043%ED%98%B8"
+  },
   "headline": "축제의 긴 줄부터 마지막 결과 보고서까지",
-  "description": "PAMP는 주문·정산, 원격 웨이팅, 디지털 안내와 방문객 분석을 한 흐름으로 연결하는 FYND 협력사입니다. 관람객에게는 줄에 묶이지 않는 시간을, 운영자에게는 다음 축제를 준비할 기록을 남깁니다.",
+  "description": "PAMP는 축제장에서 주문·정산, 원격 웨이팅과 디지털 안내를 맡는 FYND 협력사입니다. 관람객은 휴대폰으로 순서와 일정을 보고, 운영팀은 행사 뒤 주문과 방문 기록을 정리할 수 있습니다.",
   "collaborationCards": [
     {
-      "eyebrow": "축제 안내 화면에서 만나는 FYND",
-      "title": "PAMP",
-      "description": "디지털 리플렛과 행사 배너에서 FYND를 열어 축제 주변의 가게를 더 찾아볼 수 있습니다.",
-      "fact": "축제·행사 디지털 안내",
+      "medium": "축제 안내 화면",
+      "headline": "축제 일정 확인 뒤, 근처 가게도 같이 찾아봅니다.",
+      "description": "디지털 리플릿에서 행사 일정과 부스를 확인하고 FYND로 주변 가게를 이어서 봅니다.",
+      "placement": "디지털 리플릿·행사 배너",
       "image": "/assets/brands/pamp/service-leaflet.webp",
+      "imageAlt": "PAMP 디지털 리플릿의 축제 일정과 안내 화면",
+      "imageFit": "contain",
+      "mediaKind": "screen",
+      "caption": "PAMP 공식 서비스의 실제 디지털 리플릿 화면",
       "linkLabel": "PAMP 이야기 보기"
     }
   ],
