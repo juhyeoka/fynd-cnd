@@ -14,6 +14,44 @@ document.querySelectorAll("[data-story-reader]").forEach((reader) => {
   let scrollFrame = 0;
   let settleTimer = 0;
 
+  function updateScrollableCopy() {
+    slides.forEach((slide) => {
+      const copy = slide.querySelector(".brand-detail-story-section-copy") || slide;
+      const canScroll = copy.scrollHeight > copy.clientHeight + 2;
+      copy.dataset.storyCanScroll = String(canScroll);
+      copy.classList.toggle("is-scrollable", canScroll);
+      slide.classList.toggle("has-scrollable-copy", canScroll);
+
+      let cue = slide.querySelector(".brand-detail-story-more-cue");
+      if (!cue) {
+        cue = document.createElement("span");
+        cue.className = "brand-detail-story-more-cue";
+        cue.textContent = "위로 더 읽기";
+        cue.setAttribute("aria-hidden", "true");
+        slide.append(cue);
+      }
+
+      const updateCue = () => {
+        const reachedEnd = copy.scrollTop + copy.clientHeight >= copy.scrollHeight - 4;
+        cue.hidden = copy.dataset.storyCanScroll !== "true" || reachedEnd;
+      };
+
+      if (!copy.dataset.storyScrollCue) {
+        copy.dataset.storyScrollCue = "true";
+        copy.addEventListener("scroll", updateCue, { passive: true });
+      }
+      updateCue();
+
+      if (canScroll) {
+        copy.tabIndex = 0;
+        copy.setAttribute("aria-label", "이야기 본문. 위아래로 스크롤할 수 있습니다.");
+      } else {
+        copy.removeAttribute("tabindex");
+        copy.removeAttribute("aria-label");
+      }
+    });
+  }
+
   function updateControls(index) {
     activeIndex = Math.max(0, Math.min(index, slides.length - 1));
     if (previous) previous.disabled = activeIndex === 0;
@@ -80,9 +118,13 @@ document.querySelectorAll("[data-story-reader]").forEach((reader) => {
   window.addEventListener("resize", () => {
     window.requestAnimationFrame(() => {
       viewport.scrollTo({ left: slides[activeIndex].offsetLeft, behavior: "auto" });
+      updateScrollableCopy();
     });
   });
 
+  window.addEventListener("load", updateScrollableCopy, { once: true });
+
   reader.classList.add("is-story-ready");
   updateControls(0);
+  updateScrollableCopy();
 });

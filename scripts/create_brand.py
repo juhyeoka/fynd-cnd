@@ -521,7 +521,7 @@ def build_detail_html(brand: dict, base_url: str) -> str:
         <article class="brand-detail-story-section{section_class}" data-story-index="{index - 1}"
                  role="group" aria-roledescription="페이지" aria-label="{index} / __STORY_COUNT__">
           {section_label_html}
-          <div><h3>{section_title}</h3>{paragraph_html}</div>
+          <div class="brand-detail-story-section-copy"><h3>{section_title}</h3>{paragraph_html}</div>
         </article>
                 """.strip()
             )
@@ -540,7 +540,7 @@ def build_detail_html(brand: dict, base_url: str) -> str:
         )
         reading_minutes = max(2, round(story_character_count / 350))
         reading_time = (
-            f'<p class="brand-detail-story-meta"><span>천천히 읽으면 약 {reading_minutes}분</span></p>'
+            f'<p class="brand-detail-story-meta"><span>약 {reading_minutes}분 분량</span></p>'
         )
         story_article = f"""
       <div class="brand-detail-story-reader" data-story-reader>
@@ -556,11 +556,12 @@ def build_detail_html(brand: dict, base_url: str) -> str:
           </div>
           <button type="button" class="brand-detail-story-arrow" data-story-next aria-label="다음 이야기">다음 <span aria-hidden="true">→</span></button>
         </nav>
-        <p class="brand-detail-story-swipe-hint">휴대폰에서는 사진과 글을 좌우로 넘겨 보세요.</p>
+        <p class="brand-detail-story-swipe-hint">다음 이야기는 옆으로, 긴 글은 카드 안에서 위로 넘겨 보세요.</p>
       </div>
         """.strip()
 
     gallery_lead = gallery_block if not story_sections else ""
+    supplemental_story_blocks = "" if story_sections else highlights_block + process_block
 
     location_block = build_location_html(brand)
 
@@ -576,7 +577,7 @@ def build_detail_html(brand: dict, base_url: str) -> str:
   <meta name="theme-color" content="#ffffff">
   <link rel="canonical" href="{page_url}">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/styles.css?v=service-editorial-17">
+  <link rel="stylesheet" href="/styles.css?v=service-editorial-18">
   <meta property="og:type" content="{'website' if is_service else 'product'}">
   <meta property="og:site_name" content="FYND">
   <meta property="og:title" content="{name} {product} | FYND">
@@ -631,14 +632,13 @@ def build_detail_html(brand: dict, base_url: str) -> str:
       </div>
     </section>
 
-    <section class="brand-detail-story">
+    <section class="brand-detail-story" id="brandStory">
       <p class="section-kicker">{story_kicker}</p>
       <h2>{escape(brand.get("storyTitle") or "브랜드가 지키는 가치")}</h2>
       {reading_time}
       <p>{escape(brand.get("storyDescription") or brand["description"])}</p>{gallery_lead}
       {story_article}
-      {highlights_block}
-      {process_block}
+      {supplemental_story_blocks}
       {story_links_block}
     </section>
     {location_block}
@@ -651,7 +651,7 @@ def build_detail_html(brand: dict, base_url: str) -> str:
       <small>© 2026 FYND.</small>
     </div>
   </footer>
-  <script src="/brand-detail.js?v=story-reader-1" defer></script>
+  <script src="/brand-detail.js?v=story-reader-2" defer></script>
 </body>
 </html>
 """
