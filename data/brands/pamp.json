@@ -22,14 +22,14 @@
   "collaborationCards": [
     {
       "medium": "축제 안내 화면",
-      "headline": "축제 일정 확인 뒤, 근처 가게도 같이 찾아봅니다.",
-      "description": "디지털 리플릿에서 행사 일정과 부스를 확인하고 FYND로 주변 가게를 이어서 봅니다.",
+      "headline": "축제 안내를 본 다음, 근처 가게 이야기까지 이어집니다.",
+      "description": "행사 일정과 부스를 확인한 뒤 FYND에서 주변 가게를 천천히 둘러볼 수 있습니다.",
       "placement": "디지털 리플릿·행사 배너",
-      "image": "/assets/brands/pamp/service-leaflet.webp",
-      "imageAlt": "PAMP 디지털 리플릿의 축제 일정과 안내 화면",
-      "imageFit": "contain",
-      "mediaKind": "screen",
-      "caption": "PAMP 공식 서비스의 실제 디지털 리플릿 화면",
+      "image": "/assets/brands/pamp/event-beer.webp",
+      "imageAlt": "PAMP가 적용된 노원 수제맥주축제 현장과 관람객",
+      "imagePosition": "center 52%",
+      "mediaKind": "photo",
+      "caption": "PAMP가 적용된 노원 수제맥주축제 현장",
       "linkLabel": "PAMP 이야기 보기"
     }
   ],
@@ -59,7 +59,8 @@
       ],
       "image": "/assets/brands/pamp/service-waiting.webp",
       "imageAlt": "PAMP 원격 주문과 웨이팅 서비스 화면",
-      "caption": "원격 주문·웨이팅 기능 공식 안내 화면"
+      "caption": "원격 주문·웨이팅 기능 공식 안내 화면",
+      "imageFit": "contain"
     },
     {
       "label": "다음 장소를 찾을 때",
@@ -70,7 +71,8 @@
       ],
       "image": "/assets/brands/pamp/service-leaflet.webp",
       "imageAlt": "PAMP 디지털 리플렛과 축제 안내 화면",
-      "caption": "디지털 리플렛 공식 안내 화면"
+      "caption": "디지털 리플렛 공식 안내 화면",
+      "imageFit": "contain"
     },
     {
       "label": "일정이 바뀌었을 때",
@@ -81,7 +83,8 @@
       ],
       "image": "/assets/brands/pamp/service-alert.webp",
       "imageAlt": "PAMP 실시간 현장 알림 화면",
-      "caption": "실시간 현장 알림 기능 공식 안내 화면"
+      "caption": "실시간 현장 알림 기능 공식 안내 화면",
+      "imageFit": "contain"
     },
     {
       "label": "부스 안에서는",
@@ -103,7 +106,8 @@
       ],
       "image": "/assets/brands/pamp/service-report.webp",
       "imageAlt": "PAMP 축제 결과 보고서 데이터 시각화 화면",
-      "caption": "부스별 방문과 시간대별 흐름을 정리하는 결과 보고서"
+      "caption": "부스별 방문과 시간대별 흐름을 정리하는 결과 보고서",
+      "imageFit": "contain"
     },
     {
       "label": "공식 웹에 공개된 수치",
@@ -192,17 +196,20 @@
       {
         "src": "/assets/brands/pamp/story-2.webp",
         "alt": "PAMP 주문과 원격 줄서기 화면",
-        "label": "원격 주문·웨이팅"
+        "label": "원격 주문·웨이팅",
+        "fit": "contain"
       },
       {
         "src": "/assets/brands/pamp/service-leaflet.webp",
         "alt": "PAMP 디지털 축제 안내 화면",
-        "label": "디지털 리플렛"
+        "label": "디지털 리플렛",
+        "fit": "contain"
       },
       {
         "src": "/assets/brands/pamp/service-report.webp",
         "alt": "PAMP 축제 결과 보고서 화면",
-        "label": "운영 결과 보고서"
+        "label": "운영 결과 보고서",
+        "fit": "contain"
       }
     ],
     "gallery": [

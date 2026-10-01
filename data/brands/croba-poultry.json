@@ -20,14 +20,14 @@
   "collaborationCards": [
     {
       "medium": "택배 상자",
-      "headline": "계란 상자 안쪽에서 홍성 가게를 더 찾아봅니다.",
-      "description": "택배를 받은 뒤 상자 안 QR을 열어 농장 이야기와 가까운 지역 가게를 함께 봅니다.",
+      "headline": "계란을 만든 사람의 이야기에서, 홍성의 다음 가게로 이어집니다.",
+      "description": "배송 상자 안쪽의 FYND를 열면 크로바양계 이야기와 홍성의 다른 가게를 함께 볼 수 있습니다.",
       "placement": "배송 상자 안쪽",
-      "image": "/assets/brands/croba-poultry/shipping-pack.jpg",
-      "imageAlt": "배송용 완충 포장을 마친 크로바양계 계란",
+      "image": "/assets/brands/croba-poultry/official-producer.jpg",
+      "imageAlt": "크로바양계 생산자가 포장된 계란을 들어 보이는 모습",
       "imagePosition": "center",
-      "mediaKind": "package",
-      "caption": "크로바양계 공식 판매 페이지의 실제 배송 포장",
+      "mediaKind": "photo",
+      "caption": "크로바양계 공식 판매처에 공개된 생산 현장",
       "linkLabel": "크로바양계 이야기 보기"
     }
   ],

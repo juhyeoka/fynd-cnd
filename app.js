@@ -279,7 +279,7 @@ function restartCollaboratorProgress() {
 }
 
 function hasBlockingCollaboratorFocus() {
-  return collaboratorFocusPaused && document.activeElement !== collaboratorPause;
+  return collaboratorFocusPaused;
 }
 
 function updateCollaboratorPauseState() {
@@ -404,15 +404,17 @@ collaboratorViewport?.addEventListener("mouseleave", () => {
 collaboratorSection?.addEventListener("focusin", () => {
   collaboratorFocusPaused = true;
   updateCollaboratorPauseState();
-  if (hasBlockingCollaboratorFocus()) stopCollaboratorSlider();
-  else startCollaboratorSlider();
+  stopCollaboratorSlider();
 });
 
 collaboratorSection?.addEventListener("focusout", (event) => {
   if (collaboratorSection.contains(event.relatedTarget)) return;
-  collaboratorFocusPaused = false;
-  updateCollaboratorPauseState();
-  startCollaboratorSlider();
+  window.requestAnimationFrame(() => {
+    if (collaboratorSection.contains(document.activeElement)) return;
+    collaboratorFocusPaused = false;
+    updateCollaboratorPauseState();
+    startCollaboratorSlider();
+  });
 });
 
 collaboratorReducedMotion.addEventListener?.("change", () => {

@@ -39,7 +39,8 @@
       "imageAlt": "i4 COMPANY 공개 리포트의 농장 영상 첫 화면",
       "caption": "2026년 9월 29일 확인한 공개 리포트 첫 화면",
       "sourceLabel": "i4 COMPANY 공개 리포트",
-      "sourceUrl": "https://eggtrace-82hy.onrender.com/p/EGG-0001"
+      "sourceUrl": "https://eggtrace-82hy.onrender.com/p/EGG-0001",
+      "imageFit": "contain"
     },
     {
       "label": "영상 아래",
@@ -52,7 +53,8 @@
       "imageAlt": "공개 리포트에 표시된 네 가지 인증 정보",
       "caption": "공개 페이지에 표시된 인증 정보 4종",
       "sourceLabel": "i4 COMPANY 공개 리포트",
-      "sourceUrl": "https://eggtrace-82hy.onrender.com/p/EGG-0001"
+      "sourceUrl": "https://eggtrace-82hy.onrender.com/p/EGG-0001",
+      "imageFit": "contain"
     },
     {
       "label": "짧게 읽기",
@@ -65,7 +67,8 @@
       "imageAlt": "농장 영상의 활동 흐름과 밀집 구역을 설명한 주간 요약 화면",
       "caption": "공개 리포트가 영상 내용을 문장으로 풀어 쓴 화면",
       "sourceLabel": "i4 COMPANY 공개 리포트",
-      "sourceUrl": "https://eggtrace-82hy.onrender.com/p/EGG-0001"
+      "sourceUrl": "https://eggtrace-82hy.onrender.com/p/EGG-0001",
+      "imageFit": "contain"
     },
     {
       "label": "자세히 보기",
@@ -78,7 +81,8 @@
       "imageAlt": "활동량 탭이 선택된 농장 영상 분석 화면",
       "caption": "활동량 분석 탭과 원본 장면을 함께 보여 주는 공개 화면",
       "sourceLabel": "i4 COMPANY 공개 리포트",
-      "sourceUrl": "https://eggtrace-82hy.onrender.com/p/EGG-0001"
+      "sourceUrl": "https://eggtrace-82hy.onrender.com/p/EGG-0001",
+      "imageFit": "contain"
     },
     {
       "label": "읽을 때 주의할 점",
@@ -153,25 +157,28 @@
   "sourceUrls": [
     "https://eggtrace-82hy.onrender.com/p/EGG-0001"
   ],
-  "visualNote": "2026년 9월 29일 i4 COMPANY 공개 리포트에서 직접 캡처한 화면입니다.",
+  "visualNote": "아이뽀란의 ‘농장부터 확인하는 계란’ 이야기를 바탕으로 구성한 연출 이미지입니다.",
   "images": {
-    "main": "/assets/brands/i4/report-hero-2026-09.png",
-    "card": "/assets/brands/i4/report-hero-2026-09.png",
+    "main": "/assets/brands/i4/editorial-farm-hero-v2.png",
+    "card": "/assets/brands/i4/editorial-farm-hero-v2.png",
     "productGallery": [
       {
         "src": "/assets/brands/i4/report-hero-2026-09.png",
         "alt": "농장 영상이 먼저 보이는 공개 리포트 첫 화면",
-        "label": "농장 영상 첫 화면"
+        "label": "농장 영상 첫 화면",
+        "fit": "contain"
       },
       {
         "src": "/assets/brands/i4/report-certifications-2026-09.png",
         "alt": "공개 리포트의 인증 정보 네 칸",
-        "label": "페이지에 표시된 인증 정보"
+        "label": "페이지에 표시된 인증 정보",
+        "fit": "contain"
       },
       {
         "src": "/assets/brands/i4/report-analysis-2026-09.png",
         "alt": "농장 영상의 활동량을 분석한 공개 화면",
-        "label": "영상 분석 화면"
+        "label": "영상 분석 화면",
+        "fit": "contain"
       }
     ],
     "gallery": [

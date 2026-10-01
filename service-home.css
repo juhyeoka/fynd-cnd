@@ -1397,3 +1397,165 @@
     transform: scaleX(1);
   }
 }
+
+/* service editorial 17: 같은 비율의 현장 사진과 더 짧은 문의 영역 */
+.service-v3 .sv3-collaboration-section {
+  padding: 68px 0 46px;
+}
+
+.service-v3 .sv3-collaboration-section > .sv3-section-head,
+.service-v3 .sv3-collaborator-viewport,
+.service-v3 .sv3-collaborator-nav {
+  width: min(calc(100% - 72px), 1080px);
+}
+
+.service-v3 .sv3-collaborator-card {
+  height: 540px;
+  min-height: 0;
+  grid-template-columns: minmax(0, 2fr) minmax(340px, 1fr);
+}
+
+.service-v3 .sv3-collaborator-media {
+  min-height: 0;
+  height: 540px;
+  background: #d7d6d1;
+}
+
+.service-v3 .sv3-collaborator-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.service-v3 .sv3-collaborator-media figcaption {
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 30px 16px 13px;
+  color: rgba(255, 255, 255, .9);
+  background: linear-gradient(transparent, rgba(0, 0, 0, .62));
+  font-size: 10px;
+  text-shadow: none;
+}
+
+.service-v3 .sv3-collaborator-copy {
+  padding: 34px 32px 30px;
+}
+
+.service-v3 .sv3-collaborator-copy > strong {
+  margin-top: 14px;
+  font-size: clamp(27px, 2.25vw, 32px);
+  line-height: 1.18;
+}
+
+.service-v3 .sv3-collaborator-copy > p {
+  margin-top: 14px;
+  font-size: 14px;
+  line-height: 1.68;
+}
+
+.service-v3 .sv3-collaborator-copy dl {
+  padding-top: 18px;
+}
+
+.service-v3 .sv3-collaborator-copy > a {
+  margin-top: 18px;
+}
+
+.service-v3 .sv3-inquiry {
+  padding-block: 36px;
+  grid-template-columns: .48fr 1.52fr;
+  gap: 34px;
+}
+
+.service-v3 .sv3-inquiry-intro h2 {
+  font-size: clamp(28px, 2.7vw, 38px);
+}
+
+.service-v3 .sv3-inquiry-intro > span {
+  margin-top: 9px;
+}
+
+.service-v3 .sv3-inquiry-form {
+  gap: 12px 18px;
+}
+
+.service-v3 .sv3-inquiry-form label {
+  gap: 4px;
+}
+
+.service-v3 .sv3-inquiry-form input,
+.service-v3 .sv3-inquiry-form textarea {
+  padding: 10px 0;
+}
+
+.service-v3 .sv3-inquiry-form button {
+  min-height: 48px;
+  margin-top: 2px;
+}
+
+.service-v3 #serviceInquiryStatus {
+  min-height: 16px;
+}
+
+@media (max-width: 720px) {
+  .service-v3 .sv3-collaboration-section {
+    padding: 46px 0 34px;
+  }
+
+  .service-v3 .sv3-collaboration-section > .sv3-section-head,
+  .service-v3 .sv3-collaborator-viewport,
+  .service-v3 .sv3-collaborator-nav {
+    width: calc(100% - 28px);
+  }
+
+  .service-v3 .sv3-collaborator-card {
+    height: auto;
+    grid-template-columns: 1fr;
+  }
+
+  .service-v3 .sv3-collaborator-media {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+  }
+
+  .service-v3 .sv3-collaborator-copy {
+    min-height: 278px;
+    padding: 22px 20px;
+  }
+
+  .service-v3 .sv3-collaborator-copy > strong {
+    margin-top: 10px;
+    font-size: clamp(23px, 6.8vw, 28px);
+  }
+
+  .service-v3 .sv3-collaborator-copy > p {
+    margin-top: 10px;
+  }
+
+  .service-v3 .sv3-inquiry {
+    padding: 30px 16px;
+    gap: 24px;
+  }
+
+  .service-v3 .sv3-inquiry-intro h2 {
+    font-size: 32px;
+  }
+
+  .service-v3 .sv3-inquiry-form {
+    gap: 10px 14px;
+  }
+}
+
+@media (min-width: 380px) and (max-width: 720px) {
+  .service-v3 .sv3-inquiry-form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .service-v3 .sv3-inquiry-form label.wide,
+  .service-v3 .sv3-inquiry-form button,
+  .service-v3 #serviceInquiryStatus {
+    grid-column: 1 / -1;
+  }
+}

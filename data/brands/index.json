@@ -40,7 +40,8 @@
         "imageAlt": "i4 COMPANY 공개 리포트의 농장 영상 첫 화면",
         "caption": "2026년 9월 29일 확인한 공개 리포트 첫 화면",
         "sourceLabel": "i4 COMPANY 공개 리포트",
-        "sourceUrl": "https://eggtrace-82hy.onrender.com/p/EGG-0001"
+        "sourceUrl": "https://eggtrace-82hy.onrender.com/p/EGG-0001",
+        "imageFit": "contain"
       },
       {
         "label": "영상 아래",
@@ -53,7 +54,8 @@
         "imageAlt": "공개 리포트에 표시된 네 가지 인증 정보",
         "caption": "공개 페이지에 표시된 인증 정보 4종",
         "sourceLabel": "i4 COMPANY 공개 리포트",
-        "sourceUrl": "https://eggtrace-82hy.onrender.com/p/EGG-0001"
+        "sourceUrl": "https://eggtrace-82hy.onrender.com/p/EGG-0001",
+        "imageFit": "contain"
       },
       {
         "label": "짧게 읽기",
@@ -66,7 +68,8 @@
         "imageAlt": "농장 영상의 활동 흐름과 밀집 구역을 설명한 주간 요약 화면",
         "caption": "공개 리포트가 영상 내용을 문장으로 풀어 쓴 화면",
         "sourceLabel": "i4 COMPANY 공개 리포트",
-        "sourceUrl": "https://eggtrace-82hy.onrender.com/p/EGG-0001"
+        "sourceUrl": "https://eggtrace-82hy.onrender.com/p/EGG-0001",
+        "imageFit": "contain"
       },
       {
         "label": "자세히 보기",
@@ -79,7 +82,8 @@
         "imageAlt": "활동량 탭이 선택된 농장 영상 분석 화면",
         "caption": "활동량 분석 탭과 원본 장면을 함께 보여 주는 공개 화면",
         "sourceLabel": "i4 COMPANY 공개 리포트",
-        "sourceUrl": "https://eggtrace-82hy.onrender.com/p/EGG-0001"
+        "sourceUrl": "https://eggtrace-82hy.onrender.com/p/EGG-0001",
+        "imageFit": "contain"
       },
       {
         "label": "읽을 때 주의할 점",
@@ -154,25 +158,28 @@
     "sourceUrls": [
       "https://eggtrace-82hy.onrender.com/p/EGG-0001"
     ],
-    "visualNote": "2026년 9월 29일 i4 COMPANY 공개 리포트에서 직접 캡처한 화면입니다.",
+    "visualNote": "아이뽀란의 ‘농장부터 확인하는 계란’ 이야기를 바탕으로 구성한 연출 이미지입니다.",
     "images": {
-      "main": "/assets/brands/i4/report-hero-2026-09.png",
-      "card": "/assets/brands/i4/report-hero-2026-09.png",
+      "main": "/assets/brands/i4/editorial-farm-hero-v2.png",
+      "card": "/assets/brands/i4/editorial-farm-hero-v2.png",
       "productGallery": [
         {
           "src": "/assets/brands/i4/report-hero-2026-09.png",
           "alt": "농장 영상이 먼저 보이는 공개 리포트 첫 화면",
-          "label": "농장 영상 첫 화면"
+          "label": "농장 영상 첫 화면",
+          "fit": "contain"
         },
         {
           "src": "/assets/brands/i4/report-certifications-2026-09.png",
           "alt": "공개 리포트의 인증 정보 네 칸",
-          "label": "페이지에 표시된 인증 정보"
+          "label": "페이지에 표시된 인증 정보",
+          "fit": "contain"
         },
         {
           "src": "/assets/brands/i4/report-analysis-2026-09.png",
           "alt": "농장 영상의 활동량을 분석한 공개 화면",
-          "label": "영상 분석 화면"
+          "label": "영상 분석 화면",
+          "fit": "contain"
         }
       ],
       "gallery": [
@@ -315,6 +322,7 @@
         "image": "/assets/brands/yesan-apple-united/parent-app-home.jpg",
         "imageAlt": "예산 애플 유나이티드 학부모 전용 앱의 공지와 일정 화면",
         "caption": "공식 계정에 공개된 학부모 전용 앱 미리보기",
+        "imageFit": "contain",
         "paragraphs": [
           "2026년 8월 24일 공식 계정에 학부모 전용 앱 화면이 올라왔습니다. 감독이 직접 개발해 현재 비공개 테스트를 진행하는 앱입니다. 첫 화면에는 공지사항과 일정, 경기 정보가 보이고 훈련과 경기 사진을 모아 보는 메뉴도 마련돼 있습니다.",
           "회원가입을 마친 뒤 구단의 승인을 받은 학부모가 로그인하는 방식으로 안내됐습니다. 아직 정식 출시 전이므로 실제 제공 기능과 공개 일정은 달라질 수 있습니다. 공식 게시물도 곧 공개할 예정인 화면이라고 설명합니다."
@@ -326,6 +334,7 @@
         "image": "/assets/brands/yesan-apple-united/parent-app-notifications.jpg",
         "imageAlt": "예산 애플 유나이티드 학부모 앱의 등원과 하원 알림 화면",
         "caption": "등원과 하원 시각을 알려 주는 앱 화면 예시",
+        "imageFit": "contain",
         "paragraphs": [
           "공개된 화면에는 아이의 등원과 하원 시각을 알려 주는 알림이 보입니다. 수업이 시작되고 끝나는 시간을 학부모가 휴대폰에서 확인하도록 준비한 기능입니다.",
           "선수별 화면에는 다음 일정과 수납 내역, 개인 리포트가 함께 배치돼 있습니다. 훈련 사진과 경기 기록도 앱 안에서 찾아볼 수 있도록 테스트하고 있습니다. 출시 전 화면이므로 이용 방법은 정식 안내가 나온 뒤 다시 확인하는 것이 좋습니다."
@@ -437,14 +446,14 @@
     "collaborationCards": [
       {
         "medium": "버스 좌석",
-        "headline": "버스에서 보내는 동안, 다음에 들를 곳을 찾아봅니다.",
-        "description": "좌석 앞 QR을 열면 지나가는 지역의 가게 이야기와 위치를 볼 수 있습니다.",
+        "headline": "목적지까지 가는 동안, 충남의 가게를 먼저 만납니다.",
+        "description": "좌석 앞 FYND를 열면 지나가는 지역의 가게 이야기와 위치를 볼 수 있습니다.",
         "placement": "전세버스 좌석 앞면",
-        "image": "/assets/brands/yeongjin-tour/bus-interior.jpg",
-        "imageAlt": "영진관광 전세버스의 좌석과 통로",
-        "imagePosition": "center 66%",
+        "image": "/assets/brands/yeongjin-tour/bus-side-view.jpg",
+        "imageAlt": "영진관광 공식 전세버스의 옆모습",
+        "imagePosition": "center 60%",
         "mediaKind": "photo",
-        "caption": "영진관광 공식 차량 내부",
+        "caption": "영진관광 공식 차량",
         "linkLabel": "영진관광 웹사이트"
       }
     ],
@@ -857,14 +866,14 @@
     "collaborationCards": [
       {
         "medium": "택배 상자",
-        "headline": "계란 상자 안쪽에서 홍성 가게를 더 찾아봅니다.",
-        "description": "택배를 받은 뒤 상자 안 QR을 열어 농장 이야기와 가까운 지역 가게를 함께 봅니다.",
+        "headline": "계란을 만든 사람의 이야기에서, 홍성의 다음 가게로 이어집니다.",
+        "description": "배송 상자 안쪽의 FYND를 열면 크로바양계 이야기와 홍성의 다른 가게를 함께 볼 수 있습니다.",
         "placement": "배송 상자 안쪽",
-        "image": "/assets/brands/croba-poultry/shipping-pack.jpg",
-        "imageAlt": "배송용 완충 포장을 마친 크로바양계 계란",
+        "image": "/assets/brands/croba-poultry/official-producer.jpg",
+        "imageAlt": "크로바양계 생산자가 포장된 계란을 들어 보이는 모습",
         "imagePosition": "center",
-        "mediaKind": "package",
-        "caption": "크로바양계 공식 판매 페이지의 실제 배송 포장",
+        "mediaKind": "photo",
+        "caption": "크로바양계 공식 판매처에 공개된 생산 현장",
         "linkLabel": "크로바양계 이야기 보기"
       }
     ],
@@ -1083,14 +1092,14 @@
     "collaborationCards": [
       {
         "medium": "축제 안내 화면",
-        "headline": "축제 일정 확인 뒤, 근처 가게도 같이 찾아봅니다.",
-        "description": "디지털 리플릿에서 행사 일정과 부스를 확인하고 FYND로 주변 가게를 이어서 봅니다.",
+        "headline": "축제 안내를 본 다음, 근처 가게 이야기까지 이어집니다.",
+        "description": "행사 일정과 부스를 확인한 뒤 FYND에서 주변 가게를 천천히 둘러볼 수 있습니다.",
         "placement": "디지털 리플릿·행사 배너",
-        "image": "/assets/brands/pamp/service-leaflet.webp",
-        "imageAlt": "PAMP 디지털 리플릿의 축제 일정과 안내 화면",
-        "imageFit": "contain",
-        "mediaKind": "screen",
-        "caption": "PAMP 공식 서비스의 실제 디지털 리플릿 화면",
+        "image": "/assets/brands/pamp/event-beer.webp",
+        "imageAlt": "PAMP가 적용된 노원 수제맥주축제 현장과 관람객",
+        "imagePosition": "center 52%",
+        "mediaKind": "photo",
+        "caption": "PAMP가 적용된 노원 수제맥주축제 현장",
         "linkLabel": "PAMP 이야기 보기"
       }
     ],
@@ -1120,7 +1129,8 @@
         ],
         "image": "/assets/brands/pamp/service-waiting.webp",
         "imageAlt": "PAMP 원격 주문과 웨이팅 서비스 화면",
-        "caption": "원격 주문·웨이팅 기능 공식 안내 화면"
+        "caption": "원격 주문·웨이팅 기능 공식 안내 화면",
+        "imageFit": "contain"
       },
       {
         "label": "다음 장소를 찾을 때",
@@ -1131,7 +1141,8 @@
         ],
         "image": "/assets/brands/pamp/service-leaflet.webp",
         "imageAlt": "PAMP 디지털 리플렛과 축제 안내 화면",
-        "caption": "디지털 리플렛 공식 안내 화면"
+        "caption": "디지털 리플렛 공식 안내 화면",
+        "imageFit": "contain"
       },
       {
         "label": "일정이 바뀌었을 때",
@@ -1142,7 +1153,8 @@
         ],
         "image": "/assets/brands/pamp/service-alert.webp",
         "imageAlt": "PAMP 실시간 현장 알림 화면",
-        "caption": "실시간 현장 알림 기능 공식 안내 화면"
+        "caption": "실시간 현장 알림 기능 공식 안내 화면",
+        "imageFit": "contain"
       },
       {
         "label": "부스 안에서는",
@@ -1164,7 +1176,8 @@
         ],
         "image": "/assets/brands/pamp/service-report.webp",
         "imageAlt": "PAMP 축제 결과 보고서 데이터 시각화 화면",
-        "caption": "부스별 방문과 시간대별 흐름을 정리하는 결과 보고서"
+        "caption": "부스별 방문과 시간대별 흐름을 정리하는 결과 보고서",
+        "imageFit": "contain"
       },
       {
         "label": "공식 웹에 공개된 수치",
@@ -1253,17 +1266,20 @@
         {
           "src": "/assets/brands/pamp/story-2.webp",
           "alt": "PAMP 주문과 원격 줄서기 화면",
-          "label": "원격 주문·웨이팅"
+          "label": "원격 주문·웨이팅",
+          "fit": "contain"
         },
         {
           "src": "/assets/brands/pamp/service-leaflet.webp",
           "alt": "PAMP 디지털 축제 안내 화면",
-          "label": "디지털 리플렛"
+          "label": "디지털 리플렛",
+          "fit": "contain"
         },
         {
           "src": "/assets/brands/pamp/service-report.webp",
           "alt": "PAMP 축제 결과 보고서 화면",
-          "label": "운영 결과 보고서"
+          "label": "운영 결과 보고서",
+          "fit": "contain"
         }
       ],
       "gallery": [

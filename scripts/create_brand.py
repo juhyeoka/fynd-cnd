@@ -306,17 +306,21 @@ def build_detail_html(brand: dict, base_url: str) -> str:
             product_gallery_image = product_entry.get("src") or ""
             product_gallery_alt = product_entry.get("alt") or f"{brand['name']} {brand['product']}"
             product_gallery_label = product_entry.get("label") or ""
+            product_gallery_class = (
+                " is-contain" if product_entry.get("fit") == "contain" else ""
+            )
         else:
             product_gallery_image = product_entry
             product_gallery_alt = f"{brand['name']} {brand['product']}"
             product_gallery_label = ""
+            product_gallery_class = ""
         if not product_gallery_image:
             continue
         product_gallery_path = BASE_DIR / product_gallery_image.lstrip("/")
         if product_gallery_image.startswith(("http://", "https://")) or product_gallery_path.exists():
             product_gallery_items.append(
                 f"""
-          <figure>
+          <figure class="{product_gallery_class.strip()}">
             <img src="{escape(product_gallery_image)}" alt="{escape(product_gallery_alt)}" loading="lazy">
             {f'<figcaption>{escape(product_gallery_label)}</figcaption>' if product_gallery_label else ''}
           </figure>
@@ -476,6 +480,9 @@ def build_detail_html(brand: dict, base_url: str) -> str:
             f"<p>{escape(paragraph)}</p>" for paragraph in paragraphs
         )
         section_image = section.get("image") or ""
+        section_image_class = (
+            " is-contain" if section.get("imageFit") == "contain" else ""
+        )
         section_image_path = BASE_DIR / section_image.lstrip("/")
         has_section_image = bool(
             section_image
@@ -495,8 +502,9 @@ def build_detail_html(brand: dict, base_url: str) -> str:
             )
             story_sections.append(
                 f"""
-        <article class="brand-detail-story-section has-image{section_class}">
-          <figure>
+        <article class="brand-detail-story-section has-image{section_class}" data-story-index="{index - 1}"
+                 role="group" aria-roledescription="페이지" aria-label="{index} / __STORY_COUNT__">
+          <figure class="{section_image_class.strip()}">
             <img src="{escape(section_image)}" alt="{section_alt}" loading="lazy">
             {caption_html}
           </figure>
@@ -510,7 +518,8 @@ def build_detail_html(brand: dict, base_url: str) -> str:
         else:
             story_sections.append(
                 f"""
-        <article class="brand-detail-story-section{section_class}">
+        <article class="brand-detail-story-section{section_class}" data-story-index="{index - 1}"
+                 role="group" aria-roledescription="페이지" aria-label="{index} / __STORY_COUNT__">
           {section_label_html}
           <div><h3>{section_title}</h3>{paragraph_html}</div>
         </article>
@@ -519,15 +528,39 @@ def build_detail_html(brand: dict, base_url: str) -> str:
     story_article = ""
     reading_time = ""
     if story_sections:
+        story_count = len(story_sections)
+        rendered_story_sections = "".join(story_sections).replace(
+            "__STORY_COUNT__", str(story_count)
+        )
+        story_dots = "".join(
+            f'<button type="button" data-story-dot="{index}" '
+            f'aria-label="이야기 {index + 1}장 보기" '
+            f'aria-current="{"true" if index == 0 else "false"}"></button>'
+            for index in range(story_count)
+        )
         reading_minutes = max(2, round(story_character_count / 350))
         reading_time = (
             f'<p class="brand-detail-story-meta"><span>천천히 읽으면 약 {reading_minutes}분</span></p>'
         )
-        story_article = (
-            '<div class="brand-detail-story-article">'
-            + "".join(story_sections)
-            + "</div>"
-        )
+        story_article = f"""
+      <div class="brand-detail-story-reader" data-story-reader>
+        <div class="brand-detail-story-article" data-story-viewport tabindex="0"
+             role="region" aria-label="{story_count}장으로 구성된 브랜드 이야기">
+          {rendered_story_sections}
+        </div>
+        <nav class="brand-detail-story-nav" data-story-nav aria-label="브랜드 이야기 페이지">
+          <button type="button" class="brand-detail-story-arrow" data-story-prev aria-label="이전 이야기" disabled><span aria-hidden="true">←</span> 이전</button>
+          <div class="brand-detail-story-position">
+            <output data-story-status aria-live="polite">1 / {story_count}</output>
+            <div class="brand-detail-story-dots" aria-label="이야기 바로가기">{story_dots}</div>
+          </div>
+          <button type="button" class="brand-detail-story-arrow" data-story-next aria-label="다음 이야기">다음 <span aria-hidden="true">→</span></button>
+        </nav>
+        <p class="brand-detail-story-swipe-hint">휴대폰에서는 사진과 글을 좌우로 넘겨 보세요.</p>
+      </div>
+        """.strip()
+
+    gallery_lead = gallery_block if not story_sections else ""
 
     location_block = build_location_html(brand)
 
@@ -543,7 +576,7 @@ def build_detail_html(brand: dict, base_url: str) -> str:
   <meta name="theme-color" content="#ffffff">
   <link rel="canonical" href="{page_url}">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/styles.css?v=service-editorial-16">
+  <link rel="stylesheet" href="/styles.css?v=service-editorial-17">
   <meta property="og:type" content="{'website' if is_service else 'product'}">
   <meta property="og:site_name" content="FYND">
   <meta property="og:title" content="{name} {product} | FYND">
@@ -554,7 +587,7 @@ def build_detail_html(brand: dict, base_url: str) -> str:
   {structured_data}
   </script>
 </head>
-<body class="brand-detail-body brand-detail-page-{escape(brand['slug'])}">
+<body class="brand-detail-body brand-detail-page-{escape(brand['slug'])}{' has-mobile-action' if mobile_shop_action else ''}">
   <header class="site-header">
     <div class="header-inner brand-detail-header">
       <a class="brand-detail-fynd-home" href="/" aria-label="FYND 홈"><img src="/assets/brand/fynd-logo-transparent.png" alt="FYND"></a>
@@ -602,7 +635,7 @@ def build_detail_html(brand: dict, base_url: str) -> str:
       <p class="section-kicker">{story_kicker}</p>
       <h2>{escape(brand.get("storyTitle") or "브랜드가 지키는 가치")}</h2>
       {reading_time}
-      <p>{escape(brand.get("storyDescription") or brand["description"])}</p>{gallery_block}
+      <p>{escape(brand.get("storyDescription") or brand["description"])}</p>{gallery_lead}
       {story_article}
       {highlights_block}
       {process_block}
@@ -618,6 +651,7 @@ def build_detail_html(brand: dict, base_url: str) -> str:
       <small>© 2026 FYND.</small>
     </div>
   </footer>
+  <script src="/brand-detail.js?v=story-reader-1" defer></script>
 </body>
 </html>
 """
