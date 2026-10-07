@@ -11,8 +11,9 @@
   <meta name="theme-color" content="#151515">
   <link rel="canonical" href="https://fynd-cnd.onrender.com/">
   <link rel="icon" href="/assets/fynd-favicon-20260729.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/styles.css?v=service-editorial-18">
-  <link rel="stylesheet" href="/service-home.css?v=service-editorial-17">
+  <link rel="preload" href="/assets/fonts/SUIT-Variable-v2.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/styles.css?v=detail-refresh-19">
+  <link rel="stylesheet" href="/service-home.css?v=service-editorial-19">
 
   <meta property="og:locale" content="ko_KR">
   <meta property="og:type" content="website">
@@ -55,7 +56,6 @@
 
       <nav class="sv3-desktop-nav" aria-label="주요 메뉴">
         <a href="#brands">소상공인 이야기</a>
-        <a href="#collaborators">협력 파트너</a>
         <a href="#festivals">충남의 행사</a>
         <a href="#inquiry">소개 신청</a>
       </nav>
@@ -70,7 +70,6 @@
 
     <nav class="sv3-mobile-menu" id="mobileMenu" aria-label="모바일 메뉴" hidden>
       <a href="#brands">소상공인 이야기</a>
-      <a href="#collaborators">협력 파트너</a>
       <a href="#festivals">충남의 행사</a>
       <a href="#inquiry">소개 신청</a>
     </nav>
@@ -79,28 +78,25 @@
   <main id="main">
     <section class="sv3-hero" aria-labelledby="heroTitle">
       <div class="sv3-hero-copy">
-        <p class="sv3-kicker">충청남도 지역 발견 서비스</p>
-        <h1 id="heroTitle"><span>충남에서 연결되는</span><em>소상공인 네트워크</em></h1>
-        <p>충남 곳곳에서 누가 무엇을 만드는지, 사진과 이야기로 소개합니다.</p>
+        <p class="sv3-kicker">충남에서 오늘 어디 갈지 찾고 있다면</p>
+        <h1 id="heroTitle"><span>충남 로컬 맛집</span><em>지금 바로 확인하기</em></h1>
+      </div>
+    </section>
 
+    <section class="sv3-brand-section" id="brands" aria-labelledby="brandSectionTitle">
+      <div class="sv3-section-head">
+        <div><p>충청남도 업체 이야기</p><h2 id="brandSectionTitle">충청남도 소상공인 이야기를 확인하세요</h2></div>
+        <span>사진을 누르면 가게 이야기와 상품, 위치를 볼 수 있어요.</span>
+      </div>
+
+      <div class="sv3-brand-toolbar" id="brandToolbar">
         <form class="sv3-search" id="brandSearchForm" role="search">
           <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.6-3.6"></path></svg>
           <label class="visually-hidden" for="brandSearchInput">가게와 브랜드 검색</label>
           <input id="brandSearchInput" type="search" name="search" placeholder="가게, 상품, 지역으로 검색" autocomplete="off">
           <button id="clearSearchButton" type="button" aria-label="검색어 지우기" hidden>×</button>
         </form>
-      </div>
-
-    </section>
-
-    <section class="sv3-brand-section" id="brands" aria-labelledby="brandSectionTitle">
-      <div class="sv3-section-head">
-        <div><p>충청남도 업체 이야기</p><h2 id="brandSectionTitle">충남에서 만난 가게들</h2></div>
-        <span>사진을 누르면 가게가 시작된 이야기와 실제 제품, 위치를 볼 수 있어요.</span>
-      </div>
-
-      <div class="sv3-brand-toolbar">
-        <p class="result-summary" id="resultSummary" aria-live="polite">가게를 불러오고 있어요.</p>
+        <p class="result-summary" id="resultSummary" aria-live="polite" hidden></p>
       </div>
 
       <div class="brand-grid" id="brandGrid">
@@ -108,40 +104,6 @@
       </div>
 
       <div class="empty-result" id="emptyResult" hidden><strong>아직 보이는 가게가 없어요.</strong><p>다른 가게 이름이나 지역으로 다시 찾아보세요.</p><button type="button" id="resetSearchButton">전체 보기</button></div>
-    </section>
-
-    <section class="sv3-collaboration-section" id="collaborators" aria-labelledby="collaboratorSectionTitle">
-      <div class="sv3-section-head sv3-section-head-light">
-        <div><p>협력 파트너 3곳</p><h2 id="collaboratorSectionTitle">FYND가 놓이는 세 자리</h2></div>
-        <span>영진관광 버스 좌석 앞, 크로바양계 배송 상자 안, PAMP 축제 안내 화면에서 볼 수 있습니다.</span>
-      </div>
-      <div class="sv3-collaborator-viewport">
-        <div class="sv3-collaborator-track" id="collaboratorTrack">
-          <article class="sv3-collaborator-card">
-            <figure class="sv3-collaborator-media">
-              <img src="/assets/brands/yeongjin-tour/bus-side-view.jpg" alt="영진관광 공식 전세버스의 옆모습">
-              <figcaption>영진관광 공식 차량</figcaption>
-            </figure>
-            <div class="sv3-collaborator-copy">
-              <small>버스 좌석</small><span>영진관광</span>
-              <strong>버스가 출발하면, 좌석 앞에서 충남 가게를 골라 보세요.</strong>
-              <p>도착할 때까지 지나가는 지역의 가게 이야기와 위치를 천천히 볼 수 있습니다.</p>
-              <dl><dt>FYND를 만나는 곳</dt><dd>전세버스 좌석 앞면</dd></dl>
-              <a href="https://yeongjin-tour.onrender.com/" target="_blank" rel="noopener noreferrer">영진관광 웹사이트 <span aria-hidden="true">→</span></a>
-            </div>
-          </article>
-        </div>
-      </div>
-      <div class="sv3-collaborator-nav" id="collaboratorNav" hidden>
-        <span id="collaboratorCurrent">1 / 1</span>
-        <div class="sv3-collaborator-progress" aria-hidden="true"><i id="collaboratorProgress"></i></div>
-        <div class="sv3-collaborator-dots" id="collaboratorDots" aria-label="협력 파트너 슬라이드"></div>
-        <div class="sv3-collaborator-controls">
-          <button type="button" id="collaboratorPrevious" aria-label="이전 협력 파트너">←</button>
-          <button type="button" id="collaboratorPause" aria-label="협력 파트너 자동 넘김 멈춤" aria-pressed="false">멈춤</button>
-          <button type="button" id="collaboratorNext" aria-label="다음 협력 파트너">→</button>
-        </div>
-      </div>
     </section>
 
     <section class="sv3-festival-section" id="festivals" aria-labelledby="festivalSectionTitle">
@@ -154,17 +116,16 @@
       <div class="empty-result" id="festivalEmptyResult" hidden><strong>조건에 맞는 행사가 없어요.</strong><p>검색어를 지우면 전체 행사를 볼 수 있어요.</p></div>
     </section>
 
-    <div class="sv3-inquiry" id="inquiry" aria-labelledby="inquiryTitle">
-      <div class="sv3-inquiry-intro"><p>CONTACT</p><h2 id="inquiryTitle">문의</h2><span>FYND에 소개하고 싶은 가게가 있다면 알려주세요.</span></div>
-      <form class="sv3-inquiry-form" id="serviceInquiryForm">
-        <label><span>상호 또는 담당자</span><input type="text" name="name" required autocomplete="organization"></label>
-        <label><span>연락처</span><input type="tel" name="contact" required autocomplete="tel"></label>
-        <label class="wide"><span>지역과 업종</span><input type="text" name="region" placeholder="예: 예산 · 카페" required></label>
-        <label class="wide"><span>남길 내용</span><textarea name="message" rows="2" placeholder="가게와 상품 이야기를 편하게 적어주세요."></textarea></label>
-        <button type="submit">문의 보내기</button>
-        <p id="serviceInquiryStatus" role="status" aria-live="polite"></p>
-      </form>
-    </div>
+    <section class="sv3-inquiry" id="inquiry" aria-labelledby="inquiryTitle">
+      <div class="sv3-inquiry-intro">
+        <p>CONTACT</p>
+        <h2 id="inquiryTitle">가게를 소개하고 싶으신가요?</h2>
+        <span>상호와 지역, 연락처만 남겨주세요. 확인하고 연락드릴게요.</span>
+      </div>
+      <a class="sv3-inquiry-link" href="https://fynd-chungnam.onrender.com/contact.html" target="_blank" rel="noopener noreferrer">
+        <small>문의 남기기</small><strong>간단한 소개 양식 열기</strong><span aria-hidden="true">↗</span>
+      </a>
+    </section>
 
     <div class="sv3-region-loop" aria-label="FYND 지역 안내">
       <div class="sv3-region-track">
@@ -174,14 +135,18 @@
         <a href="https://www.yesan.go.kr/" target="_blank" rel="noopener"><b>예산군</b><span>YESAN</span></a>
         <a href="https://www.gongju.go.kr/" target="_blank" rel="noopener"><b>공주시</b><span>GONGJU</span></a>
         <a href="https://www.hongseong.go.kr/" target="_blank" rel="noopener"><b>홍성군</b><span>HONGSEONG</span></a>
-        <a href="https://yeongjin-tour.onrender.com/" target="_blank" rel="noopener"><b>영진관광</b><span>YEONGJIN TOUR</span></a>
+        <a class="is-partner" href="https://yeongjin-tour.onrender.com/" target="_blank" rel="noopener"><img src="/assets/brand/yeongjin-logo-original.png" alt="영진관광"><span>협력 파트너</span></a>
+        <a class="is-partner" href="/brands/croba-poultry/"><img src="/assets/brands/croba-poultry/logo.gif" alt="크로바양계"><span>협력 파트너</span></a>
+        <a class="is-partner is-pamp" href="/brands/pamp/"><span class="sv3-partner-logo"><img src="/assets/brands/pamp/main.png" alt="PAMP"></span><span>협력 파트너</span></a>
         <a href="https://www.chungnam.go.kr/" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1"><b>충청남도</b><span>CHUNGNAM</span></a>
         <a href="https://www.cheonan.go.kr/" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1"><b>천안시</b><span>CHEONAN</span></a>
         <a href="https://www.asan.go.kr/" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1"><b>아산시</b><span>ASAN</span></a>
         <a href="https://www.yesan.go.kr/" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1"><b>예산군</b><span>YESAN</span></a>
         <a href="https://www.gongju.go.kr/" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1"><b>공주시</b><span>GONGJU</span></a>
         <a href="https://www.hongseong.go.kr/" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1"><b>홍성군</b><span>HONGSEONG</span></a>
-        <a href="https://yeongjin-tour.onrender.com/" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1"><b>영진관광</b><span>YEONGJIN TOUR</span></a>
+        <a class="is-partner" href="https://yeongjin-tour.onrender.com/" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1"><img src="/assets/brand/yeongjin-logo-original.png" alt=""><span>협력 파트너</span></a>
+        <a class="is-partner" href="/brands/croba-poultry/" aria-hidden="true" tabindex="-1"><img src="/assets/brands/croba-poultry/logo.gif" alt=""><span>협력 파트너</span></a>
+        <a class="is-partner is-pamp" href="/brands/pamp/" aria-hidden="true" tabindex="-1"><span class="sv3-partner-logo"><img src="/assets/brands/pamp/main.png" alt=""></span><span>협력 파트너</span></a>
       </div>
     </div>
   </main>
@@ -189,18 +154,17 @@
   <footer class="sv3-footer">
     <img src="/assets/brand/fynd-logo-transparent.png" alt="FYND">
     <p>충남 곳곳의 가게와 브랜드를 만나보세요.</p>
-    <nav><a href="#brands">소상공인 이야기</a><a href="#collaborators">협력 파트너</a><a href="#festivals">행사와 축제</a><a href="#inquiry">소개 신청</a></nav>
+    <nav><a href="#brands">소상공인 이야기</a><a href="#festivals">행사와 축제</a><a href="#inquiry">소개 신청</a></nav>
     <dl class="sv3-business-info" aria-label="사업자 정보">
       <div><dt>상호</dt><dd>에프와이앤디(FYND)</dd></div>
       <div><dt>대표</dt><dd>김준하</dd></div>
       <div><dt>사업자등록번호</dt><dd>323-26-02328</dd></div>
       <div><dt>전화</dt><dd><a href="tel:01081900116">010-8190-0116</a></dd></div>
-      <div><dt>주소</dt><dd>충남 홍성군 홍성읍 문화로33번길-3</dd></div>
     </dl>
     <small>© 2026 FYND. All rights reserved.</small>
   </footer>
 
   <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
-  <script src="/app.js?v=service-editorial-17"></script>
+  <script src="/app.js?v=service-editorial-19"></script>
 </body>
 </html>

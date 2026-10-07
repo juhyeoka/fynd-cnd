@@ -90,9 +90,12 @@ def read_brand_files() -> list[dict]:
 def optional_action(url: str, label: str, class_name: str = "") -> str:
     if not url:
         return ""
+    classes = "brand-detail-action"
+    if class_name:
+        classes += f" {class_name.strip()}"
     return (
         f"""
-      <a class="brand-detail-action {class_name}" href="{escape(url)}"
+      <a class="{classes}" href="{escape(url)}"
          target="_blank" rel="noopener noreferrer">
         {escape(label)} <span>↗</span>
       </a>
@@ -251,20 +254,30 @@ def build_detail_html(brand: dict, base_url: str) -> str:
         if "smartstore.naver.com" in shop_url
         else "공식 판매처 방문"
     )
+    action_candidates = [
+        (shop_url, shop_action_label),
+        (
+            brand.get("traceUrl", ""),
+            brand.get("traceLabel", "생산 정보 확인하기"),
+        ),
+        (
+            brand.get("homepageUrl", ""),
+            brand.get("homepageLabel", "공식 홈페이지"),
+        ),
+        (brand.get("placeUrl", ""), "카카오맵에서 보기"),
+        (brand.get("instagramUrl", ""), "인스타그램 보기"),
+    ]
+    primary_action_index = next(
+        (index for index, (url, _) in enumerate(action_candidates) if url),
+        None,
+    )
     actions = "".join(
-        [
-            optional_action(shop_url, shop_action_label, "primary"),
-            optional_action(
-                brand.get("traceUrl", ""),
-                brand.get("traceLabel", "생산 정보 확인하기"),
-            ),
-            optional_action(
-                brand.get("homepageUrl", ""),
-                brand.get("homepageLabel", "공식 홈페이지"),
-            ),
-            optional_action(brand.get("placeUrl", ""), "카카오맵에서 보기"),
-            optional_action(brand.get("instagramUrl", ""), "인스타그램 보기"),
-        ]
+        optional_action(
+            url,
+            label,
+            "primary" if index == primary_action_index else "",
+        )
+        for index, (url, label) in enumerate(action_candidates)
     )
 
     address_row = (
@@ -280,7 +293,6 @@ def build_detail_html(brand: dict, base_url: str) -> str:
         """
 
     shop_action = ""
-    mobile_shop_action = ""
     if brand.get("shopUrl"):
         shop_label = (
             "네이버 스마트스토어에서 보기"
@@ -292,13 +304,19 @@ def build_detail_html(brand: dict, base_url: str) -> str:
             {shop_label} <span>↗</span>
           </a>
         """.strip()
-        mobile_shop_action = f"""
-  <a class="brand-detail-mobile-action" href="{escape(brand['shopUrl'])}"
+
+    mobile_primary_action = ""
+    if primary_action_index is not None:
+        primary_url, primary_label = action_candidates[primary_action_index]
+        mobile_primary_action = f"""
+  <a class="brand-detail-mobile-action" href="{escape(primary_url)}"
      target="_blank" rel="noopener noreferrer">
-    공식 판매처 방문
+    {escape(primary_label)} <span aria-hidden="true">↗</span>
   </a>
         """.strip()
-    mobile_shop_block = f"\n\n  {mobile_shop_action}" if mobile_shop_action else ""
+    mobile_primary_block = (
+        f"\n\n  {mobile_primary_action}" if mobile_primary_action else ""
+    )
 
     product_gallery_items: list[str] = []
     for product_entry in images.get("productGallery", []):
@@ -577,7 +595,8 @@ def build_detail_html(brand: dict, base_url: str) -> str:
   <meta name="theme-color" content="#ffffff">
   <link rel="canonical" href="{page_url}">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/styles.css?v=service-editorial-18">
+  <link rel="preload" href="/assets/fonts/SUIT-Variable-v2.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/styles.css?v=detail-refresh-19">
   <meta property="og:type" content="{'website' if is_service else 'product'}">
   <meta property="og:site_name" content="FYND">
   <meta property="og:title" content="{name} {product} | FYND">
@@ -588,7 +607,7 @@ def build_detail_html(brand: dict, base_url: str) -> str:
   {structured_data}
   </script>
 </head>
-<body class="brand-detail-body brand-detail-page-{escape(brand['slug'])}{' has-mobile-action' if mobile_shop_action else ''}">
+<body class="brand-detail-body brand-detail-page-{escape(brand['slug'])}{' has-mobile-action' if mobile_primary_action else ''}">
   <header class="site-header">
     <div class="header-inner brand-detail-header">
       <a class="brand-detail-fynd-home" href="/" aria-label="FYND 홈"><img src="/assets/brand/fynd-logo-transparent.png" alt="FYND"></a>
@@ -607,6 +626,7 @@ def build_detail_html(brand: dict, base_url: str) -> str:
         <p class="section-kicker">{detail_kicker}</p>
         <h1>{headline}</h1>
         <p>{description}</p>
+        <div class="brand-detail-actions">{actions}</div>
         <dl>
           <div><dt>{entity_info_label}</dt><dd>{name}</dd></div>
           <div><dt>{product_info_label}</dt><dd>{product}</dd></div>
@@ -614,7 +634,6 @@ def build_detail_html(brand: dict, base_url: str) -> str:
           <div><dt>지역</dt><dd>{region}</dd></div>
           {address_row}
         </dl>
-        <div class="brand-detail-actions">{actions}</div>
       </div>
     </section>
 
@@ -642,11 +661,11 @@ def build_detail_html(brand: dict, base_url: str) -> str:
       {story_links_block}
     </section>
     {location_block}
-  </main>{mobile_shop_block}
+  </main>{mobile_primary_block}
 
   <footer class="site-footer">
     <div class="footer-inner brand-detail-footer">
-      <a class="brand-detail-footer-logo" href="/" aria-label="FYND 홈"><img src="/assets/brand/fynd-logo-transparent.png" alt="FYND"></a>
+      <a class="footer-signature fynd-footer-signature brand-detail-footer-logo" href="/" aria-label="FYND 홈"><strong>FYND</strong></a>
       <p>충남 곳곳의 가게와 브랜드를 만나보세요.</p>
       <small>© 2026 FYND.</small>
     </div>
