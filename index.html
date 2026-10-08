@@ -8,12 +8,12 @@
   <meta name="keywords" content="FYND, 파인드, 충남 소상공인, 충남 로컬 브랜드, 충남 축제, 천안, 아산, 예산, 홍성, 공주">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="author" content="FYND">
-  <meta name="theme-color" content="#151515">
+  <meta name="theme-color" content="#ffffff">
   <link rel="canonical" href="https://fynd-cnd.onrender.com/">
   <link rel="icon" href="/assets/fynd-favicon-20260729.svg" type="image/svg+xml">
   <link rel="preload" href="/assets/fonts/SUIT-Variable-v2.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/styles.css?v=detail-refresh-19">
-  <link rel="stylesheet" href="/service-home.css?v=local-banner-20261007">
+  <link rel="stylesheet" href="/service-home.css?v=service-ui-20261008">
 
   <meta property="og:locale" content="ko_KR">
   <meta property="og:type" content="website">
@@ -79,29 +79,23 @@
     <section class="sv3-hero" aria-labelledby="heroTitle">
       <a class="sv3-hero-link" href="#brands">
         <img class="sv3-hero-map" src="/assets/regions/chungnam-map.svg" alt="" aria-hidden="true">
-        <img class="sv3-hero-region" src="/assets/regions/chungnam.svg" alt="충청남도">
         <div class="sv3-hero-copy">
-          <p class="sv3-kicker">지나치기 아까운</p>
-          <h1 id="heroTitle"><span>충청남도 로컬 맛집</span><em>지금 바로 확인하기</em></h1>
-          <div class="sv3-hero-signature" aria-label="FYND와 영진관광">
-            <img src="/assets/brand/fynd-logo-transparent.png" alt="FYND">
-            <span aria-hidden="true">×</span>
-            <img src="/assets/brand/yeongjin-logo-original.png" alt="영진관광">
-          </div>
+          <h1 id="heroTitle"><span>충청남도 로컬 맛집</span><em>지금 바로 확인하기 <span aria-hidden="true">›</span></em></h1>
         </div>
       </a>
     </section>
 
+    <div class="sv3-discover-layout">
     <section class="sv3-brand-section" id="brands" aria-labelledby="brandSectionTitle">
       <div class="sv3-section-head">
-        <div><p>충청남도 업체 이야기</p><h2 id="brandSectionTitle">충청남도 소상공인 이야기를 확인하세요</h2></div>
+        <h2 id="brandSectionTitle">충청남도 소상공인 이야기를 확인하세요</h2>
       </div>
 
       <div class="sv3-brand-toolbar" id="brandToolbar">
         <form class="sv3-search" id="brandSearchForm" role="search">
           <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.6-3.6"></path></svg>
           <label class="visually-hidden" for="brandSearchInput">가게와 브랜드 검색</label>
-          <input id="brandSearchInput" type="search" name="search" placeholder="가게, 상품, 지역으로 검색" autocomplete="off">
+          <input id="brandSearchInput" type="search" name="search" placeholder="가게 이름이나 지역 검색" autocomplete="off">
           <button id="clearSearchButton" type="button" aria-label="검색어 지우기" hidden>×</button>
         </form>
         <p class="result-summary" id="resultSummary" aria-live="polite" hidden></p>
@@ -111,27 +105,27 @@
         <a class="brand-card" href="/brands/greeny-box/"><span class="brand-card-media"><img src="/assets/brands/greeny-box/main.png" alt="GREENY BOX 샐러드와 포케"></span><span class="brand-card-body"><small>건강 · 충남 예산</small><strong>GREENY BOX</strong><p>샐러드로 가볍게, 포케로 든든하게. 내포의 점심 선택지</p></span></a>
       </div>
 
-      <div class="empty-result" id="emptyResult" hidden><strong>아직 보이는 가게가 없어요.</strong><p>다른 가게 이름이나 지역으로 다시 찾아보세요.</p><button type="button" id="resetSearchButton">전체 보기</button></div>
+      <div class="empty-result" id="emptyResult" hidden><strong>검색 결과가 없어요</strong><p>다른 가게 이름이나 지역을 입력해 주세요.</p><button type="button" id="resetSearchButton">전체 보기</button></div>
     </section>
 
     <section class="sv3-festival-section" id="festivals" aria-labelledby="festivalSectionTitle">
       <div class="sv3-section-head sv3-section-head-light">
-        <div><p>이번 계절, 충남에서</p><h2 id="festivalSectionTitle">지금 가볼 만한 곳</h2></div>
-        <span>자세한 일정은 각 행사 공식 페이지에서 볼 수 있어요.</span>
+        <h2 id="festivalSectionTitle">충남의 행사</h2>
       </div>
       <p class="result-summary" id="festivalResultSummary" aria-live="polite">행사를 불러오고 있어요.</p>
       <div class="festival-grid" id="festivalGrid"></div>
       <div class="empty-result" id="festivalEmptyResult" hidden><strong>조건에 맞는 행사가 없어요.</strong><p>검색어를 지우면 전체 행사를 볼 수 있어요.</p></div>
     </section>
 
+    </div>
+
     <section class="sv3-inquiry" id="inquiry" aria-labelledby="inquiryTitle">
       <div class="sv3-inquiry-intro">
-        <p>CONTACT</p>
-        <h2 id="inquiryTitle">가게를 소개하고 싶으신가요?</h2>
-        <span>상호와 지역, 연락처만 남겨주세요. 확인하고 연락드릴게요.</span>
+        <h2 id="inquiryTitle">가게 소개 신청</h2>
+        <span>가게 이름과 지역, 연락처를 남겨주세요.</span>
       </div>
       <a class="sv3-inquiry-link" href="https://form.naver.com/response/E8pgonBSzz5" target="_blank" rel="noopener noreferrer">
-        <small>문의 남기기</small><strong>네이버폼으로 문의하기</strong><span aria-hidden="true">↗</span>
+        <strong>네이버폼으로 문의하기</strong><span aria-hidden="true">↗</span>
       </a>
     </section>
 
@@ -144,7 +138,7 @@
         <a class="is-region" href="https://www.gongju.go.kr/" target="_blank" rel="noopener"><img src="/assets/regions/gongju.svg" alt="공주시"></a>
         <a class="is-region" href="https://www.hongseong.go.kr/" target="_blank" rel="noopener"><img src="/assets/regions/hongseong.png" alt="홍성군"></a>
         <a class="is-partner is-yeongjin" href="https://yeongjin-tour.onrender.com/" target="_blank" rel="noopener"><img src="/assets/brand/yeongjin-logo-original.png" alt="영진관광"><span>협력 파트너</span></a>
-        <a class="is-partner" href="/brands/croba-poultry/"><img src="/assets/brands/croba-poultry/logo.gif" alt="크로바양계"><span>협력 파트너</span></a>
+        <a class="is-partner is-croba" href="/brands/croba-poultry/"><img src="/assets/brands/croba-poultry/logo-20261008.png" alt="크로바양계식품"><span>크로바양계</span></a>
         <a class="is-partner is-pamp" href="/brands/pamp/"><span class="sv3-partner-logo"><img src="/assets/brands/pamp/main.png" alt="PAMP"></span><span>협력 파트너</span></a>
         <a class="is-region" href="https://www.chungnam.go.kr/" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1"><img src="/assets/regions/chungnam.svg" alt=""></a>
         <a class="is-region" href="https://www.cheonan.go.kr/" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1"><img src="/assets/regions/cheonan.svg" alt=""></a>
@@ -153,7 +147,7 @@
         <a class="is-region" href="https://www.gongju.go.kr/" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1"><img src="/assets/regions/gongju.svg" alt=""></a>
         <a class="is-region" href="https://www.hongseong.go.kr/" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1"><img src="/assets/regions/hongseong.png" alt=""></a>
         <a class="is-partner is-yeongjin" href="https://yeongjin-tour.onrender.com/" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1"><img src="/assets/brand/yeongjin-logo-original.png" alt=""><span>협력 파트너</span></a>
-        <a class="is-partner" href="/brands/croba-poultry/" aria-hidden="true" tabindex="-1"><img src="/assets/brands/croba-poultry/logo.gif" alt=""><span>협력 파트너</span></a>
+        <a class="is-partner is-croba" href="/brands/croba-poultry/" aria-hidden="true" tabindex="-1"><img src="/assets/brands/croba-poultry/logo-20261008.png" alt=""><span>크로바양계</span></a>
         <a class="is-partner is-pamp" href="/brands/pamp/" aria-hidden="true" tabindex="-1"><span class="sv3-partner-logo"><img src="/assets/brands/pamp/main.png" alt=""></span><span>협력 파트너</span></a>
       </div>
     </div>
@@ -161,7 +155,7 @@
 
   <footer class="sv3-footer">
     <img src="/assets/brand/fynd-logo-transparent.png" alt="FYND">
-    <p>충남 곳곳의 가게와 브랜드를 만나보세요.</p>
+    <p>충청남도 소상공인 이야기</p>
     <nav><a href="#brands">소상공인 이야기</a><a href="#festivals">행사와 축제</a><a href="#inquiry">소개 신청</a></nav>
     <dl class="sv3-business-info" aria-label="사업자 정보">
       <div><dt>상호</dt><dd>에프와이앤디(FYND)</dd></div>
@@ -173,6 +167,6 @@
   </footer>
 
   <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
-  <script src="/app.js?v=service-editorial-19"></script>
+  <script src="/app.js?v=service-ui-20261008"></script>
 </body>
 </html>

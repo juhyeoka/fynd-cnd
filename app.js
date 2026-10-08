@@ -19,13 +19,10 @@ const brandTicker = document.querySelector("#brandTicker");
 const toast = document.querySelector("#toast");
 
 const RECENT_BRAND_KEY = "fynd-cnd-recent-brand";
-const FESTIVAL_ROTATION_INTERVAL = 12000;
 
 let brands = [];
 let festivals = [];
 let searchKeyword = "";
-let festivalRotationTimer = null;
-let festivalGridInteractionActive = false;
 let toastTimer = null;
 
 function setMenuOpen(open) {
@@ -107,19 +104,10 @@ function getExternalLinkAttributes(item) {
   return item.externalUrl ? ' target="_blank" rel="noopener noreferrer"' : "";
 }
 
-function getRegionBadge(region) {
-  return (
-    String(region || "")
-      .replace(/^충청남도\s*/, "")
-      .replace(/^충남\s*/, "")
-      .trim() || "충남"
-  );
-}
-
 function renderBrandCard(brand, index) {
   const image = brand.images?.card || brand.images?.main || "/assets/brands/brand-placeholder.svg";
   const partner = isPartner(brand);
-  const location = [brand.category, brand.region].filter(Boolean).join(" · ");
+  const location = brand.region;
   const url = getBrandPageUrl(brand);
 
   return `
@@ -133,7 +121,7 @@ function renderBrandCard(brand, index) {
             alt="${escapeHtml(brand.name)} ${escapeHtml(brand.product)} 대표 이미지"
             ${index < 4 ? 'fetchpriority="high"' : 'loading="lazy"'}
           >
-          <i class="brand-card-status">${escapeHtml(partner ? "FYND 협력사" : getRegionBadge(brand.region))}</i>
+          ${partner ? '<i class="brand-card-status">FYND 협력사</i>' : ""}
         </span>
         <span class="brand-card-body">
           <small>${escapeHtml(location)}</small>
@@ -141,7 +129,7 @@ function renderBrandCard(brand, index) {
           <p>${escapeHtml(brand.headline)}</p>
           <span class="brand-card-meta">
             <i>${escapeHtml(brand.product)}</i>
-            <b>이야기 보기</b>
+            <b aria-hidden="true">›</b>
           </span>
         </span>
       </a>
@@ -227,21 +215,9 @@ function renderFestivals() {
   festivalGrid.hidden = visibleFestivals.length === 0;
   if (festivalEmptyResult) festivalEmptyResult.hidden = visibleFestivals.length > 0;
   if (festivalResultSummary) {
-    festivalResultSummary.textContent = searchKeyword
-      ? `행사 검색 결과 ${visibleFestivals.length}개`
-      : `행사와 축제 ${visibleFestivals.length}개`;
+    festivalResultSummary.textContent = `행사 검색 결과 ${visibleFestivals.length}개`;
+    festivalResultSummary.hidden = !searchKeyword;
   }
-}
-
-function rotateFestivalOrder() {
-  if (festivals.length < 2 || searchKeyword || document.hidden || festivalGridInteractionActive) return;
-  festivals = [...festivals.slice(1), festivals[0]];
-  renderFestivals();
-}
-
-function startFestivalRotation() {
-  window.clearInterval(festivalRotationTimer);
-  festivalRotationTimer = window.setInterval(rotateFestivalOrder, FESTIVAL_ROTATION_INTERVAL);
 }
 
 function renderBrandTicker(items) {
@@ -325,13 +301,6 @@ brandGrid?.addEventListener("click", (event) => {
   });
 });
 
-festivalGrid?.addEventListener("mouseenter", () => { festivalGridInteractionActive = true; });
-festivalGrid?.addEventListener("mouseleave", () => { festivalGridInteractionActive = false; });
-festivalGrid?.addEventListener("focusin", () => { festivalGridInteractionActive = true; });
-festivalGrid?.addEventListener("focusout", (event) => {
-  if (!festivalGrid.contains(event.relatedTarget)) festivalGridInteractionActive = false;
-});
-
 function showToast(message) {
   if (!toast) return;
   window.clearTimeout(toastTimer);
@@ -377,7 +346,6 @@ async function loadBrands() {
 
     renderAll();
     renderBrandTicker(brands);
-    startFestivalRotation();
   } catch (error) {
     console.error(error);
     brands = [];
