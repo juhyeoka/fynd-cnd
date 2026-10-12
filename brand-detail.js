@@ -26,7 +26,7 @@ document.querySelectorAll("[data-story-reader]").forEach((reader) => {
       if (!cue) {
         cue = document.createElement("span");
         cue.className = "brand-detail-story-more-cue";
-        cue.textContent = "위로 더 읽기";
+        cue.textContent = "위로 밀어 더 읽기";
         cue.setAttribute("aria-hidden", "true");
         slide.append(cue);
       }

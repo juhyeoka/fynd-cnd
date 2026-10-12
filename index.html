@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>FYND | 충남 소상공인 이야기</title>
-  <meta name="description" content="충남의 가게와 브랜드, 지역 행사를 지역별로 둘러보는 FYND 서비스입니다.">
+  <meta name="description" content="충남의 가게와 농장 이야기, 지역 행사 소식을 모았습니다.">
   <meta name="keywords" content="FYND, 파인드, 충남 소상공인, 충남 로컬 브랜드, 충남 축제, 천안, 아산, 예산, 홍성, 공주">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="author" content="FYND">
@@ -13,13 +13,13 @@
   <link rel="icon" href="/assets/fynd-favicon-20260729.svg" type="image/svg+xml">
   <link rel="preload" href="/assets/fonts/SUIT-Variable-v2.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/styles.css?v=detail-refresh-19">
-  <link rel="stylesheet" href="/service-home.css?v=service-ui-20261008-2">
+  <link rel="stylesheet" href="/service-home.css?v=service-ui-20261012">
 
   <meta property="og:locale" content="ko_KR">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="FYND">
   <meta property="og:title" content="FYND | 충남 소상공인 이야기">
-  <meta property="og:description" content="궁금한 지역을 고르고, 충남의 가게와 브랜드를 만나보세요.">
+  <meta property="og:description" content="충남의 가게와 농장 이야기, 지역 행사 소식을 모았습니다.">
   <meta property="og:url" content="https://fynd-cnd.onrender.com/">
   <meta property="og:image" content="https://fynd-cnd.onrender.com/assets/fynd-share-20260831.png">
   <meta property="og:image:width" content="1200">
@@ -34,7 +34,7 @@
     "name": "FYND",
     "alternateName": "파인드 충남",
     "url": "https://fynd-cnd.onrender.com/",
-    "description": "충남의 가게와 브랜드, 지역 행사를 지역별로 둘러보는 서비스",
+    "description": "충남의 가게와 농장 이야기, 지역 행사 소식을 모았습니다.",
     "inLanguage": "ko-KR",
     "potentialAction": {
       "@type": "SearchAction",
@@ -78,9 +78,9 @@
   <main id="main">
     <section class="sv3-hero" aria-labelledby="heroTitle">
       <a class="sv3-hero-link" href="#brands">
-        <img class="sv3-hero-map" src="/assets/regions/chungnam-map.svg" alt="" aria-hidden="true">
+        <img class="sv3-hero-art" src="/assets/hero-chungnam-network-20261012.png" width="1983" height="793" alt="" aria-hidden="true" fetchpriority="high" decoding="async">
         <div class="sv3-hero-copy">
-          <h1 id="heroTitle"><span>충청남도 로컬 맛집</span><em>지금 바로 확인하기 <span aria-hidden="true">›</span></em></h1>
+          <h1 id="heroTitle"><span>충청남도 <span class="sv3-hero-subject">로컬 맛집</span></span><em>가게 둘러보기 <span aria-hidden="true">›</span></em></h1>
         </div>
       </a>
     </section>
@@ -102,7 +102,7 @@
       </div>
 
       <div class="brand-grid" id="brandGrid">
-        <a class="brand-card" href="/brands/greeny-box/"><span class="brand-card-media"><img src="/assets/brands/greeny-box/main.png" alt="GREENY BOX 샐러드와 포케"></span><span class="brand-card-body"><small>건강 · 충남 예산</small><strong>GREENY BOX</strong><p>샐러드로 가볍게, 포케로 든든하게. 내포의 점심 선택지</p></span></a>
+        <a class="brand-card" href="/brands/greeny-box/"><span class="brand-card-media"><img src="/assets/brands/greeny-box/main.png" alt="GREENY BOX 샐러드와 포케"></span><span class="brand-card-body"><small>충남 예산</small><strong>GREENY BOX</strong><p>샐러드와 포케, 샌드위치를 만드는 내포신도시 가게입니다.</p></span></a>
       </div>
 
       <div class="empty-result" id="emptyResult" hidden><strong>검색 결과가 없어요</strong><p>다른 가게 이름이나 지역을 입력해 주세요.</p><button type="button" id="resetSearchButton">전체 보기</button></div>
@@ -114,7 +114,7 @@
       </div>
       <p class="result-summary" id="festivalResultSummary" aria-live="polite">행사를 불러오고 있어요.</p>
       <div class="festival-grid" id="festivalGrid"></div>
-      <div class="empty-result" id="festivalEmptyResult" hidden><strong>조건에 맞는 행사가 없어요.</strong><p>검색어를 지우면 전체 행사를 볼 수 있어요.</p></div>
+      <div class="empty-result" id="festivalEmptyResult" hidden><strong>찾는 행사가 없어요</strong><p>다른 지역이나 행사 이름으로 검색해 주세요.</p></div>
     </section>
 
     </div>
@@ -125,7 +125,7 @@
         <span>가게 이름과 지역, 연락처를 남겨주세요.</span>
       </div>
       <a class="sv3-inquiry-link" href="https://form.naver.com/response/E8pgonBSzz5" target="_blank" rel="noopener noreferrer">
-        <strong>네이버폼으로 문의하기</strong><span aria-hidden="true">↗</span>
+        <strong>소개 신청하기</strong><span aria-hidden="true">↗</span>
       </a>
     </section>
 
@@ -167,6 +167,6 @@
   </footer>
 
   <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
-  <script src="/app.js?v=service-ui-20261008"></script>
+  <script src="/app.js?v=service-ui-20261012"></script>
 </body>
 </html>

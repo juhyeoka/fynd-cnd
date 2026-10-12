@@ -439,7 +439,7 @@ def build_detail_html(brand: dict, base_url: str) -> str:
     if highlight_items:
         highlights_block = (
             '<div class="brand-detail-story-highlights" '
-            'aria-label="이럴 때 떠올려보세요">'
+            'aria-label="이용 안내">'
             + "".join(highlight_items)
             + "</div>"
         )
@@ -460,7 +460,7 @@ def build_detail_html(brand: dict, base_url: str) -> str:
     process_block = ""
     if process_items:
         process_title = escape(
-            brand.get("processTitle") or "이용 전에 확인할 순서"
+            brand.get("processTitle") or "이용 전 확인"
         )
         process_block = f"""
       <aside class="brand-detail-process">
@@ -575,7 +575,7 @@ def build_detail_html(brand: dict, base_url: str) -> str:
         )
         reading_minutes = max(2, round(story_character_count / 350))
         reading_time = (
-            f'<p class="brand-detail-story-meta"><span>약 {reading_minutes}분 분량</span></p>'
+            f'<p class="brand-detail-story-meta"><span>약 {reading_minutes}분</span></p>'
         )
         story_article = f"""
       <div class="brand-detail-story-reader" data-story-reader>
@@ -667,7 +667,7 @@ def build_detail_html(brand: dict, base_url: str) -> str:
     </section>
 
     <section class="brand-detail-story" id="brandStory">
-      <h2>{escape(brand.get("storyTitle") or "브랜드가 지키는 가치")}</h2>
+      <h2>{escape(brand.get("storyTitle") or "가게 이야기")}</h2>
       {reading_time}
       <p>{escape(brand.get("storyDescription") or brand["description"])}</p>{gallery_lead}
       {story_article}
@@ -684,7 +684,7 @@ def build_detail_html(brand: dict, base_url: str) -> str:
       <small>© 2026 FYND.</small>
     </div>
   </footer>
-  <script src="/brand-detail.js?v=story-reader-2" defer></script>
+  <script src="/brand-detail.js?v=story-reader-20261012" defer></script>
 </body>
 </html>
 """
@@ -774,7 +774,7 @@ def create_brand(base_url: str) -> dict:
     headline = ask("한 줄 소개", required=True)
     description = ask("브랜드 소개", required=True)
     quantity = ask("상품 구성", default="공식 판매처에서 확인")
-    story_title = ask("브랜드 스토리 제목", default="브랜드가 지키는 가치")
+    story_title = ask("브랜드 스토리 제목", default="가게 이야기")
     story_description = ask("브랜드 스토리 본문", default=description)
     shop_url = validate_url(ask("공식 판매처 URL"))
     homepage_url = validate_url(ask("브랜드 홈페이지 URL"))

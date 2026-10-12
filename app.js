@@ -319,7 +319,7 @@ recentBrandButton?.addEventListener("click", () => {
   } catch {
     // 잘못된 저장값은 무시합니다.
   }
-  showToast("아직 살펴본 브랜드가 없어요.");
+  showToast("최근에 본 가게가 없어요.");
 });
 
 async function loadBrands() {
@@ -352,7 +352,7 @@ async function loadBrands() {
     festivals = [];
     renderAll();
     if (resultSummary) {
-      resultSummary.textContent = "가게 정보를 불러오지 못했어요. 잠시 후 다시 확인해 주세요.";
+      resultSummary.textContent = "가게 정보를 불러오지 못했어요. 잠시 후 다시 시도해 주세요.";
       resultSummary.hidden = false;
     }
   }
