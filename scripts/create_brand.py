@@ -611,9 +611,11 @@ def build_detail_html(brand: dict, base_url: str) -> str:
   <meta name="theme-color" content="#ffffff">
   <link rel="canonical" href="{page_url}">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-  <link rel="preload" href="/assets/fonts/SUIT-Variable-v2.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/styles.css?v=detail-refresh-19">
-  <link rel="stylesheet" href="/brand-ui.css?v=detail-ui-20261008">
+  <link rel="preload" href="/assets/fonts/GmarketSans-Medium.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/SpoqaHanSansNeo-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/typography.css?v=type-20261012">
+  <link rel="stylesheet" href="/styles.css?v=type-20261012">
+  <link rel="stylesheet" href="/brand-ui.css?v=type-20261012">
   <meta property="og:type" content="{'website' if is_service else 'product'}">
   <meta property="og:site_name" content="FYND">
   <meta property="og:title" content="{name} {product} | FYND">
