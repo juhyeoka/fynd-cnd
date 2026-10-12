@@ -14,7 +14,7 @@
   <link rel="preload" href="/assets/fonts/WantedSansVariable-v1.0.3.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/typography.css?v=type-polish-20261012">
   <link rel="stylesheet" href="/styles.css?v=type-polish-20261012">
-  <link rel="stylesheet" href="/service-home.css?v=type-polish-20261012">
+  <link rel="stylesheet" href="/service-home.css?v=mixed-feed-20261013">
 
   <meta property="og:locale" content="ko_KR">
   <meta property="og:type" content="website">
@@ -88,6 +88,7 @@
 
     <div class="sv3-discover-layout">
     <section class="sv3-brand-section" id="brands" aria-labelledby="brandSectionTitle">
+      <div class="sv3-brand-top">
       <div class="sv3-section-head">
         <h2 id="brandSectionTitle">충청남도 소상공인 이야기를 확인하세요</h2>
       </div>
@@ -101,9 +102,10 @@
         </form>
         <p class="result-summary" id="resultSummary" aria-live="polite" hidden></p>
       </div>
+      </div>
 
       <div class="brand-grid" id="brandGrid">
-        <a class="brand-card" href="/brands/greeny-box/"><span class="brand-card-media"><img src="/assets/brands/greeny-box/main.png" alt="GREENY BOX 샐러드와 포케"></span><span class="brand-card-body"><small>충남 예산</small><strong>GREENY BOX</strong><p>샐러드와 포케, 샌드위치를 만드는 내포신도시 가게입니다.</p></span></a>
+        <article class="brand-card-shell" data-brand-slug="greeny-box"><a class="brand-card" href="/brands/greeny-box/"><span class="brand-card-media"><img src="/assets/brands/greeny-box/main.png" alt="GREENY BOX 샐러드와 포케"><span class="brand-card-heading"><small>충남 예산</small><strong>GREENY BOX</strong></span></span><span class="brand-card-body"><p>내포에서 샐러드와 포케, 샌드위치를 만듭니다</p><span class="brand-card-meta"><i>샐러드·포케·샌드위치</i><b aria-hidden="true">›</b></span></span></a></article>
       </div>
 
       <div class="empty-result" id="emptyResult" hidden><strong>검색 결과가 없어요</strong><p>다른 가게 이름이나 지역을 입력해 주세요.</p><button type="button" id="resetSearchButton">전체 보기</button></div>
@@ -168,6 +170,6 @@
   </footer>
 
   <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
-  <script src="/app.js?v=service-ui-20261012"></script>
+  <script src="/app.js?v=mixed-feed-20261013"></script>
 </body>
 </html>

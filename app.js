@@ -24,6 +24,27 @@ let brands = [];
 let festivals = [];
 let searchKeyword = "";
 let toastTimer = null;
+let brandCardObserver = null;
+
+// Shuffle once when the page opens; filtering must not move the remaining shops.
+function shuffled(items) {
+  const result = [...items];
+  for (let index = result.length - 1; index > 0; index -= 1) {
+    const other = Math.floor(Math.random() * (index + 1));
+    [result[index], result[other]] = [result[other], result[index]];
+  }
+  return result;
+}
+
+function shopDeck(items) {
+  const result = shuffled(items);
+  // Open the feed with a shop photograph, not the white logo tile.
+  if (result[0]?.slug === "croba-poultry") {
+    const photoIndex = result.findIndex((brand) => brand.slug !== "croba-poultry");
+    if (photoIndex > 0) [result[0], result[photoIndex]] = [result[photoIndex], result[0]];
+  }
+  return result;
+}
 
 function setMenuOpen(open) {
   if (!menuButton || !mobileMenu) return;
@@ -111,7 +132,7 @@ function renderBrandCard(brand, index) {
   const url = getBrandPageUrl(brand);
 
   return `
-    <article class="brand-card-shell" data-brand-slug="${escapeHtml(brand.slug)}">
+    <article class="brand-card-shell brand-tile-${brand.tileShape || "square"}" data-brand-slug="${escapeHtml(brand.slug)}">
       <a class="brand-card brand-card-real brand-card-standard${partner ? " brand-card-partner" : ""}"
          href="${escapeHtml(url)}"${getExternalLinkAttributes(brand)}
          data-brand-slug="${escapeHtml(brand.slug)}" data-brand-name="${escapeHtml(brand.name)}">
@@ -122,10 +143,12 @@ function renderBrandCard(brand, index) {
             ${index < 4 ? 'fetchpriority="high"' : 'loading="lazy"'}
           >
           ${partner ? '<i class="brand-card-status">FYND 협력사</i>' : ""}
+          <span class="brand-card-heading">
+            <small>${escapeHtml(location)}</small>
+            <strong>${escapeHtml(brand.name)}</strong>
+          </span>
         </span>
         <span class="brand-card-body">
-          <small>${escapeHtml(location)}</small>
-          <strong>${escapeHtml(brand.name)}</strong>
           <p>${escapeHtml(brand.headline)}</p>
           <span class="brand-card-meta">
             <i>${escapeHtml(brand.product)}</i>
@@ -186,8 +209,16 @@ function countUniqueResults(...groups) {
 function renderBrands() {
   if (!brandGrid) return;
   const visibleBrands = getVisibleBrands();
+  brandCardObserver?.disconnect();
   brandGrid.innerHTML = visibleBrands.map(renderBrandCard).join("");
   brandGrid.hidden = visibleBrands.length === 0;
+  brandGrid.classList.toggle("is-mixed", !searchKeyword && visibleBrands.length === 6);
+  brandGrid.classList.toggle("is-filtered", Boolean(searchKeyword));
+  measureBrandCards();
+  if ("ResizeObserver" in window) {
+    brandCardObserver ||= new ResizeObserver(measureBrandCards);
+    brandGrid.querySelectorAll(".brand-card").forEach((card) => brandCardObserver.observe(card));
+  }
 
   if (emptyResult) {
     const hasAnotherResult = Boolean(searchKeyword) && getVisibleFestivals().length > 0;
@@ -207,6 +238,21 @@ function renderBrands() {
 
   if (onboardingSlots) onboardingSlots.hidden = Boolean(searchKeyword) || brands.length >= 4;
 }
+
+function measureBrandCards() {
+  if (!brandGrid) return;
+  const mobile = window.matchMedia("(max-width: 720px)").matches;
+  brandGrid.classList.toggle("is-masonry", mobile);
+  brandGrid.querySelectorAll(".brand-card-shell").forEach((shell) => {
+    // Four-pixel rows keep the two-column mobile feed tightly packed, without
+    // changing the DOM/tab order or stretching a short card to its neighbour.
+    shell.style.gridRowEnd = mobile
+      ? `span ${Math.ceil((shell.querySelector(".brand-card").getBoundingClientRect().height + 14) / 4)}`
+      : "";
+  });
+}
+
+window.addEventListener("resize", measureBrandCards);
 
 function renderFestivals() {
   if (!festivalGrid) return;
@@ -328,11 +374,13 @@ async function loadBrands() {
     if (!response.ok) throw new Error(`브랜드 데이터를 불러오지 못했습니다. (${response.status})`);
     const items = (await response.json()).filter((item) => item.published !== false);
 
-    brands = items
-      .filter((item) => !isFestival(item) && !isCollaborator(item))
-      .sort((first, second) =>
-        (first.sortOrder ?? 999) - (second.sortOrder ?? 999) || first.name.localeCompare(second.name, "ko")
-      );
+    const tileShapes = ["portrait", "landscape", "square", "portrait", "landscape", "square"];
+    brands = shopDeck(items.filter((item) => !isFestival(item) && !isCollaborator(item)))
+      .map((brand, index) => ({
+        ...brand,
+        tileShape: brand.slug === "croba-poultry" ? "square" : tileShapes[index % tileShapes.length]
+      }));
+    if (brandGrid) brandGrid.dataset.layout = Math.random() < .5 ? "wide-first" : "narrow-first";
     festivals = items
       .filter((item) => isFestival(item) && isCurrentFestival(item))
       .sort((first, second) => String(first.startDate || "").localeCompare(String(second.startDate || "")));
