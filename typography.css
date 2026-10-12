@@ -1,53 +1,25 @@
 @font-face {
-  font-family: "Gmarket Sans";
+  font-family: "Wanted Sans";
   font-style: normal;
-  font-weight: 500;
+  font-weight: 400 1000;
   font-display: swap;
-  src: url("/assets/fonts/GmarketSans-Medium.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Gmarket Sans";
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url("/assets/fonts/GmarketSans-Bold.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Spoqa Han Sans Neo";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("/assets/fonts/SpoqaHanSansNeo-Regular.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Spoqa Han Sans Neo";
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url("/assets/fonts/SpoqaHanSansNeo-Medium.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Spoqa Han Sans Neo";
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url("/assets/fonts/SpoqaHanSansNeo-Bold.woff2") format("woff2");
+  src: url("/assets/fonts/WantedSansVariable-v1.0.3.woff2") format("woff2");
 }
 
 :root {
-  --fynd-display: "Gmarket Sans", "Apple SD Gothic Neo", sans-serif;
-  --fynd-body: "Spoqa Han Sans Neo", -apple-system, BlinkMacSystemFont, system-ui, "Apple SD Gothic Neo", sans-serif;
+  --fynd-display: "Wanted Sans", "Apple SD Gothic Neo", sans-serif;
+  --fynd-body: "Wanted Sans", -apple-system, BlinkMacSystemFont, system-ui, "Apple SD Gothic Neo", sans-serif;
 }
 
 body.info-page .info-page-main :is(h1, h2, h3),
 body.info-page .info-page-main .process-list strong,
 body.info-page .info-page-main .partnership-steps strong {
   font-family: var(--fynd-display);
-  font-weight: 500;
-  letter-spacing: -.02em;
+  font-weight: 740;
+  letter-spacing: -.035em;
 }
 
 body.info-page .info-page-main p {
-  font-weight: 400;
+  font-weight: 430;
   letter-spacing: -.01em;
 }
