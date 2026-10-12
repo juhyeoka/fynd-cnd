@@ -42,15 +42,12 @@
 
 /* Keep the supplied town illustration to the right of the reading area. */
 .service-v3 .sv3-hero { position: relative; width: var(--sv3-content); margin: 24px auto; overflow: hidden; background: #c9e9fc; border-radius: 16px; }
-.service-v3 .sv3-hero-link { position: relative; min-height: 160px; padding: 30px 32px; display: flex; align-items: center; }
+.service-v3 .sv3-hero-link { position: relative; min-height: 160px; padding: 22px 32px; display: flex; align-items: center; }
 .service-v3 .sv3-hero-link:focus-visible { outline-offset: -5px; border-radius: 16px; }
 .service-v3 .sv3-hero-art { position: absolute; top: -16px; right: -8px; width: auto; max-width: none; height: calc(100% + 32px); object-fit: contain; pointer-events: none; mask-image: linear-gradient(to right, transparent, #000 22%); }
 .service-v3 .sv3-hero-copy { position: relative; z-index: 1; max-width: 56%; }
 .service-v3 .sv3-hero h1 { margin: 0; font-size: 29px; font-weight: 750; line-height: 1.3; letter-spacing: -.045em; }
-.service-v3 .sv3-hero h1 > span { display: block; }
-.service-v3 .sv3-hero-subject { display: inline-block; white-space: nowrap; }
-.service-v3 .sv3-hero h1 > em { display: inline-flex; align-items: center; gap: 12px; margin-top: 14px; color: #1765cc; font-size: 14px; font-weight: 650; font-style: normal; letter-spacing: -.015em; }
-.service-v3 .sv3-hero h1 em span { font-size: 22px; font-weight: 450; line-height: .8; }
+.service-v3 .sv3-hero h1 > span { display: block; white-space: nowrap; }
 
 .service-v3 .sv3-discover-layout { width: var(--sv3-content); margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr) 292px; gap: 24px; align-items: start; }
 .service-v3 .sv3-brand-section { min-width: 0; padding: 24px; background: #fff; border-radius: 20px; }
@@ -168,9 +165,8 @@
   .service-v3 .sv3-search-button { background: #fff; }
   .service-v3 .sv3-hero { margin: 16px auto 20px; border-radius: 14px; }
   .service-v3 .sv3-hero-link { min-height: 136px; padding: 20px; }
-  .service-v3 .sv3-hero-copy { max-width: 55%; }
-  .service-v3 .sv3-hero h1 { font-size: 23px; }
-  .service-v3 .sv3-hero h1 > em { margin-top: 11px; font-size: 13px; }
+  .service-v3 .sv3-hero-copy { max-width: 65%; }
+  .service-v3 .sv3-hero h1 { font-size: clamp(19px, 5.3vw, 23px); }
   .service-v3 .sv3-hero-art { top: 0; left: 30%; right: auto; height: 100%; }
   .service-v3 .sv3-brand-section { padding: 20px 0 0; background: transparent; border-radius: 0; }
   .service-v3 .sv3-section-head { margin-bottom: 17px; }
